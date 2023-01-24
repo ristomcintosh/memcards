@@ -4,7 +4,7 @@ import './custom.scss';
 import App from './App';
 import { makeServer } from './server';
 import AppProviders from './context';
-import 'styles/main.css';
+// import 'styles/main.css';
 
 if (process.env.NODE_ENV === 'development') {
   makeServer({ environment: 'development' });

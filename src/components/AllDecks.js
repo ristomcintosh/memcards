@@ -23,6 +23,7 @@ const IconButton = styled.button`
   }
 `;
 
+// eslint-disable-next-line react/display-name
 const CustomToggle = React.forwardRef(({ onClick }, ref) => (
   <IconButton
     ref={ref}

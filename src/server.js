@@ -1,4 +1,5 @@
 import { Server, Model, belongsTo, hasMany, Factory } from 'miragejs';
+import {getServerUrl} from "./serverConfig";
 
 export function makeServer({ environment = 'test' } = {}) {
   let server = new Server({
@@ -48,7 +49,7 @@ export function makeServer({ environment = 'test' } = {}) {
     },
 
     routes() {
-      this.urlPrefix = process.env.REACT_APP_SERVER_URL;
+      this.urlPrefix = getServerUrl();
       // this.namespace = `${process.env.REACT_APP_SERVER_URL}`;
       // console.log(process.env.REACT_APP_SERVER_URL);
       this.passthrough('https://api.unsplash.com/search/**');

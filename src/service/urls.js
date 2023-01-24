@@ -1,4 +1,6 @@
-const BASE_URL = process.env.REACT_APP_SERVER_URL;
+import {getServerUrl} from "../serverConfig";
+
+const BASE_URL = getServerUrl();
 export default {
   login: BASE_URL + '/login',
   logout: BASE_URL + '/logout',
