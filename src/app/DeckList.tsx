@@ -1,11 +1,12 @@
-import { Deck } from '@/types'
-import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
+import { MenuItemsAnimate } from "@/components/MenuItemsAnimate"
+import { Deck } from "@/types"
+import { Menu, MenuButton, MenuItem } from "@headlessui/react"
 
 const decks: Deck[] = [
   {
-    name: 'Deck 1',
+    name: "Deck 1",
     cardCount: 25,
-    id: 'some-id',
+    id: "some-id",
   },
 ]
 
@@ -22,20 +23,23 @@ export const DeckList = () => {
   ))
 }
 
+const menuOptions = ["Rename", "Delete"]
+
 const DeckOptions = () => {
   return (
     <Menu>
       <MenuButton aria-label="Deck menu" className="w-5">
         <Icon />
       </MenuButton>
-      <MenuItems>
-        <MenuItem>
-          <p>Hey hey</p>
-        </MenuItem>
-        <MenuItem>
-          <p>Hey hey</p>
-        </MenuItem>
-      </MenuItems>
+      <MenuItemsAnimate>
+        {menuOptions.map((option) => (
+          <MenuItem key={option}>
+            <button className="w-full text-center data-[active]:bg-brand-800 data-[active]:bg-opacity-60 text-base whitespace-nowrap p-2 border-b-2 last:border-0 border-brand-700 border-opacity-60">
+              {option}
+            </button>
+          </MenuItem>
+        ))}
+      </MenuItemsAnimate>
     </Menu>
   )
 }
