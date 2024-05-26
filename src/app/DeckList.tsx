@@ -1,7 +1,5 @@
-import { DropdownMenu, MenuItemsAnimate } from "@/components/MenuItemsAnimate"
-import { VerticalDots } from "@/components/VerticalDots"
+import { DropdownMenu } from "@/components/DropdownMenu"
 import { Deck } from "@/types"
-import { Menu, MenuButton, MenuItem } from "@headlessui/react"
 
 const decks: Deck[] = [
   {

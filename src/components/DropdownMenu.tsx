@@ -13,7 +13,7 @@ export const DropdownMenu = ({ items }: DropdownMenuProps) => (
     <MenuButton aria-label="Deck menu" className="w-5">
       <VerticalDots />
     </MenuButton>
-    <MenuItemsAnimate>
+    <MenuItemsAnimated>
       {items.map((option) => (
         <MenuItem key={option}>
           <button className="w-full text-center data-[active]:bg-brand-800 data-[active]:bg-opacity-60 text-base whitespace-nowrap p-2 border-b-2 last:border-0 border-brand-700 border-opacity-60">
@@ -21,13 +21,13 @@ export const DropdownMenu = ({ items }: DropdownMenuProps) => (
           </button>
         </MenuItem>
       ))}
-    </MenuItemsAnimate>
+    </MenuItemsAnimated>
   </Menu>
 )
 
 type Props = HTMLMotionProps<"div">
 
-export const MenuItemsAnimate = ({
+const MenuItemsAnimated = ({
   children,
   className,
   ...delegated
@@ -41,7 +41,7 @@ export const MenuItemsAnimate = ({
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ bounce: 0, duration: 0.15 }}
-      className={`${baseStyles} ${className} overflow-clip`}
+      className={`${baseStyles} ${className}`}
       {...delegated}
     >
       {children}

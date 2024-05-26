@@ -1,6 +1,5 @@
-import { DropdownMenu, MenuItemsAnimate } from "@/components/MenuItemsAnimate"
-import { Menu, MenuButton, MenuItem } from "@headlessui/react"
-import { VerticalDots } from "@/components/VerticalDots"
+import { DropdownMenu } from "@/components/DropdownMenu"
+import Link from "next/link"
 import { PropsWithChildren } from "react"
 
 type StudyContainerProps = {
@@ -13,11 +12,6 @@ export function StudyContainer({
 }: PropsWithChildren<StudyContainerProps>) {
   return (
     <div className="flex flex-col h-screen">
-      {/* <Header
-        editFlashcard={editFlashcard}
-        handleDelete={handleDelete}
-        progress={progress}
-      /> */}
       <Header />
       <main className="flex-1 px-2 overflow-x-hidden overflow-y-auto bg-gray-100">
         <div className="flex flex-col min-h-full pt-4 pb-6">
@@ -25,8 +19,7 @@ export function StudyContainer({
           {children}
         </div>
       </main>
-
-      {/* <Footer flipCard={flipCard} nextCard={nextCard} /> */}
+      <Footer />
     </div>
   )
 }
@@ -34,7 +27,35 @@ export function StudyContainer({
 const headerMenuOptions = ["Edit", "Delete"]
 
 const Header = () => (
-  <header className="flex items-center justify-between p-4">
+  <section className="flex items-center justify-between p-4">
     <DropdownMenu items={headerMenuOptions} />
-  </header>
+    <ProgressBar progress={50} />
+    <nav>
+      <Link href="/">Home</Link>
+    </nav>
+  </section>
+)
+
+const ProgressBar = ({ progress }: { progress: number }) => (
+  <div className="relative flex-1 h-3 max-w-lg overflow-hidden bg-gray-300 rounded-lg shadow-inner">
+    <div
+      role="progressbar"
+      aria-valuenow={progress}
+      aria-valuemin={0}
+      aria-valuemax={100}
+      className="absolute inset-y-0 bg-gradient-to-tr from-brand-600 to-brand-200"
+      style={{
+        width: progress + "%",
+      }}
+    ></div>
+  </div>
+)
+
+const Footer = () => (
+  <div className="py-3">
+    <div className="flex justify-around max-w-md mx-auto">
+      <button>Flip</button>
+      <button>Next</button>
+    </div>
+  </div>
 )

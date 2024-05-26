@@ -4,12 +4,9 @@ import { Flashcard } from "./Flashcard"
 export const StudyView = async () => {
   const deck = await getDeck()
   return (
-    <div>
-      <h1>{deck.name}</h1>
-      <section>
-        <Flashcard flashcard={deck.flashcards[0]} cardSide="front" />
-      </section>
-    </div>
+    <section>
+      <Flashcard flashcard={deck.flashcards[0]} cardSide="front" />
+    </section>
   )
 }
 
