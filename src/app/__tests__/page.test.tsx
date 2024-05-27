@@ -24,6 +24,12 @@ describe(Home.name, () => {
       createButton.click()
     })
 
+    const createNewDeckButton = screen.getByText("Create Deck")
+
+    act(() => {
+      createNewDeckButton.click()
+    })
+
     expect(screen.getByText("Create A New Deck")).toBeInTheDocument()
     expect(screen.getByRole("button", { name: "Submit" })).toBeInTheDocument()
     expect(screen.getByRole("button", { name: "Cancel" })).toBeInTheDocument()
@@ -38,6 +44,12 @@ describe(Home.name, () => {
 
     act(() => {
       createButton.click()
+    })
+
+    const createNewDeckButton = screen.getByText("Create Deck")
+
+    act(() => {
+      createNewDeckButton.click()
     })
 
     const cancelButton = screen.getByRole("button", { name: "Cancel" })

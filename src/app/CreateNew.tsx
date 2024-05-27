@@ -1,14 +1,23 @@
 "use client"
-import { Dialog, DialogPanel, DialogTitle } from "@headlessui/react"
+import {
+  Dialog,
+  DialogPanel,
+  DialogTitle,
+  Menu,
+  MenuButton,
+} from "@headlessui/react"
 import { useState } from "react"
 import { TextInput } from "@/components/TextInput"
 import { Button } from "@/components/Button"
+import { Plus } from "@/components/Plus"
+import { MenuItem, MenuItemsAnimated } from "@/components/DropdownMenu"
+import { motion } from "framer-motion"
 
 export const CreateNew = () => {
   const [isCreateDeckFormOpen, showCreateDeckFrom] = useState(false)
   return (
     <>
-      <CreateButton handleClick={() => showCreateDeckFrom(true)} />
+      <CreateNewMenu handleClick={() => showCreateDeckFrom(true)} />
       <CreateDeckForm
         handleClick={() => showCreateDeckFrom(false)}
         isOpen={isCreateDeckFormOpen}
@@ -17,16 +26,30 @@ export const CreateNew = () => {
   )
 }
 
-const CreateButton = ({ handleClick }: { handleClick: () => void }) => {
+const CreateNewMenu = ({ handleClick }: { handleClick: () => void }) => {
   return (
-    <div className="relative flex flex-col items-center">
-      <button
-        aria-label="Create a new deck or new flashcard"
-        onClick={handleClick}
-      >
-        Create a new deck or new flashcard
-      </button>
-    </div>
+    <Menu>
+      {({ open }) => (
+        <>
+          <MenuButton
+            as={motion.button}
+            animate={{ rotate: open ? 225 : 0 }}
+            className=" w-10 text-gray-900 rounded-full shadow-lg bg-brand-500 focus:outline-none focus-visible:outline-black"
+            aria-label="Create a new deck or new flashcard"
+          >
+            <Plus />
+          </MenuButton>
+          <MenuItemsAnimated
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="absolute mb-1 bottom-full right-full"
+          >
+            <MenuItem text="Create Deck" onClick={handleClick} />
+            <MenuItem text="Create Flashcard" />
+          </MenuItemsAnimated>
+        </>
+      )}
+    </Menu>
   )
 }
 

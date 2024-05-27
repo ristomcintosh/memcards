@@ -1,7 +1,13 @@
 "use client"
-import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react"
+import {
+  Menu,
+  MenuButton,
+  MenuItems,
+  MenuItem as HUIMenuItem,
+  MenuItemsProps,
+} from "@headlessui/react"
 import { motion, HTMLMotionProps } from "framer-motion"
-import { PropsWithChildren } from "react"
+import { HTMLAttributes, PropsWithChildren } from "react"
 import { VerticalDots } from "./VerticalDots"
 
 type DropdownMenuProps = {
@@ -13,21 +19,33 @@ export const DropdownMenu = ({ items }: DropdownMenuProps) => (
     <MenuButton aria-label="Deck menu" className="w-5">
       <VerticalDots />
     </MenuButton>
-    <MenuItemsAnimated>
+    <MenuItemsAnimated anchor="right">
       {items.map((option) => (
-        <MenuItem key={option}>
-          <button className="w-full text-center data-[active]:bg-brand-800 data-[active]:bg-opacity-60 text-base whitespace-nowrap p-2 border-b-2 last:border-0 border-brand-700 border-opacity-60">
-            {option}
-          </button>
-        </MenuItem>
+        <MenuItem text={option} key={option} />
       ))}
     </MenuItemsAnimated>
   </Menu>
 )
 
-type Props = HTMLMotionProps<"div">
+type MenuItemProps = {
+  text: string
+} & HTMLAttributes<HTMLButtonElement>
+export const MenuItem = ({ text, ...delegated }: MenuItemProps) => {
+  return (
+    <HUIMenuItem>
+      <button
+        className="w-full text-center data-[active]:bg-brand-800 data-[active]:bg-opacity-60 text-base whitespace-nowrap p-2 border-b-2 last:border-0 border-brand-700 border-opacity-60"
+        {...delegated}
+      >
+        {text}
+      </button>
+    </HUIMenuItem>
+  )
+}
 
-const MenuItemsAnimated = ({
+type Props = HTMLMotionProps<"div"> & MenuItemsProps
+
+export const MenuItemsAnimated = ({
   children,
   className,
   ...delegated
@@ -37,7 +55,6 @@ const MenuItemsAnimated = ({
   return (
     <MenuItems
       as={motion.div}
-      anchor="right"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ bounce: 0, duration: 0.15 }}
