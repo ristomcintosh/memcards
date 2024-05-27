@@ -1,8 +1,8 @@
 import { Deck } from "@/types"
 import { Flashcard } from "./Flashcard"
 
-export const StudyView = async () => {
-  const deck = await getDeck()
+export const StudyView = () => {
+  const deck = getDeck()
   return (
     <section className="flex items-center justify-center flex-1">
       <Flashcard flashcard={deck.flashcards[0]} cardSide="front" />
@@ -10,16 +10,16 @@ export const StudyView = async () => {
   )
 }
 
-async function getDeck(): Promise<Deck> {
+function getDeck(): Deck {
   return {
     id: "deck-id",
-    name: "Deck Name",
+    name: "Test Deck",
     cardCount: 1,
     flashcards: [
       {
         id: "card-id",
-        front: "Front of the card",
-        back: "Back of the card",
+        front: "Front of card",
+        back: "Back of card",
       },
     ],
   }

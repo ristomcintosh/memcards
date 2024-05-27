@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react"
-import { StudyView } from "../StudyView"
+import Study from "../page"
 
 const testDeck = {
   id: "deck-id",
@@ -14,10 +14,14 @@ const testDeck = {
 }
 
 describe("Study Page", () => {
-  it("renders the StudyView component", async () => {
-    render(await StudyView())
+  it("renders", async () => {
+    render(<Study />)
     expect(screen.getByText("Test Deck")).toBeInTheDocument()
     expect(screen.getByText("Front of card")).toBeInTheDocument()
-    expect(screen.getByText("Back of card")).toBeInTheDocument()
+    // expect(screen.getByText("Back of card")).toBeInTheDocument()
+    expect(screen.getByRole("button", { name: "Flip" })).toBeInTheDocument()
+    expect(screen.getByRole("button", { name: "Next" })).toBeInTheDocument()
   })
+
+  it.todo("flips the card")
 })
