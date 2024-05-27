@@ -4,7 +4,7 @@ import { Flashcard } from "./Flashcard"
 export const StudyView = async () => {
   const deck = await getDeck()
   return (
-    <section>
+    <section className="flex items-center justify-center flex-1">
       <Flashcard flashcard={deck.flashcards[0]} cardSide="front" />
     </section>
   )

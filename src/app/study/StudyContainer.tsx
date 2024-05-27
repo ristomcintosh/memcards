@@ -1,3 +1,4 @@
+import { Button } from "@/components/Button"
 import { DropdownMenu } from "@/components/DropdownMenu"
 import Link from "next/link"
 import { PropsWithChildren } from "react"
@@ -54,8 +55,10 @@ const ProgressBar = ({ progress }: { progress: number }) => (
 const Footer = () => (
   <div className="py-3">
     <div className="flex justify-around max-w-md mx-auto">
-      <button>Flip</button>
-      <button>Next</button>
+      <Button size="lg" variant="outline">
+        Flip
+      </Button>
+      <Button size="lg">Next</Button>
     </div>
   </div>
 )
