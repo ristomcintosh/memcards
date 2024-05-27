@@ -1,4 +1,5 @@
-import { Field, Label, Input, Select, Button } from "@headlessui/react"
+import { TextInput } from "@/components/TextInput"
+import { Field, Label, Select, Button } from "@headlessui/react"
 
 export default function CreateFlashcard() {
   return (
@@ -44,18 +45,5 @@ const Form = () => {
         Create
       </Button>
     </form>
-  )
-}
-
-const TextInput = ({ label, name }: { label: string; name: string }) => {
-  return (
-    <Field>
-      <Label className="block mb-2 text-base">{label}</Label>
-      <Input
-        type="text"
-        name={name}
-        className="w-full mb-5 text-xl py-1 rounded md:h-auto"
-      />
-    </Field>
   )
 }

@@ -9,6 +9,7 @@ type FlashcardProps = {
   flashcard: FlashcardType
 }
 
+// TODO Trying using AnimatePresence to animate the flashcard flipping
 export const Flashcard = ({ cardSide, flashcard }: FlashcardProps) => {
   return (
     <motion.div

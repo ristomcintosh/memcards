@@ -1,5 +1,6 @@
 import DefaultLayout from "@/components/DefaultLayout"
 import { DeckList } from "./DeckList"
+import { CreateNew } from "./CreateNew"
 
 export default function Home() {
   return (
@@ -12,20 +13,10 @@ export default function Home() {
           </div>
 
           <div className="absolute bottom-0 right-0 mb-8 mr-8">
-            <CreateButton />
+            <CreateNew />
           </div>
         </div>
       </div>
     </DefaultLayout>
-  )
-}
-
-const CreateButton = () => {
-  return (
-    <div className="relative flex flex-col items-center">
-      <button aria-label="Create a new deck or new flashcard">
-        Create a new deck or new flashcard
-      </button>
-    </div>
   )
 }

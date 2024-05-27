@@ -29,7 +29,7 @@ const baseStyles =
 const variants = {
   default: "bg-brand-600 text-white",
   outline: "border-2 border-brand-600 text-brand-800 ",
-  text: "font-semibold shadow-none",
+  text: "font-semibold shadow-none text-brand-800",
   warn: "bg-danger-500 text-white",
 }
 
