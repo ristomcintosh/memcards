@@ -1,15 +1,8 @@
 import { DropdownMenu } from "@/components/DropdownMenu"
-import { Deck } from "@/types"
+import { getDecks } from "@/service/dbService"
 
-const decks: Deck[] = [
-  {
-    name: "Deck 1",
-    cardCount: 25,
-    id: "some-id",
-  },
-]
-
-export const DeckList = () => {
+export const DeckList = async () => {
+  const decks = await getDecks()
   return decks.map((deck) => (
     <div
       key={deck.id}
@@ -17,10 +10,7 @@ export const DeckList = () => {
     >
       <p className="flex-1">{deck.name}</p>
       <p data-testid="deck-card-count">{deck.cardCount}</p>
-      <DeckOptions />
+      <DropdownMenu items={["Rename", "Delete"]} />
     </div>
   ))
 }
-
-const menuOptions = ["Rename", "Delete"]
-const DeckOptions = () => <DropdownMenu items={menuOptions} />

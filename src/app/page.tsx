@@ -1,6 +1,6 @@
 import DefaultLayout from "@/components/DefaultLayout"
-import { DeckList } from "./DeckList"
-import { CreateNew } from "./CreateNew"
+import { DeckList } from "./_components/DeckList"
+import { CreateNew } from "./_components/CreateNew"
 
 export default function Home() {
   return (

@@ -1,5 +1,5 @@
-import { StudyContainer } from "./StudyContainer"
-import { StudyView } from "./StudyView"
+import { StudyContainer } from "./_components/StudyContainer"
+import { StudyView } from "./_components/StudyView"
 
 export default function Study() {
   return (

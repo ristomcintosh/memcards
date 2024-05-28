@@ -1,21 +1,9 @@
-import Home from "../page"
-import { act, render, screen } from "@testing-library/react"
+import { render, screen, act } from "@testing-library/react"
+import { CreateNew } from "../_components/CreateNew"
 
-// Maybe someday they'll come up with a way to test server components
-describe.skip(Home.name, () => {
-  it("renders", async () => {
-    render(<Home />)
-
-    expect(screen.getByText("Deck 1")).toBeInTheDocument()
-    expect(screen.getByTestId("deck-card-count")).toHaveTextContent("25")
-    expect(
-      screen.getByLabelText("Create a new deck or new flashcard")
-    ).toBeInTheDocument()
-    expect(screen.getByLabelText("Deck menu")).toBeInTheDocument()
-  })
-
+describe(CreateNew.name, () => {
   it("shows the create deck form ", () => {
-    render(<Home />)
+    render(<CreateNew />)
 
     const createButton = screen.getByLabelText(
       "Create a new deck or new flashcard"
@@ -37,7 +25,7 @@ describe.skip(Home.name, () => {
   })
 
   it("hides the create deck form when the cancel button is clicked", () => {
-    render(<Home />)
+    render(<CreateNew />)
 
     const createButton = screen.getByLabelText(
       "Create a new deck or new flashcard"
