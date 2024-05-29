@@ -1,10 +1,13 @@
 import { render, screen } from "@testing-library/react"
 import Study from "../page"
+import { getDeckById } from "@/service/dbService"
+import { Deck } from "@/types"
 
-const testDeck = {
+const testDeck: Deck = {
   id: "deck-id",
   name: "Test Deck",
-  cards: [
+  cardCount: 1,
+  flashcards: [
     {
       id: "card-id",
       front: "Front of card",
@@ -13,9 +16,12 @@ const testDeck = {
   ],
 }
 
+jest.mock("@/service/dbService")
+
 describe("Study Page", () => {
   it("renders", async () => {
-    render(<Study />)
+    jest.mocked(getDeckById).mockResolvedValue(testDeck)
+    render(await Study({ params: { deckId: "deck-id" } }))
     expect(screen.getByText("Test Deck")).toBeInTheDocument()
     expect(screen.getByText("Front of card")).toBeInTheDocument()
     // expect(screen.getByText("Back of card")).toBeInTheDocument()

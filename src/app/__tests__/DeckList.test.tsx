@@ -1,10 +1,21 @@
 import { render, screen } from "@testing-library/react"
 import { DeckList } from "../_components/DeckList"
+import { getDecks } from "@/service/dbService"
+
+jest.mock("@/service/dbService")
 
 describe(DeckList.name, () => {
   it("renders", async () => {
+    jest.mocked(getDecks).mockResolvedValue([
+      {
+        id: "some-id",
+        name: "Deck 1",
+        cardCount: 3,
+      },
+    ])
     render(await DeckList())
+
     expect(screen.getByText("Deck 1")).toBeInTheDocument()
-    expect(screen.getAllByTestId("deck-card-count")[0]).toHaveTextContent("3")
+    expect(screen.getByTestId("deck-card-count")).toHaveTextContent("3")
   })
 })

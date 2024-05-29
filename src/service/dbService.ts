@@ -1,6 +1,5 @@
 import { Deck, Flashcard } from "@/types"
 
-// an array of Flashcards
 const flashcards: Flashcard[] = [
   {
     id: "some-id",
@@ -30,13 +29,13 @@ const flashcards: Flashcard[] = [
 
 const decks: Deck[] = [
   {
-    id: "some-id",
+    id: "1",
     name: "Deck 1",
     cardCount: 3,
     flashcards,
   },
   {
-    id: "some-id-2",
+    id: "2",
     name: "Deck 2",
     cardCount: 3,
     flashcards,
@@ -45,4 +44,8 @@ const decks: Deck[] = [
 
 export const getDecks = async () => {
   return decks
+}
+
+export const getDeckById = async (id: string) => {
+  return decks.find((deck) => deck.id === id)
 }
