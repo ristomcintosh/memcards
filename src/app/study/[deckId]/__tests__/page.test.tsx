@@ -24,10 +24,7 @@ describe("Study Page", () => {
     render(await Study({ params: { deckId: "deck-id" } }))
     expect(screen.getByText("Test Deck")).toBeInTheDocument()
     expect(screen.getByText("Front of card")).toBeInTheDocument()
-    // expect(screen.getByText("Back of card")).toBeInTheDocument()
     expect(screen.getByRole("button", { name: "Flip" })).toBeInTheDocument()
     expect(screen.getByRole("button", { name: "Next" })).toBeInTheDocument()
   })
-
-  it.todo("flips the card")
 })
