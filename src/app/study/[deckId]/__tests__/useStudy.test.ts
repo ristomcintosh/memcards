@@ -62,7 +62,7 @@ describe(useStudy.name, () => {
   it("returns the progress of the study session", async () => {
     const { result, rerender } = renderHook(() => useStudy(testDeck))
 
-    expect(result.current.progress).toBe(0)
+    expect(result.current.progress).toBe(50)
 
     act(() => {
       result.current.nextCard()
@@ -70,6 +70,6 @@ describe(useStudy.name, () => {
 
     rerender()
 
-    expect(result.current.progress).toBe(50)
+    expect(result.current.progress).toBe(100)
   })
 })

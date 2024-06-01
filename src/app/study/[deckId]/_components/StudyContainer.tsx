@@ -3,17 +3,28 @@ import { DropdownMenu } from "@/components/DropdownMenu"
 import Link from "next/link"
 import { PropsWithChildren } from "react"
 
+type OnFlip = () => void
+type OnNextCard = () => void
+type Progress = number
+
 type StudyContainerProps = {
   title: string
+  progress: Progress
+  controls: {
+    flipCard: OnFlip
+    nextCard: OnNextCard
+  }
 }
 
 export function StudyContainer({
   title,
+  controls,
+  progress,
   children,
 }: PropsWithChildren<StudyContainerProps>) {
   return (
     <div className="flex flex-col h-screen">
-      <Header />
+      <Header progress={progress} />
       <main className="flex-1 px-2 overflow-x-hidden overflow-y-auto bg-gray-100">
         <div className="flex flex-col min-h-full pt-4 pb-6">
           <h1 className="text-3xl text-center">{title}</h1>
@@ -22,17 +33,17 @@ export function StudyContainer({
           </section>
         </div>
       </main>
-      <Footer />
+      <Footer onFlip={controls.flipCard} onNextCard={controls.nextCard} />
     </div>
   )
 }
 
 const headerMenuOptions = ["Edit", "Delete"]
 
-const Header = () => (
+const Header = ({ progress }: { progress: Progress }) => (
   <section className="flex items-center justify-between p-4">
     <DropdownMenu items={headerMenuOptions} />
-    <ProgressBar progress={50} />
+    <ProgressBar progress={progress} />
     <nav>
       <Link href="/">Home</Link>
     </nav>
@@ -54,13 +65,21 @@ const ProgressBar = ({ progress }: { progress: number }) => (
   </div>
 )
 
-const Footer = () => (
+const Footer = ({
+  onFlip,
+  onNextCard,
+}: {
+  onFlip: OnFlip
+  onNextCard: OnNextCard
+}) => (
   <div className="py-3">
     <div className="flex justify-around max-w-md mx-auto">
-      <Button size="lg" variant="outline">
+      <Button size="lg" variant="outline" onClick={onFlip}>
         Flip
       </Button>
-      <Button size="lg">Next</Button>
+      <Button size="lg" onClick={onNextCard}>
+        Next
+      </Button>
     </div>
   </div>
 )

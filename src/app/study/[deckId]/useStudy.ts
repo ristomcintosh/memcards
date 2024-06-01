@@ -1,13 +1,10 @@
-import { Deck } from "@/types"
-import { useState, useCallback, useMemo } from "react"
+import { Deck, Flashcard } from "@/types"
+import { useState, useCallback, useEffect } from "react"
 
 // deck will already be randomised
 export const useStudy = (deck: Deck) => {
-  const flashcardsLocalCopy = useMemo(
-    () => [...deck.flashcards],
-    [deck.flashcards]
-  )
-  const [flashcard, setFlashcard] = useState(flashcardsLocalCopy[0])
+  const [flashcards, setFlashcards] = useState<Flashcard[]>([])
+  const [flashcard, setFlashcard] = useState<Flashcard | null>(null)
   const [cardSide, setCardSide] = useState<"front" | "back">("front")
 
   const flipCard = useCallback(() => {
@@ -16,12 +13,19 @@ export const useStudy = (deck: Deck) => {
 
   const deleteCard = useCallback(() => {}, [])
   const nextCard = useCallback(() => {
-    setFlashcard(flashcardsLocalCopy.pop())
-  }, [flashcardsLocalCopy])
+    const nextCard = flashcards[0]
+    setFlashcards((cards) => cards.slice(1))
+    setFlashcard(nextCard)
+  }, [flashcards])
 
   const progress =
-    ((deck.flashcards.length - flashcardsLocalCopy.length) * 100) /
+    ((deck.flashcards.length - flashcards.length) * 100) /
     deck.flashcards.length
+
+  useEffect(() => {
+    setFlashcards(deck.flashcards.slice(1))
+    setFlashcard(deck.flashcards[0])
+  }, [deck.flashcards])
 
   return {
     progress,

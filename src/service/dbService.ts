@@ -27,7 +27,7 @@ const flashcards: Flashcard[] = [
   },
 ]
 
-const decks: Deck[] = [
+export const decks: Deck[] = [
   {
     id: "1",
     name: "Deck 1",
