@@ -1,4 +1,4 @@
-import { renderHook } from "@testing-library/react"
+import { act, renderHook, waitFor } from "@testing-library/react"
 import { useStudy } from "../useStudy"
 import { Deck } from "@/types"
 
@@ -27,21 +27,49 @@ describe(useStudy.name, () => {
     const { result } = renderHook(() => useStudy(testDeck))
 
     expect(Object.keys(result.current.flashcard)).toEqual(
-      expect.arrayContaining([
-        ...Object.keys(testDeck.flashcards[0]),
-        "isShowingFrontOfCard",
-      ])
+      Object.keys(testDeck.flashcards[0])
     )
+    expect(result.current.cardSide).toBeDefined()
     expect(result.current.flipCard).toBeDefined()
   })
 
-  it("flips the card", () => {
-    const { result } = renderHook(() => useStudy(testDeck))
+  it("flips the card", async () => {
+    const { result, rerender } = renderHook(() => useStudy(testDeck))
 
-    expect(result.current.flashcard.isShowingFrontOfCard).toBe(true)
+    expect(result.current.cardSide).toBe("front")
 
-    result.current.flipCard()
+    act(() => {
+      result.current.flipCard()
+    })
 
-    expect(result.current.flashcard.isShowingFrontOfCard).toBe(false)
+    rerender()
+
+    expect(result.current.cardSide).toBe("back")
+  })
+
+  it("returns the next card", async () => {
+    const { result, rerender } = renderHook(() => useStudy(testDeck))
+
+    act(() => {
+      result.current.nextCard()
+    })
+
+    rerender()
+
+    expect(result.current.flashcard).toEqual(testDeck.flashcards[1])
+  })
+
+  it("returns the progress of the study session", async () => {
+    const { result, rerender } = renderHook(() => useStudy(testDeck))
+
+    expect(result.current.progress).toBe(0)
+
+    act(() => {
+      result.current.nextCard()
+    })
+
+    rerender()
+
+    expect(result.current.progress).toBe(50)
   })
 })
