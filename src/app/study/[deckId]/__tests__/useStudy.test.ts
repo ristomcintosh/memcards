@@ -59,7 +59,7 @@ describe(useStudy.name, () => {
     expect(result.current.flashcard).toEqual(testDeck.flashcards[1])
   })
 
-  it("returns the progress of the study session", async () => {
+  it("returns the progress of the study session", () => {
     const { result, rerender } = renderHook(() => useStudy(testDeck))
 
     expect(result.current.progress).toBe(50)
@@ -71,5 +71,33 @@ describe(useStudy.name, () => {
     rerender()
 
     expect(result.current.progress).toBe(100)
+  })
+
+  it("re-initializes the study session - reset the state", () => {
+    const { result, rerender } = renderHook(() => useStudy(testDeck))
+
+    act(() => {
+      result.current.nextCard()
+    })
+
+    rerender()
+
+    act(() => {
+      result.current.flipCard()
+    })
+
+    expect(result.current.flashcard).toEqual(testDeck.flashcards[1])
+    expect(result.current.cardSide).toBe("back")
+    expect(result.current.progress).toBe(100)
+
+    act(() => {
+      result.current.initialize()
+    })
+
+    rerender()
+
+    expect(result.current.cardSide).toBe("front")
+    expect(result.current.flashcard).toEqual(testDeck.flashcards[0])
+    expect(result.current.progress).toBe(50)
   })
 })
