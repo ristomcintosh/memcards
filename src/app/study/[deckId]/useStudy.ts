@@ -17,6 +17,7 @@ export const useStudy = (deck: Deck) => {
     const nextCard = flashcards[0]
     setFlashcards((cards) => cards.slice(1))
     setFlashcard(nextCard)
+    setCardSide("front")
   }, [flashcards])
 
   const initialize = useCallback(() => {

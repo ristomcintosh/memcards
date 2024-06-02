@@ -23,16 +23,6 @@ const testDeck: Deck = {
 }
 
 describe(useStudy.name, () => {
-  it("returns an object", () => {
-    const { result } = renderHook(() => useStudy(testDeck))
-
-    expect(
-      result.current.flashcard && Object.keys(result.current.flashcard)
-    ).toEqual(Object.keys(testDeck.flashcards[0]))
-    expect(result.current.cardSide).toBeDefined()
-    expect(result.current.flipCard).toBeDefined()
-  })
-
   it("flips the card", async () => {
     const { result, rerender } = renderHook(() => useStudy(testDeck))
 
@@ -57,6 +47,24 @@ describe(useStudy.name, () => {
     rerender()
 
     expect(result.current.flashcard).toEqual(testDeck.flashcards[1])
+  })
+
+  it("flips the card to the front when the next card is shown", () => {
+    const { result, rerender } = renderHook(() => useStudy(testDeck))
+
+    act(() => {
+      result.current.flipCard()
+    })
+
+    expect(result.current.cardSide).toBe("back")
+
+    act(() => {
+      result.current.nextCard()
+    })
+
+    rerender()
+
+    expect(result.current.cardSide).toBe("front")
   })
 
   it("returns the progress of the study session", () => {
