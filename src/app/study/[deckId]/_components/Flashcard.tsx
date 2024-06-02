@@ -9,7 +9,6 @@ type FlashcardProps = {
   flashcard: FlashcardType
 }
 
-// TODO Trying using AnimatePresence to animate the flashcard flipping
 export const Flashcard = ({ cardSide, flashcard }: FlashcardProps) => {
   return (
     <motion.div
@@ -36,14 +35,6 @@ const FlashcardContent = ({ cardSide, text, image }: FlashcardContentProps) => {
   const defaultStyles = cardSide === "back" ? { rotateY: 180 } : {}
   return (
     <motion.div
-      key={cardSide}
-      initial={{
-        opacity: 0,
-      }}
-      animate={{
-        opacity: 1,
-      }}
-      transition={{ delay: 0.2 }}
       style={{ ...defaultStyles }}
       className="flex flex-col items-center justify-center w-full p-4"
     >
