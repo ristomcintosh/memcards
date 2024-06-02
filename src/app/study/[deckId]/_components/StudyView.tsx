@@ -3,6 +3,7 @@ import { Deck } from "@/types"
 import { Flashcard } from "./Flashcard"
 import { StudyContainer } from "./StudyContainer"
 import { useStudy } from "../useStudy"
+import { Completed } from "./Completed"
 
 type StudyViewProps = {
   deck: Required<Deck>
@@ -16,7 +17,11 @@ export const StudyView = ({ deck }: StudyViewProps) => {
       progress={progress}
       controls={{ flipCard, nextCard }}
     >
-      {flashcard && <Flashcard flashcard={flashcard} cardSide={cardSide} />}
+      {flashcard ? (
+        <Flashcard flashcard={flashcard} cardSide={cardSide} />
+      ) : (
+        <Completed />
+      )}
     </StudyContainer>
   )
 }

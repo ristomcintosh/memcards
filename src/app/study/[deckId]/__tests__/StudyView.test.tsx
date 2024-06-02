@@ -38,4 +38,28 @@ describe(StudyView.name, () => {
 
     expect(screen.getByText(nextCard)).toBeInTheDocument()
   })
+
+  it("shows the completed modal after viewing all cards", () => {
+    render(<StudyView deck={decks[0]} />)
+
+    const nextButton = screen.getByRole("button", { name: "Next" })
+
+    act(() => {
+      nextButton.click()
+    })
+
+    act(() => {
+      nextButton.click()
+    })
+
+    act(() => {
+      nextButton.click()
+    })
+
+    act(() => {
+      nextButton.click()
+    })
+
+    expect(screen.getByText("Congratulations! 🎉")).toBeInTheDocument()
+  })
 })
