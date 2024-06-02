@@ -11,11 +11,12 @@ describe(DeckList.name, () => {
         id: "some-id",
         name: "Deck 1",
         cardCount: 3,
+        flashcards: [],
       },
     ])
     render(await DeckList())
 
     expect(screen.getByText("Deck 1")).toBeInTheDocument()
-    expect(screen.getByTestId("deck-card-count")).toHaveTextContent("3")
+    expect(screen.getByLabelText("card count 3")).toBeInTheDocument()
   })
 })

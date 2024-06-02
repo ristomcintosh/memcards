@@ -1,4 +1,4 @@
-import { act, renderHook, waitFor } from "@testing-library/react"
+import { act, renderHook } from "@testing-library/react"
 import { useStudy } from "../useStudy"
 import { Deck } from "@/types"
 
@@ -26,9 +26,9 @@ describe(useStudy.name, () => {
   it("returns an object", () => {
     const { result } = renderHook(() => useStudy(testDeck))
 
-    expect(Object.keys(result.current.flashcard)).toEqual(
-      Object.keys(testDeck.flashcards[0])
-    )
+    expect(
+      result.current.flashcard && Object.keys(result.current.flashcard)
+    ).toEqual(Object.keys(testDeck.flashcards[0]))
     expect(result.current.cardSide).toBeDefined()
     expect(result.current.flipCard).toBeDefined()
   })
