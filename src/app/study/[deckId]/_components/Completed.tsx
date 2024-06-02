@@ -7,7 +7,7 @@ import {
 } from "@headlessui/react"
 import Link from "next/link"
 
-export const Completed = () => {
+export const Completed = ({ restart }: { restart: () => void }) => {
   return (
     <Dialog onClose={() => {}} open={true}>
       <div className="fixed bg-black/30 inset-0 p-4 flex items-center justify-center">
@@ -22,7 +22,7 @@ export const Completed = () => {
             You have successfully completed all the flashcards in this deck.
           </Description>
           <div className="flex justify-evenly">
-            <Button onClick={() => {}}>Restart</Button>
+            <Button onClick={restart}>Restart</Button>
             <Link
               href="/"
               style={{ minWidth: 44, minHeight: 44 }}

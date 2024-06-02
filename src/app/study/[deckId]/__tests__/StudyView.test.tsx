@@ -62,4 +62,36 @@ describe(StudyView.name, () => {
 
     expect(screen.getByText("Congratulations! 🎉")).toBeInTheDocument()
   })
+
+  it("restarts the study session", () => {
+    render(<StudyView deck={decks[0]} />)
+
+    const nextButton = screen.getByRole("button", { name: "Next" })
+
+    act(() => {
+      nextButton.click()
+    })
+
+    act(() => {
+      nextButton.click()
+    })
+
+    act(() => {
+      nextButton.click()
+    })
+
+    act(() => {
+      nextButton.click()
+    })
+
+    const restartButton = screen.getByRole("button", { name: "Restart" })
+
+    act(() => {
+      restartButton.click()
+    })
+
+    expect(
+      screen.getByText("What is the capital of France?")
+    ).toBeInTheDocument()
+  })
 })
