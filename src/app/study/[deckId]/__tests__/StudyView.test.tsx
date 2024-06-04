@@ -1,4 +1,4 @@
-import { decks } from "@/service/dbService"
+import { decks } from "@/tests/testData"
 import { StudyView } from "../_components/StudyView"
 import { act, render, screen } from "@testing-library/react"
 
