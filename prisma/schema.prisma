@@ -22,7 +22,7 @@ model Flashcard {
   front  String
   back   String
   image  Image?
-  deck   Deck   @relation(fields: [deckId], references: [id])
+  deck   Deck   @relation(fields: [deckId], references: [id], onDelete: Cascade)
   deckId String
 }
 

@@ -1,9 +1,14 @@
+"use client"
 import { DropdownMenu } from "@/components/DropdownMenu"
-import { getDecks } from "@/service/dbService"
+import { deleteDeck } from "@/service/dbService"
+import { Deck } from "@prisma/client"
 import Link from "next/link"
 
-export const DeckList = async () => {
-  const decks = await getDecks()
+type DeckListProps = {
+  decks: Deck[]
+}
+
+export const DeckList = ({ decks }: DeckListProps) => {
   return decks.map((deck) => (
     <div
       key={deck.id}
@@ -16,7 +21,14 @@ export const DeckList = async () => {
         <p className="">{deck.name}</p>
         <p aria-label={`card count ${deck.cardCount}`}>{deck.cardCount}</p>
       </Link>
-      <DropdownMenu items={["Rename", "Delete"]} />
+      <DropdownMenu
+        items={[
+          {
+            name: "Delete",
+            action: () => deleteDeck(deck.id),
+          },
+        ]}
+      />
     </div>
   ))
 }

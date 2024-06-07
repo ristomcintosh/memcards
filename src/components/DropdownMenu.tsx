@@ -10,8 +10,13 @@ import { motion, HTMLMotionProps } from "framer-motion"
 import { HTMLAttributes, PropsWithChildren } from "react"
 import { VerticalDots } from "./VerticalDots"
 
+export type DropdownMenuItems = {
+  name: string
+  action: () => Promise<void>
+}[]
+
 type DropdownMenuProps = {
-  items: string[]
+  items: DropdownMenuItems
 }
 
 export const DropdownMenu = ({ items }: DropdownMenuProps) => (
@@ -20,8 +25,8 @@ export const DropdownMenu = ({ items }: DropdownMenuProps) => (
       <VerticalDots />
     </MenuButton>
     <MenuItemsAnimated anchor="right">
-      {items.map((option) => (
-        <MenuItem text={option} key={option} />
+      {items.map(({ name, action }) => (
+        <MenuItem text={name} key={name} onClick={() => action()} />
       ))}
     </MenuItemsAnimated>
   </Menu>
