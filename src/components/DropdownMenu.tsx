@@ -12,7 +12,7 @@ import { VerticalDots } from "./VerticalDots"
 
 export type DropdownMenuItems = {
   name: string
-  action: () => Promise<void>
+  action: () => Promise<void> | void
 }[]
 
 type DropdownMenuProps = {

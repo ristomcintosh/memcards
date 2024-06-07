@@ -1,17 +1,12 @@
 "use client"
-import {
-  Dialog,
-  DialogPanel,
-  DialogTitle,
-  Menu,
-  MenuButton,
-} from "@headlessui/react"
+import { Menu, MenuButton } from "@headlessui/react"
 import { useState } from "react"
 import { TextInput } from "@/components/TextInput"
 import { Button } from "@/components/Button"
 import { Plus } from "@/components/Plus"
 import { MenuItem, MenuItemsAnimated } from "@/components/DropdownMenu"
 import { motion } from "framer-motion"
+import { Dialog } from "@/components/Dialog"
 
 export const CreateNew = () => {
   const [isCreateDeckFormOpen, showCreateDeckFrom] = useState(false)
@@ -61,23 +56,16 @@ const CreateDeckForm = ({
   isOpen: boolean
 }) => {
   return (
-    <Dialog open={isOpen} onClose={handleClick}>
-      <div className="fixed inset-0 p-4 top-[7%] flex items-start justify-center">
-        <DialogPanel className="w-full max-w-sm px-6 py-6 bg-white rounded-lg shadow-lg border-2">
-          <DialogTitle className="text-xl text-center mb-2">
-            Create A New Deck
-          </DialogTitle>
-          <form>
-            <TextInput label="Deck Name:" name="deckName" />
-            <div className="flex justify-around">
-              <Button type="submit">Submit</Button>
-              <Button onClick={handleClick} variant="text">
-                Cancel
-              </Button>
-            </div>
-          </form>
-        </DialogPanel>
-      </div>
+    <Dialog isOpen={isOpen} onClose={handleClick} title="Create A New Deck">
+      <form>
+        <TextInput label="Deck Name:" name="deckName" />
+        <div className="flex justify-around">
+          <Button type="submit">Submit</Button>
+          <Button onClick={handleClick} variant="text">
+            Cancel
+          </Button>
+        </div>
+      </form>
     </Dialog>
   )
 }

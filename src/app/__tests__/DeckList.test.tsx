@@ -33,4 +33,22 @@ describe(DeckList.name, () => {
 
     expect(deleteDeck).toHaveBeenCalledWith("some-id")
   })
+
+  it.todo("shows the delete confirmation dialog")
+
+  it("Show the rename dialog", () => {
+    render(<DeckList decks={testDeckList} />)
+
+    act(() => {
+      screen.getByLabelText("Deck menu").click()
+    })
+
+    act(() => {
+      screen.getByText("Rename").click()
+    })
+
+    expect(screen.getByText("Rename Deck")).toBeInTheDocument()
+    expect(screen.getByRole("button", { name: "Submit" })).toBeInTheDocument()
+    expect(screen.getByRole("button", { name: "Cancel" })).toBeInTheDocument()
+  })
 })
