@@ -1,9 +1,13 @@
-import { decks } from "@/tests/testData"
+import { Deck } from "@/types"
+import { prisma } from "@/utils/db.server"
 
 export const getDecks = async () => {
-  return decks
+  return prisma.deck.findMany()
 }
 
-export const getDeckById = async (id: string) => {
-  return decks.find((deck) => deck.id === id)
+export const getDeckById = async (id: string): Promise<Deck | null> => {
+  return prisma.deck.findUnique({
+    where: { id },
+    include: { flashcards: true },
+  })
 }

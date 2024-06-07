@@ -11,7 +11,6 @@ describe(DeckList.name, () => {
         id: "some-id",
         name: "Deck 1",
         cardCount: 3,
-        flashcards: [],
       },
     ])
     render(await DeckList())
