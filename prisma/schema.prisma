@@ -13,7 +13,7 @@ datasource db {
 model Deck {
   id         String      @id @default(cuid())
   name       String
-  cardCount  Int
+  cardCount  Int         @default(0)
   flashcards Flashcard[]
 }
 
