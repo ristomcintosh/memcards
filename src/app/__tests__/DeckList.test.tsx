@@ -20,7 +20,7 @@ describe(DeckList.name, () => {
     expect(screen.getByLabelText("card count 3")).toBeInTheDocument()
   })
 
-  it("calls deleteDeck when the delete button is clicked", () => {
+  it("shows the delete confirmation dialog and calls deleteDeck when 'Yes' is clicked", () => {
     render(<DeckList decks={testDeckList} />)
 
     act(() => {
@@ -31,10 +31,13 @@ describe(DeckList.name, () => {
       screen.getByText("Delete").click()
     })
 
+    expect(
+      screen.getByText("Are you sure you want to delete Deck 1?")
+    ).toBeInTheDocument()
+
+    screen.getByRole("button", { name: "Yes" }).click()
     expect(deleteDeck).toHaveBeenCalledWith("some-id")
   })
-
-  it.todo("shows the delete confirmation dialog")
 
   it("Show the rename dialog", () => {
     render(<DeckList decks={testDeckList} />)

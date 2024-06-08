@@ -34,6 +34,7 @@ export const DeckList = ({ decks }: DeckListProps) => {
 
 const Menu = ({ deck }: { deck: Deck }) => {
   const [isRenameDeckFormOpen, showRenameDeckForm] = useState(false)
+  const [isDeleteConfirmationOpen, showDeleteConfirmation] = useState(false)
   return (
     <>
       <DropdownMenu
@@ -44,7 +45,7 @@ const Menu = ({ deck }: { deck: Deck }) => {
           },
           {
             name: "Delete",
-            action: () => deleteDeck(deck.id),
+            action: () => showDeleteConfirmation(true),
           },
         ]}
       />
@@ -52,6 +53,11 @@ const Menu = ({ deck }: { deck: Deck }) => {
         deck={deck}
         isOpen={isRenameDeckFormOpen}
         onClose={() => showRenameDeckForm(false)}
+      />
+      <DeleteConfirmation
+        deck={deck}
+        isOpen={isDeleteConfirmationOpen}
+        onClose={() => showDeleteConfirmation(false)}
       />
     </>
   )
@@ -83,6 +89,33 @@ const RenameDeckForm = ({
           </Button>
         </div>
       </form>
+    </Dialog>
+  )
+}
+
+const DeleteConfirmation = ({
+  deck,
+  onClose,
+  isOpen,
+}: {
+  deck: Deck
+  onClose: () => void
+  isOpen: boolean
+}) => {
+  return (
+    <Dialog
+      isOpen={isOpen}
+      onClose={onClose}
+      title={`Are you sure you want to delete ${deck.name}?`}
+    >
+      <div className="flex justify-around mt-4">
+        <Button variant="warn" onClick={() => deleteDeck(deck.id)}>
+          Yes
+        </Button>
+        <Button onClick={onClose} variant="text">
+          Cancel
+        </Button>
+      </div>
     </Dialog>
   )
 }
