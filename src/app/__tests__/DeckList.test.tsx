@@ -47,8 +47,8 @@ describe(DeckList.name, () => {
       screen.getByText("Rename").click()
     })
 
-    expect(screen.getByText("Rename Deck")).toBeInTheDocument()
-    expect(screen.getByRole("button", { name: "Submit" })).toBeInTheDocument()
+    expect(screen.getByText("Rename: Deck 1")).toBeInTheDocument()
     expect(screen.getByRole("button", { name: "Cancel" })).toBeInTheDocument()
+    expect(screen.getByRole("button", { name: "Submit" })).toBeInTheDocument()
   })
 })
