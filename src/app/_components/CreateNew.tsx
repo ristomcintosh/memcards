@@ -7,6 +7,7 @@ import { Plus } from "@/components/Plus"
 import { MenuItem, MenuItemsAnimated } from "@/components/DropdownMenu"
 import { motion } from "framer-motion"
 import { Dialog } from "@/components/Dialog"
+import { createDeck } from "@/actions/actions"
 
 export const CreateNew = () => {
   const [isCreateDeckFormOpen, showCreateDeckFrom] = useState(false)
@@ -49,19 +50,24 @@ const CreateNewMenu = ({ handleClick }: { handleClick: () => void }) => {
 }
 
 const CreateDeckForm = ({
-  handleClick,
+  handleClick: onClose,
   isOpen,
 }: {
   handleClick: () => void
   isOpen: boolean
 }) => {
   return (
-    <Dialog isOpen={isOpen} onClose={handleClick} title="Create A New Deck">
-      <form>
+    <Dialog isOpen={isOpen} onClose={onClose} title="Create A New Deck">
+      <form
+        action={(formData) => {
+          createDeck(formData)
+          onClose()
+        }}
+      >
         <TextInput label="Deck Name:" name="deckName" />
         <div className="flex justify-around">
           <Button type="submit">Submit</Button>
-          <Button onClick={handleClick} variant="text">
+          <Button onClick={onClose} variant="text">
             Cancel
           </Button>
         </div>

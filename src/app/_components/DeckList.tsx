@@ -1,10 +1,10 @@
 "use client"
-import { updateDeck } from "@/actions/updateDeck"
+import { deleteDeck, updateDeck } from "@/actions/actions"
 import { Button } from "@/components/Button"
 import { Dialog } from "@/components/Dialog"
 import { DropdownMenu } from "@/components/DropdownMenu"
 import { TextInput } from "@/components/TextInput"
-import { deleteDeck } from "@/service/dbService"
+
 import { Deck } from "@prisma/client"
 import Link from "next/link"
 import { useState } from "react"

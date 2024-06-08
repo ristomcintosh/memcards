@@ -1,7 +1,6 @@
 "use server"
 import { Deck } from "@/types"
 import { prisma } from "@/utils/db.server"
-import { revalidatePath } from "next/cache"
 
 export const getDecks = async () => {
   return prisma.deck.findMany()
@@ -19,10 +18,20 @@ export const deleteDeck = async (id: string) => {
     where: { id },
     include: { flashcards: true },
   })
-
-  revalidatePath("/")
 }
 
-export const updateDeck = async (id: string, name: string) => {
-  console.log("updateDeck")
+export const updateDeck = async (deck: Partial<Deck>) => {
+  const { name, cardCount } = deck
+  await prisma.deck.update({
+    where: { id: deck.id },
+    data: { name, cardCount },
+  })
+}
+
+export const createDeck = async (deckName: string) => {
+  await prisma.deck.create({
+    data: {
+      name: deckName,
+    },
+  })
 }
