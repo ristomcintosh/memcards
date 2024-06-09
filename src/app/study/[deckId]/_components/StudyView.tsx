@@ -10,13 +10,20 @@ type StudyViewProps = {
 }
 
 export const StudyView = ({ deck }: StudyViewProps) => {
-  const { flashcard, cardSide, flipCard, nextCard, progress, initialize } =
-    useStudy(deck)
+  const {
+    flashcard,
+    cardSide,
+    flipCard,
+    nextCard,
+    progress,
+    initialize,
+    deleteCard,
+  } = useStudy(deck)
   return (
     <StudyContainer
       title={deck.name}
       progress={progress}
-      controls={{ flipCard, nextCard }}
+      controls={{ flipCard, nextCard, deleteCard }}
     >
       {flashcard ? (
         <Flashcard flashcard={flashcard} cardSide={cardSide} />

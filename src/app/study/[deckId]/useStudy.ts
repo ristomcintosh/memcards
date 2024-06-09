@@ -1,3 +1,4 @@
+import { deleteFlashcard } from "@/actions/actions"
 import { DeckWithFlashcards, Flashcard } from "@/types"
 import { useState, useCallback, useEffect } from "react"
 
@@ -11,14 +12,18 @@ export const useStudy = (deck: DeckWithFlashcards) => {
     setCardSide((side) => (side === "front" ? "back" : "front"))
   }, [])
 
-  const deleteCard = useCallback(() => {}, [])
-
   const nextCard = useCallback(() => {
     const nextCard = flashcards[0]
     setFlashcards((cards) => cards.slice(1))
     setFlashcard(nextCard)
     setCardSide("front")
   }, [flashcards])
+
+  const deleteCard = useCallback(() => {
+    if (!flashcard) return
+    deleteFlashcard(flashcard?.id)
+    nextCard()
+  }, [flashcard, nextCard])
 
   const initialize = useCallback(() => {
     setFlashcards(deck.flashcards.slice(1))

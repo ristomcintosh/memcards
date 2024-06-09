@@ -1,11 +1,12 @@
 import { Button } from "@/components/Button"
-import { DropdownMenu, DropdownMenuItems } from "@/components/DropdownMenu"
+import { DropdownMenu } from "@/components/DropdownMenu"
 import Link from "next/link"
 import { PropsWithChildren } from "react"
 
 type OnFlip = () => void
 type OnNextCard = () => void
 type Progress = number
+type OnDeleteCard = () => void
 
 type StudyContainerProps = {
   title: string
@@ -13,6 +14,7 @@ type StudyContainerProps = {
   controls: {
     flipCard: OnFlip
     nextCard: OnNextCard
+    deleteCard: OnDeleteCard
   }
 }
 
@@ -24,7 +26,7 @@ export function StudyContainer({
 }: PropsWithChildren<StudyContainerProps>) {
   return (
     <div className="flex flex-col h-screen">
-      <Header progress={progress} />
+      <Header progress={progress} onDeleteCard={controls.deleteCard} />
       <main className="flex-1 px-2 overflow-x-hidden overflow-y-auto bg-gray-100">
         <div className="flex flex-col min-h-full pt-4 pb-6">
           <h1 className="text-3xl text-center">{title}</h1>
@@ -38,14 +40,21 @@ export function StudyContainer({
   )
 }
 
-const headerMenuOptions: DropdownMenuItems = [
-  { name: "Edit", action: () => {} },
-  { name: "Delete", action: () => {} },
-]
-
-const Header = ({ progress }: { progress: Progress }) => (
+const Header = ({
+  progress,
+  onDeleteCard: onDelete,
+}: {
+  progress: Progress
+  onDeleteCard: OnDeleteCard
+}) => (
   <section className="flex items-center justify-between p-4">
-    <DropdownMenu items={headerMenuOptions} />
+    <DropdownMenu
+      name="Flashcard Options"
+      items={[
+        { name: "Edit", action: () => {} },
+        { name: "Delete", action: onDelete },
+      ]}
+    />
     <ProgressBar progress={progress} />
     <nav>
       <Link href="/">Home</Link>

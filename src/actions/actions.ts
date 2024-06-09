@@ -43,3 +43,8 @@ export const createFlashcard = async (formData: FormData) => {
 
   revalidatePath("/")
 }
+
+export const deleteFlashcard = async (id: string) => {
+  await DBService.deleteFlashcard(id)
+  revalidatePath("/")
+}

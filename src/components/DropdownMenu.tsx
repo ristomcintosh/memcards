@@ -18,11 +18,12 @@ export type DropdownMenuItems = {
 
 type DropdownMenuProps = {
   items: DropdownMenuItems
+  name: string
 }
 
-export const DropdownMenu = ({ items }: DropdownMenuProps) => (
+export const DropdownMenu = ({ items, name: menuName }: DropdownMenuProps) => (
   <Menu>
-    <MenuButton aria-label="Deck menu" className="w-5">
+    <MenuButton aria-label={menuName} className="w-5">
       <VerticalDots />
     </MenuButton>
     <MenuItemsAnimated anchor="right">

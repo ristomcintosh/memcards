@@ -39,6 +39,7 @@ const Menu = ({ deck }: { deck: Deck }) => {
   return (
     <>
       <DropdownMenu
+        name="Deck Options"
         items={[
           {
             name: "Rename",

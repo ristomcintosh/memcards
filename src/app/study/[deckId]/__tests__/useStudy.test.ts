@@ -1,6 +1,9 @@
 import { act, renderHook } from "@testing-library/react"
 import { useStudy } from "../useStudy"
 import { DeckWithFlashcards } from "@/types"
+import { deleteFlashcard } from "@/actions/actions"
+
+jest.mock("@/actions/actions")
 
 const testDeck: DeckWithFlashcards = {
   id: "1",
@@ -106,5 +109,18 @@ describe(useStudy.name, () => {
     expect(result.current.cardSide).toBe("front")
     expect(result.current.flashcard).toEqual(testDeck.flashcards[0])
     expect(result.current.progress).toBe(50)
+  })
+
+  it("deletes the current card being shown and show the next card", () => {
+    const { result, rerender } = renderHook(() => useStudy(testDeck))
+
+    act(() => {
+      result.current.deleteCard()
+    })
+
+    rerender()
+
+    expect(deleteFlashcard).toHaveBeenCalledWith(testDeck.flashcards[0].id)
+    expect(result.current.flashcard).toEqual(testDeck.flashcards[1])
   })
 })

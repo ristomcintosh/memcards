@@ -1,6 +1,9 @@
 import { decks } from "@/tests/testData"
 import { StudyView } from "../_components/StudyView"
 import { act, render, screen } from "@testing-library/react"
+import { deleteFlashcard } from "@/actions/actions"
+
+jest.mock("@/actions/actions")
 
 describe(StudyView.name, () => {
   it("renders", () => {
@@ -93,5 +96,23 @@ describe(StudyView.name, () => {
     expect(
       screen.getByText("What is the capital of France?")
     ).toBeInTheDocument()
+  })
+
+  it("deletes the current card being shown and show the next card", () => {
+    const nextCard = "What is the capital of Portugal?"
+    render(<StudyView deck={decks[0]} />)
+
+    act(() => {
+      screen.getByLabelText("Flashcard Options").click()
+    })
+
+    const deleteButton = screen.getByRole("menuitem", { name: "Delete" })
+
+    act(() => {
+      deleteButton.click()
+    })
+
+    expect(deleteFlashcard).toHaveBeenCalled()
+    expect(screen.getByText(nextCard)).toBeInTheDocument()
   })
 })

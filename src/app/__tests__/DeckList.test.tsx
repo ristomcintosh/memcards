@@ -24,7 +24,7 @@ describe(DeckList.name, () => {
     render(<DeckList decks={testDeckList} />)
 
     act(() => {
-      screen.getByLabelText("Deck menu").click()
+      screen.getByLabelText("Deck Options").click()
     })
 
     act(() => {
@@ -43,7 +43,7 @@ describe(DeckList.name, () => {
     render(<DeckList decks={testDeckList} />)
 
     act(() => {
-      screen.getByLabelText("Deck menu").click()
+      screen.getByLabelText("Deck Options").click()
     })
 
     act(() => {
