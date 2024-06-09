@@ -1,5 +1,5 @@
 import { Button } from "@/components/Button"
-import { DropdownMenu } from "@/components/DropdownMenu"
+import { DropdownMenu, DropdownMenuItems } from "@/components/DropdownMenu"
 import Link from "next/link"
 import { PropsWithChildren } from "react"
 
@@ -38,7 +38,10 @@ export function StudyContainer({
   )
 }
 
-const headerMenuOptions = ["Edit", "Delete"]
+const headerMenuOptions: DropdownMenuItems = [
+  { name: "Edit", action: () => {} },
+  { name: "Delete", action: () => {} },
+]
 
 const Header = ({ progress }: { progress: Progress }) => (
   <section className="flex items-center justify-between p-4">
@@ -72,7 +75,7 @@ const Footer = ({
   onFlip: OnFlip
   onNextCard: OnNextCard
 }) => (
-  <div className="py-3">
+  <section className="py-3">
     <div className="flex justify-around max-w-md mx-auto">
       <Button size="lg" variant="outline" onClick={onFlip}>
         Flip
@@ -81,5 +84,5 @@ const Footer = ({
         Next
       </Button>
     </div>
-  </div>
+  </section>
 )

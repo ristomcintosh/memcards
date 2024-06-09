@@ -12,6 +12,8 @@ type DeckListProps = {
   decks: DeckWithCardCount[]
 }
 
+// TODO: Handle no cards in deck - show a message with option to route to add cards page
+
 export const DeckList = ({ decks }: DeckListProps) => {
   return decks.map((deck) => (
     <div
