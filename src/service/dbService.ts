@@ -35,3 +35,23 @@ export const createDeck = async (deckName: string) => {
     },
   })
 }
+
+export const createFlashcard = async ({
+  front,
+  back,
+  deckId,
+}: {
+  front: string
+  back: string
+  deckId: string
+}) => {
+  await prisma.flashcard.create({
+    data: {
+      front: front,
+      back: back,
+      deck: {
+        connect: { id: deckId },
+      },
+    },
+  })
+}

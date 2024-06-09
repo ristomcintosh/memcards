@@ -27,3 +27,18 @@ export const createDeck = async (formData: FormData) => {
 
   revalidatePath("/")
 }
+
+export const createFlashcard = async (formData: FormData) => {
+  console.log("createFlashcard", formData)
+  const front = formData.get("front")
+  const back = formData.get("back")
+  const deckId = formData.get("deckId")
+
+  if (!front || !back || !deckId) return
+
+  await DBService.createFlashcard({
+    front: front.toString(),
+    back: back.toString(),
+    deckId: deckId.toString(),
+  })
+}
