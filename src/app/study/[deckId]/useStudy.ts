@@ -1,5 +1,4 @@
-import { DeckWithFlashcards } from "@/service/dbService"
-import { Flashcard } from "@prisma/client"
+import { DeckWithFlashcards, Flashcard } from "@/types"
 import { useState, useCallback, useEffect } from "react"
 
 // deck will already be randomised

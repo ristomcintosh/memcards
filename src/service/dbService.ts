@@ -1,14 +1,7 @@
 "use server"
+import { Deck, DeckWithCardCount } from "@/types"
+import { DeckWithFlashcards } from "@/types"
 import { prisma } from "@/utils/db.server"
-import { Deck, Flashcard } from "@prisma/client"
-
-export type DeckWithFlashcards = Deck & {
-  flashcards: Flashcard[]
-}
-
-export type DeckWithCardCount = Deck & {
-  cardCount: number
-}
 
 const computeCardCount = (deck: DeckWithFlashcards) => deck.flashcards.length
 

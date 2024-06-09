@@ -3,7 +3,7 @@ import { Flashcard } from "./Flashcard"
 import { StudyContainer } from "./StudyContainer"
 import { useStudy } from "../useStudy"
 import { Completed } from "./Completed"
-import { DeckWithFlashcards } from "@/service/dbService"
+import { DeckWithFlashcards } from "@/types"
 
 type StudyViewProps = {
   deck: Required<DeckWithFlashcards>

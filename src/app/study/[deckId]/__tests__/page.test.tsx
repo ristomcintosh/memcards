@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/react"
 import Study from "../page"
-import { DeckWithFlashcards, getDeckById } from "@/service/dbService"
+import { getDeckById } from "@/service/dbService"
+import { DeckWithFlashcards } from "@/types"
 
 const testDeck: DeckWithFlashcards = {
   id: "deck-id",

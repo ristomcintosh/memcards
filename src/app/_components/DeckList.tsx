@@ -4,9 +4,7 @@ import { Button } from "@/components/Button"
 import { Dialog } from "@/components/Dialog"
 import { DropdownMenu } from "@/components/DropdownMenu"
 import { TextInput } from "@/components/TextInput"
-import { DeckWithCardCount } from "@/service/dbService"
-
-import { Deck } from "@prisma/client"
+import { Deck, DeckWithCardCount } from "@/types"
 import Link from "next/link"
 import { useState } from "react"
 

@@ -1,6 +1,6 @@
 import { act, renderHook } from "@testing-library/react"
 import { useStudy } from "../useStudy"
-import { DeckWithFlashcards } from "@/service/dbService"
+import { DeckWithFlashcards } from "@/types"
 
 const testDeck: DeckWithFlashcards = {
   id: "1",

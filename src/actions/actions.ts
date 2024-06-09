@@ -1,7 +1,7 @@
 "use server"
 import { revalidatePath } from "next/cache"
 import * as DBService from "@/service/dbService"
-import { Deck } from "@prisma/client"
+import { Deck } from "@/types"
 
 export const updateDeck = async (id: Deck["id"], formData: FormData) => {
   const name = formData.get("deckName")

@@ -1,4 +1,4 @@
-import { DeckWithFlashcards } from "@/service/dbService"
+import { DeckWithFlashcards } from "@/types"
 import { Flashcard } from "@/types"
 
 export const flashcards: Flashcard[] = [
