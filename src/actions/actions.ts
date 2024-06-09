@@ -1,7 +1,7 @@
 "use server"
-import { Deck } from "@/types"
 import { revalidatePath } from "next/cache"
 import * as DBService from "@/service/dbService"
+import { Deck } from "@prisma/client"
 
 export const updateDeck = async (id: Deck["id"], formData: FormData) => {
   const name = formData.get("deckName")
@@ -29,7 +29,6 @@ export const createDeck = async (formData: FormData) => {
 }
 
 export const createFlashcard = async (formData: FormData) => {
-  console.log("createFlashcard", formData)
   const front = formData.get("front")
   const back = formData.get("back")
   const deckId = formData.get("deckId")
@@ -41,4 +40,6 @@ export const createFlashcard = async (formData: FormData) => {
     back: back.toString(),
     deckId: deckId.toString(),
   })
+
+  revalidatePath("/")
 }

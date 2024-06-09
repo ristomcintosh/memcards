@@ -1,12 +1,12 @@
 "use client"
-import { Deck } from "@/types"
 import { Flashcard } from "./Flashcard"
 import { StudyContainer } from "./StudyContainer"
 import { useStudy } from "../useStudy"
 import { Completed } from "./Completed"
+import { DeckWithFlashcards } from "@/service/dbService"
 
 type StudyViewProps = {
-  deck: Required<Deck>
+  deck: Required<DeckWithFlashcards>
 }
 
 export const StudyView = ({ deck }: StudyViewProps) => {

@@ -1,8 +1,9 @@
-import { Deck, Flashcard } from "@/types"
+import { DeckWithFlashcards } from "@/service/dbService"
+import { Flashcard } from "@prisma/client"
 import { useState, useCallback, useEffect } from "react"
 
 // deck will already be randomised
-export const useStudy = (deck: Deck) => {
+export const useStudy = (deck: DeckWithFlashcards) => {
   const [flashcards, setFlashcards] = useState<Flashcard[]>([])
   const [flashcard, setFlashcard] = useState<Flashcard | null>(null)
   const [cardSide, setCardSide] = useState<"front" | "back">("front")

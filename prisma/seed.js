@@ -9,7 +9,6 @@ async function main() {
   const deck1 = await prisma.deck.create({
     data: {
       name: "World Capitals",
-      cardCount: 4,
       flashcards: {
         create: [
           { front: "What is the capital of France?", back: "Paris" },
@@ -24,7 +23,6 @@ async function main() {
   const deck2 = await prisma.deck.create({
     data: {
       name: "Basic Portuguese",
-      cardCount: 4,
       flashcards: {
         create: [
           { front: "What is 'hello' in Portuguese?", back: "Olá" },

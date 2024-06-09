@@ -1,4 +1,5 @@
-import { Flashcard, Deck } from "@/types"
+import { DeckWithFlashcards } from "@/service/dbService"
+import { Flashcard } from "@/types"
 
 export const flashcards: Flashcard[] = [
   {
@@ -27,7 +28,7 @@ export const flashcards: Flashcard[] = [
   },
 ]
 
-export const decks: Deck[] = [
+export const decks: DeckWithFlashcards[] = [
   {
     id: "1",
     name: "Deck 1",

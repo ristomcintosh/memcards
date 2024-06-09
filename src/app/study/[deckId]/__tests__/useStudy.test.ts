@@ -1,11 +1,10 @@
 import { act, renderHook } from "@testing-library/react"
 import { useStudy } from "../useStudy"
-import { Deck } from "@/types"
+import { DeckWithFlashcards } from "@/service/dbService"
 
-const testDeck: Deck = {
+const testDeck: DeckWithFlashcards = {
   id: "1",
   name: "Test Deck",
-  cardCount: 2,
   flashcards: [
     {
       id: "1",

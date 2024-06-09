@@ -1,17 +1,16 @@
 import { render, screen } from "@testing-library/react"
 import Study from "../page"
-import { getDeckById } from "@/service/dbService"
-import { Deck } from "@/types"
+import { DeckWithFlashcards, getDeckById } from "@/service/dbService"
 
-const testDeck: Deck = {
+const testDeck: DeckWithFlashcards = {
   id: "deck-id",
   name: "Test Deck",
-  cardCount: 1,
   flashcards: [
     {
       id: "card-id",
       front: "Front of card",
       back: "Back of card",
+      deckId: "deck-id",
     },
   ],
 }

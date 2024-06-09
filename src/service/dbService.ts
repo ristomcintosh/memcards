@@ -1,13 +1,32 @@
 "use server"
-import { Deck } from "@/types"
 import { prisma } from "@/utils/db.server"
+import { Deck, Flashcard } from "@prisma/client"
 
-export const getDecks = async () => {
-  return prisma.deck.findMany()
+export type DeckWithFlashcards = Deck & {
+  flashcards: Flashcard[]
 }
 
-export const getDeckById = async (id: string): Promise<Deck | null> => {
-  return prisma.deck.findUnique({
+export type DeckWithCardCount = Deck & {
+  cardCount: number
+}
+
+const computeCardCount = (deck: DeckWithFlashcards) => deck.flashcards.length
+
+// TODO don't need to return flashcards[] here
+export const getDecks = async (): Promise<DeckWithCardCount[]> => {
+  const decksWithFlashcards = await prisma.deck.findMany({
+    include: { flashcards: true },
+  })
+  return decksWithFlashcards.map((deck) => ({
+    ...deck,
+    cardCount: computeCardCount(deck),
+  }))
+}
+
+export const getDeckById = async (
+  id: string
+): Promise<DeckWithFlashcards | null> => {
+  return await prisma.deck.findUnique({
     where: { id },
     include: { flashcards: true },
   })
@@ -21,10 +40,10 @@ export const deleteDeck = async (id: string) => {
 }
 
 export const updateDeck = async (deck: Partial<Deck>) => {
-  const { name, cardCount } = deck
+  const { name } = deck
   await prisma.deck.update({
     where: { id: deck.id },
-    data: { name, cardCount },
+    data: { name },
   })
 }
 

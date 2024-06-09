@@ -1,4 +1,4 @@
-export type Deck = {
+export type DeckDto = {
   id: string
   name: string
   cardCount: number
