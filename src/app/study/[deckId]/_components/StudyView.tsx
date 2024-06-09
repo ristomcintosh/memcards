@@ -9,6 +9,9 @@ type StudyViewProps = {
   deck: Required<DeckWithFlashcards>
 }
 
+// TODO fix bug where the progress (starts on the first card) is reset when deleting a card
+// TODO fix progress bar jumps forward and back when deleting a card
+
 export const StudyView = ({ deck }: StudyViewProps) => {
   const {
     flashcard,
