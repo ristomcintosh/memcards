@@ -4,7 +4,12 @@ import { useState } from "react"
 import { TextInput } from "@/components/TextInput"
 import { Button } from "@/components/Button"
 import { Plus } from "@/components/Plus"
-import { MenuItem, MenuItemsAnimated } from "@/components/DropdownMenu"
+;<MenuItem text="Create Flashcard" />
+import {
+  MenuItem,
+  MenuItemAsLink,
+  MenuItemsAnimated,
+} from "@/components/DropdownMenu"
 import { motion } from "framer-motion"
 import { Dialog } from "@/components/Dialog"
 import { createDeck } from "@/actions/actions"
@@ -41,7 +46,9 @@ const CreateNewMenu = ({ handleClick }: { handleClick: () => void }) => {
             className="absolute mb-1 bottom-full right-full"
           >
             <MenuItem text="Create Deck" onClick={handleClick} />
-            <MenuItem text="Create Flashcard" />
+            <MenuItemAsLink href="/create-flashcard">
+              Create Flashcards
+            </MenuItemAsLink>
           </MenuItemsAnimated>
         </>
       )}

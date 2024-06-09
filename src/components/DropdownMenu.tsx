@@ -9,6 +9,7 @@ import {
 import { motion, HTMLMotionProps } from "framer-motion"
 import { HTMLAttributes, PropsWithChildren } from "react"
 import { VerticalDots } from "./VerticalDots"
+import Link, { LinkProps } from "next/link"
 
 export type DropdownMenuItems = {
   name: string
@@ -44,6 +45,20 @@ export const MenuItem = ({ text, ...delegated }: MenuItemProps) => {
       >
         {text}
       </button>
+    </HUIMenuItem>
+  )
+}
+
+type MenuItemAsLinkProps = LinkProps
+export const MenuItemAsLink = ({
+  ...delegated
+}: PropsWithChildren<MenuItemAsLinkProps>) => {
+  return (
+    <HUIMenuItem>
+      <Link
+        className="w-full text-center block data-[active]:bg-brand-800 data-[active]:bg-opacity-60 text-base whitespace-nowrap p-2 border-b-2 last:border-0 border-brand-700 border-opacity-60"
+        {...delegated}
+      />
     </HUIMenuItem>
   )
 }
