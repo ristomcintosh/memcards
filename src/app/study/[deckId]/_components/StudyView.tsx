@@ -4,6 +4,7 @@ import { StudyContainer } from "./StudyContainer"
 import { useStudy } from "../useStudy"
 import { Completed } from "./Completed"
 import { DeckWithFlashcards } from "@/types"
+import { EditFlashcardForm } from "./EditFlashcardForm"
 
 type StudyViewProps = {
   deck: Required<DeckWithFlashcards>
@@ -21,18 +22,29 @@ export const StudyView = ({ deck }: StudyViewProps) => {
     progress,
     initialize,
     deleteCard,
+    isEditing,
+    setIsEditing,
   } = useStudy(deck)
+
   return (
     <StudyContainer
       title={deck.name}
       progress={progress}
-      controls={{ flipCard, nextCard, deleteCard }}
+      controls={{
+        flipCard,
+        nextCard,
+        deleteCard,
+        editCard: () => setIsEditing(true),
+      }}
     >
-      {flashcard ? (
-        <Flashcard flashcard={flashcard} cardSide={cardSide} />
-      ) : (
-        <Completed restart={initialize} />
-      )}
+      <>
+        {flashcard ? (
+          <Flashcard flashcard={flashcard} cardSide={cardSide} />
+        ) : (
+          <Completed restart={initialize} />
+        )}
+        <EditFlashcardForm isOpen={isEditing} setOpen={setIsEditing} />
+      </>
     </StudyContainer>
   )
 }

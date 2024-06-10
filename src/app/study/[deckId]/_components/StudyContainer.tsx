@@ -6,7 +6,8 @@ import { PropsWithChildren } from "react"
 type OnFlip = () => void
 type OnNextCard = () => void
 type Progress = number
-type OnDeleteCard = () => void
+type DeleteCard = () => void
+type EditCard = () => void
 
 type StudyContainerProps = {
   title: string
@@ -14,7 +15,8 @@ type StudyContainerProps = {
   controls: {
     flipCard: OnFlip
     nextCard: OnNextCard
-    deleteCard: OnDeleteCard
+    deleteCard: DeleteCard
+    editCard: EditCard
   }
 }
 
@@ -26,7 +28,11 @@ export function StudyContainer({
 }: PropsWithChildren<StudyContainerProps>) {
   return (
     <div className="flex flex-col h-screen">
-      <Header progress={progress} onDeleteCard={controls.deleteCard} />
+      <Header
+        progress={progress}
+        deleteCard={controls.deleteCard}
+        editCard={controls.editCard}
+      />
       <main className="flex-1 px-2 overflow-x-hidden overflow-y-auto bg-gray-100">
         <div className="flex flex-col min-h-full pt-4 pb-6">
           <h1 className="text-3xl text-center">{title}</h1>
@@ -42,17 +48,19 @@ export function StudyContainer({
 
 const Header = ({
   progress,
-  onDeleteCard: onDelete,
+  deleteCard,
+  editCard,
 }: {
   progress: Progress
-  onDeleteCard: OnDeleteCard
+  deleteCard: DeleteCard
+  editCard: EditCard
 }) => (
   <section className="flex items-center justify-between p-4">
     <DropdownMenu
       name="Flashcard Options"
       items={[
-        { name: "Edit", action: () => {} },
-        { name: "Delete", action: onDelete },
+        { name: "Edit", action: editCard },
+        { name: "Delete", action: deleteCard },
       ]}
     />
     <ProgressBar progress={progress} />

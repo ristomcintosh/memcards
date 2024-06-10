@@ -7,6 +7,7 @@ export const useStudy = (deck: DeckWithFlashcards) => {
   const [flashcards, setFlashcards] = useState<Flashcard[]>([])
   const [flashcard, setFlashcard] = useState<Flashcard | null>(null)
   const [cardSide, setCardSide] = useState<"front" | "back">("front")
+  const [isEditing, setIsEditing] = useState(false)
 
   const flipCard = useCallback(() => {
     setCardSide((side) => (side === "front" ? "back" : "front"))
@@ -31,6 +32,8 @@ export const useStudy = (deck: DeckWithFlashcards) => {
     setCardSide("front")
   }, [deck.flashcards])
 
+  const editCard = useCallback(() => {}, [])
+
   const progress =
     ((deck.flashcards.length - flashcards.length) * 100) /
     deck.flashcards.length
@@ -47,5 +50,8 @@ export const useStudy = (deck: DeckWithFlashcards) => {
     initialize,
     flipCard,
     nextCard,
+    editCard,
+    isEditing,
+    setIsEditing,
   }
 }

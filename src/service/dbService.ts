@@ -73,3 +73,18 @@ export const deleteFlashcard = async (id: string) => {
     where: { id },
   })
 }
+
+export const updateFlashcard = async ({
+  id,
+  front,
+  back,
+}: {
+  id: string
+  front: string
+  back: string
+}) => {
+  await prisma.flashcard.update({
+    where: { id },
+    data: { front, back },
+  })
+}
