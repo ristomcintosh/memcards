@@ -24,6 +24,7 @@ export const StudyView = ({ deck }: StudyViewProps) => {
     deleteCard,
     isEditing,
     setIsEditing,
+    editCard,
   } = useStudy(deck)
 
   return (
@@ -37,14 +38,19 @@ export const StudyView = ({ deck }: StudyViewProps) => {
         editCard: () => setIsEditing(true),
       }}
     >
-      <>
-        {flashcard ? (
+      {flashcard ? (
+        <>
           <Flashcard flashcard={flashcard} cardSide={cardSide} />
-        ) : (
-          <Completed restart={initialize} />
-        )}
-        <EditFlashcardForm isOpen={isEditing} setOpen={setIsEditing} />
-      </>
+          <EditFlashcardForm
+            flashcard={flashcard}
+            editCard={editCard}
+            isOpen={isEditing}
+            setOpen={setIsEditing}
+          />
+        </>
+      ) : (
+        <Completed restart={initialize} />
+      )}
     </StudyContainer>
   )
 }

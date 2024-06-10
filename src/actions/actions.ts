@@ -49,12 +49,15 @@ export const deleteFlashcard = async (id: string) => {
   revalidatePath("/")
 }
 
-export const updateFlashcard = async (id: string, formData: FormData) => {
-  const front = formData.get("front")
-  const back = formData.get("back")
-
-  if (!front || !back) return
-
+export const updateFlashcard = async ({
+  id,
+  front,
+  back,
+}: {
+  id: string
+  front: string
+  back: string
+}) => {
   await DBService.updateFlashcard({
     id,
     front: front.toString(),
