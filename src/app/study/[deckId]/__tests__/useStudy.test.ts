@@ -128,7 +128,10 @@ describe(useStudy.name, () => {
     const { result, rerender } = renderHook(() => useStudy(testDeck))
 
     act(() => {
-      result.current.editCard()
+      result.current.editCard({
+        front: "Front of card edited!",
+        back: "Back of card 1 edited!",
+      })
     })
 
     rerender()
