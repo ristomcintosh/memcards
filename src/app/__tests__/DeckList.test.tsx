@@ -1,8 +1,8 @@
 import { act, render, screen } from "@testing-library/react"
 import { DeckList } from "../_components/DeckList"
-import { deleteDeck } from "@/service/dbService"
+import { deleteDeck } from "@/actions/actions"
 
-jest.mock("@/service/dbService")
+jest.mock("@/actions/actions")
 
 describe(DeckList.name, () => {
   const testDeckList = [
