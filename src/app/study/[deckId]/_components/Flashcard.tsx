@@ -1,5 +1,5 @@
 "use client"
-import { Flashcard as FlashcardType, FlashcardImage } from "@/types"
+import { Flashcard as FlashcardType } from "@/types"
 import { motion, Variants } from "framer-motion"
 
 type CardSide = "front" | "back"
@@ -28,10 +28,9 @@ export const Flashcard = ({ cardSide, flashcard }: FlashcardProps) => {
 type FlashcardContentProps = {
   text: string
   cardSide: CardSide
-  image?: FlashcardImage
 }
 
-const FlashcardContent = ({ cardSide, text, image }: FlashcardContentProps) => {
+const FlashcardContent = ({ cardSide, text }: FlashcardContentProps) => {
   const defaultStyles = cardSide === "back" ? { rotateY: 180 } : {}
   return (
     <motion.div
@@ -39,16 +38,6 @@ const FlashcardContent = ({ cardSide, text, image }: FlashcardContentProps) => {
       className="flex flex-col items-center justify-center w-full p-4"
     >
       <p className="mb-2 text-4xl text-center">{text}</p>
-      {/* {image && (
-        <div className="bg-gray-400 max-w-xxs">
-          <img
-            className="object-contain"
-            width="400"
-            src={image.src}
-            alt={image.alt}
-          />
-        </div>
-      )} */}
     </motion.div>
   )
 }
