@@ -16,14 +16,16 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Flashcard } from "@/types"
-import { useForm } from "react-hook-form"
+import { SubmitHandler, useForm } from "react-hook-form"
 
 type EditFlashcardFormProps = {
   isOpen: boolean
   setOpen: (isOpen: boolean) => void
   flashcard: Flashcard
-  editCard: (flashcard: Flashcard) => void
+  editCard: (flashcard: Pick<Flashcard, "front" | "back">) => void
 }
+
+type FlashcardFormValues = Pick<Flashcard, "front" | "back">
 
 export const EditFlashcardForm = ({
   isOpen,
@@ -31,14 +33,14 @@ export const EditFlashcardForm = ({
   flashcard,
   editCard,
 }: EditFlashcardFormProps) => {
-  const form = useForm({
+  const form = useForm<FlashcardFormValues>({
     defaultValues: {
       front: flashcard.front,
       back: flashcard.back,
     },
   })
 
-  const onSubmit = (values) => {
+  const onSubmit: SubmitHandler<FlashcardFormValues> = (values) => {
     editCard(values)
     updateFlashcard({
       id: flashcard.id,

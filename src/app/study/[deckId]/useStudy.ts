@@ -32,11 +32,19 @@ export const useStudy = (deck: DeckWithFlashcards) => {
     setCardSide("front")
   }, [deck.flashcards])
 
-  const editCard = useCallback((flashcard: Flashcard) => {
-    if (!flashcard) return
-    setFlashcard((card) => ({ ...card, ...flashcard }))
-    setIsEditing(false)
-  }, [])
+  const editCard = useCallback(
+    (flashcard: Pick<Flashcard, "front" | "back">) => {
+      setFlashcard((card) => {
+        if (!card) {
+          console.error("No card to edit")
+          return null
+        }
+        return { ...card, ...flashcard }
+      })
+      setIsEditing(false)
+    },
+    []
+  )
 
   const progress =
     ((deck.flashcards.length - flashcards.length) * 100) /
