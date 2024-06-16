@@ -4,12 +4,15 @@ on: [push]
 
 jobs:
   # Run node tests with Jest
-  test:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
-      - run: npm install
-      - run: npm test
+      - run: npm ci
+      - name: test
+        run: npm test
+      - name: lint
+        run: npm run lint
