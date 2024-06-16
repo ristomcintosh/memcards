@@ -122,10 +122,30 @@ describe(useStudy.name, () => {
 
     expect(deleteFlashcard).toHaveBeenCalledWith(testDeck.flashcards[0].id)
     expect(result.current.flashcard).toEqual(testDeck.flashcards[1])
+    expect(result.current.progress).toBe(100)
   })
 
-  it("edits the current card being shown", () => {
+  it("sets the isEditing state to true", () => {
     const { result, rerender } = renderHook(() => useStudy(testDeck))
+
+    act(() => {
+      result.current.editCard()
+    })
+
+    rerender()
+
+    expect(result.current.isEditing).toBe(true)
+  })
+
+  it("edits the current flashcard", () => {
+    const { result, rerender } = renderHook(() => useStudy(testDeck))
+
+    expect(result.current.flashcard).toEqual({
+      id: "1",
+      deckId: "1",
+      front: "Front of card 1",
+      back: "Back of card 1",
+    })
 
     act(() => {
       result.current.editCard({
@@ -142,5 +162,6 @@ describe(useStudy.name, () => {
       front: "Front of card edited!",
       back: "Back of card 1 edited!",
     })
+    expect(result.current.isEditing).toBe(false)
   })
 })

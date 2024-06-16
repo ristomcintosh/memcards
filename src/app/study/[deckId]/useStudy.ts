@@ -1,69 +1,135 @@
 import { deleteFlashcard } from "@/actions/actions"
 import { DeckWithFlashcards, Flashcard } from "@/types"
-import { useState, useCallback, useEffect } from "react"
+import { useCallback, useReducer } from "react"
+
+type State = {
+  totalFlashcardCount: number
+  flashcards: Flashcard[]
+  flashcard: Flashcard
+  cardSide: "front" | "back"
+  isEditing: boolean
+  progress: number
+}
+
+type Action =
+  | { type: "flipCard" }
+  | { type: "nextCard" }
+  | { type: "deleteCard" }
+  | { type: "initialize"; payload: DeckWithFlashcards }
+  | { type: "editCard"; payload?: Partial<Flashcard> }
+
+const reducer = (state: State, action: Action): State => {
+  switch (action.type) {
+    case "initialize": {
+      return getInitialState(action.payload.flashcards)
+    }
+    case "nextCard": {
+      const { flashcard, remainingFlashcards } = takeFirstFlashcard(
+        state.flashcards
+      )
+      return {
+        ...state,
+        flashcard,
+        flashcards: remainingFlashcards,
+        cardSide: "front",
+        progress: getProgress(
+          state.totalFlashcardCount,
+          remainingFlashcards.length
+        ),
+      }
+    }
+    case "flipCard": {
+      return {
+        ...state,
+        cardSide: state.cardSide === "front" ? "back" : "front",
+      }
+    }
+    case "deleteCard": {
+      const { flashcard, remainingFlashcards } = takeFirstFlashcard(
+        state.flashcards
+      )
+      // TODO: move this somewhere else
+      deleteFlashcard(state.flashcard.id)
+      return {
+        ...state,
+        flashcard: flashcard,
+        flashcards: remainingFlashcards,
+        cardSide: "front",
+        progress: getProgress(
+          state.totalFlashcardCount,
+          remainingFlashcards.length
+        ),
+      }
+    }
+    case "editCard": {
+      if (!action.payload) {
+        return { ...state, isEditing: true }
+      }
+
+      return {
+        ...state,
+        flashcard: { ...state.flashcard, ...action.payload },
+        isEditing: false,
+      }
+    }
+  }
+}
 
 // deck will already be randomised
 export const useStudy = (deck: DeckWithFlashcards) => {
-  const [flashcards, setFlashcards] = useState<Flashcard[]>([])
-  const [flashcard, setFlashcard] = useState<Flashcard | null>(null)
-  const [cardSide, setCardSide] = useState<"front" | "back">("front")
-  const [isEditing, setIsEditing] = useState(false)
+  const [state, dispatch] = useReducer(
+    reducer,
+    getInitialState(deck.flashcards)
+  )
 
-  const flipCard = useCallback(() => {
-    setCardSide((side) => (side === "front" ? "back" : "front"))
-  }, [])
+  const flipCard = useCallback(() => dispatch({ type: "flipCard" }), [])
 
-  const nextCard = useCallback(() => {
-    const nextCard = flashcards[0]
-    setFlashcards((cards) => cards.slice(1))
-    setFlashcard(nextCard)
-    setCardSide("front")
-  }, [flashcards])
+  const nextCard = useCallback(() => dispatch({ type: "nextCard" }), [])
 
-  const deleteCard = useCallback(() => {
-    if (!flashcard) return
-    deleteFlashcard(flashcard?.id)
-    nextCard()
-  }, [flashcard, nextCard])
+  const deleteCard = useCallback(() => dispatch({ type: "deleteCard" }), [])
 
-  const initialize = useCallback(() => {
-    setFlashcards(deck.flashcards.slice(1))
-    setFlashcard(deck.flashcards[0])
-    setCardSide("front")
-  }, [deck.flashcards])
+  const initialize = useCallback(
+    () => dispatch({ type: "initialize", payload: deck }),
+    [deck]
+  )
 
   const editCard = useCallback(
-    (flashcard: Pick<Flashcard, "front" | "back">) => {
-      setFlashcard((card) => {
-        if (!card) {
-          console.error("No card to edit")
-          return null
-        }
-        return { ...card, ...flashcard }
-      })
-      setIsEditing(false)
-    },
+    (payload?: Partial<Flashcard>) => dispatch({ type: "editCard", payload }),
     []
   )
 
-  const progress =
-    ((deck.flashcards.length - flashcards.length) * 100) /
-    deck.flashcards.length
-
-  useEffect(() => {
-    initialize()
-  }, [initialize])
-
   return {
-    progress,
-    cardSide,
-    flashcard,
+    ...state,
     deleteCard,
     initialize,
     flipCard,
     nextCard,
     editCard,
-    isEditing,
-    setIsEditing,
+  }
+}
+
+const takeFirstFlashcard = (
+  flashcards: Flashcard[]
+): { remainingFlashcards: Flashcard[]; flashcard: Flashcard } => {
+  const flashcard = flashcards[0]
+  const remainingFlashcards = flashcards.slice(1)
+  return {
+    flashcard,
+    remainingFlashcards,
+  }
+}
+
+const getProgress = (numberOfCards: number, cardsLeft: number) =>
+  ((numberOfCards - cardsLeft) * 100) / numberOfCards
+
+function getInitialState(flashcards: Flashcard[]): State {
+  const { flashcard, remainingFlashcards } = takeFirstFlashcard(flashcards)
+  return {
+    flashcard,
+    flashcards: remainingFlashcards,
+    cardSide: "front",
+    isEditing: false,
+    progress: getProgress(flashcards.length, remainingFlashcards.length),
+    totalFlashcardCount: flashcards.length,
   }
 }

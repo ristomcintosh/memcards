@@ -20,16 +20,14 @@ import { SubmitHandler, useForm } from "react-hook-form"
 
 type EditFlashcardFormProps = {
   isOpen: boolean
-  setOpen: (isOpen: boolean) => void
   flashcard: Flashcard
-  editCard: (flashcard: Pick<Flashcard, "front" | "back">) => void
+  editCard: (flashcard?: Pick<Flashcard, "front" | "back">) => void
 }
 
 type FlashcardFormValues = Pick<Flashcard, "front" | "back">
 
 export const EditFlashcardForm = ({
   isOpen,
-  setOpen,
   flashcard,
   editCard,
 }: EditFlashcardFormProps) => {
@@ -49,8 +47,12 @@ export const EditFlashcardForm = ({
     })
   }
 
+  const handleClose = () => {
+    editCard(flashcard)
+  }
+
   return (
-    <Dialog open={isOpen} onOpenChange={setOpen}>
+    <Dialog open={isOpen} onOpenChange={() => handleClose()}>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Edit Flashcard</DialogTitle>
