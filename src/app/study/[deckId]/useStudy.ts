@@ -20,24 +20,10 @@ type Action =
 
 const reducer = (state: State, action: Action): State => {
   switch (action.type) {
-    case "initialize": {
+    case "initialize":
       return getInitialState(action.payload.flashcards)
-    }
-    case "nextCard": {
-      const { flashcard, remainingFlashcards } = takeFirstFlashcard(
-        state.flashcards
-      )
-      return {
-        ...state,
-        flashcard,
-        flashcards: remainingFlashcards,
-        cardSide: "front",
-        progress: getProgress(
-          state.totalFlashcardCount,
-          remainingFlashcards.length
-        ),
-      }
-    }
+    case "nextCard":
+      return getNextFlashcardState(state)
     case "flipCard": {
       return {
         ...state,
@@ -45,21 +31,9 @@ const reducer = (state: State, action: Action): State => {
       }
     }
     case "deleteCard": {
-      const { flashcard, remainingFlashcards } = takeFirstFlashcard(
-        state.flashcards
-      )
       // TODO: move this somewhere else
       deleteFlashcard(state.flashcard.id)
-      return {
-        ...state,
-        flashcard: flashcard,
-        flashcards: remainingFlashcards,
-        cardSide: "front",
-        progress: getProgress(
-          state.totalFlashcardCount,
-          remainingFlashcards.length
-        ),
-      }
+      return getNextFlashcardState(state)
     }
     case "editCard": {
       if (!action.payload) {
@@ -121,6 +95,22 @@ const takeFirstFlashcard = (
 
 const getProgress = (numberOfCards: number, cardsLeft: number) =>
   ((numberOfCards - cardsLeft) * 100) / numberOfCards
+
+function getNextFlashcardState(state: State): State {
+  const { flashcard, remainingFlashcards } = takeFirstFlashcard(
+    state.flashcards
+  )
+  return {
+    ...state,
+    flashcard,
+    flashcards: remainingFlashcards,
+    cardSide: "front",
+    progress: getProgress(
+      state.totalFlashcardCount,
+      remainingFlashcards.length
+    ),
+  }
+}
 
 function getInitialState(flashcards: Flashcard[]): State {
   const { flashcard, remainingFlashcards } = takeFirstFlashcard(flashcards)

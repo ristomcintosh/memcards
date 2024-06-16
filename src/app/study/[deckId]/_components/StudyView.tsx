@@ -40,11 +40,9 @@ export const StudyView = ({ deck }: StudyViewProps) => {
       {flashcard ? (
         <>
           <Flashcard flashcard={flashcard} cardSide={cardSide} />
-          <EditFlashcardForm
-            flashcard={flashcard}
-            editCard={editCard}
-            isOpen={isEditing}
-          />
+          {isEditing && (
+            <EditFlashcardForm flashcard={flashcard} editCard={editCard} />
+          )}
         </>
       ) : (
         <Completed restart={initialize} />
