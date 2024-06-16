@@ -1,7 +1,7 @@
 "use server"
 import { revalidatePath } from "next/cache"
 import * as DBService from "@/service/dbService"
-import { Deck } from "@/types"
+import { Deck, Flashcard } from "@/types"
 
 export const updateDeck = async (id: Deck["id"], formData: FormData) => {
   const name = formData.get("deckName")
@@ -28,19 +28,10 @@ export const createDeck = async (formData: FormData) => {
   revalidatePath("/")
 }
 
-export const createFlashcard = async (formData: FormData) => {
-  const front = formData.get("front")
-  const back = formData.get("back")
-  const deckId = formData.get("deckId")
-
-  if (!front || !back || !deckId) return
-
-  await DBService.createFlashcard({
-    front: front.toString(),
-    back: back.toString(),
-    deckId: deckId.toString(),
-  })
-
+export const createFlashcard = async (
+  newFlashcard: Pick<Flashcard, "deckId" | "back" | "front">
+) => {
+  await DBService.createFlashcard(newFlashcard)
   revalidatePath("/")
 }
 
