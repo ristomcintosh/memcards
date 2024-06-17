@@ -53,7 +53,8 @@ const reducer = (state: State, action: Action): State => {
 export const useStudy = (deck: DeckWithFlashcards) => {
   const [state, dispatch] = useReducer(
     reducer,
-    getInitialState(deck.flashcards)
+    deck.flashcards,
+    getInitialState
   )
 
   const flipCard = useCallback(() => dispatch({ type: "flipCard" }), [])

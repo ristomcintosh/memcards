@@ -32,13 +32,11 @@ export const decks: DeckWithFlashcards[] = [
   {
     id: "1",
     name: "Deck 1",
-    cardCount: 3,
     flashcards,
   },
   {
     id: "2",
     name: "Deck 2",
-    cardCount: 3,
     flashcards,
   },
 ]
