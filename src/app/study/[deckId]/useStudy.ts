@@ -23,6 +23,7 @@ const reducer = (state: State, action: Action): State => {
     case "initialize":
       return getInitialState(action.payload.flashcards)
     case "nextCard":
+    case "deleteCard":
       return getNextFlashcardState(state)
     case "flipCard": {
       return {
@@ -30,11 +31,7 @@ const reducer = (state: State, action: Action): State => {
         cardSide: state.cardSide === "front" ? "back" : "front",
       }
     }
-    case "deleteCard": {
-      // TODO: move this somewhere else
-      deleteFlashcard(state.flashcard.id)
-      return getNextFlashcardState(state)
-    }
+
     case "editCard": {
       if (!action.payload) {
         return { ...state, isEditing: true }
@@ -61,7 +58,10 @@ export const useStudy = (deck: DeckWithFlashcards) => {
 
   const nextCard = useCallback(() => dispatch({ type: "nextCard" }), [])
 
-  const deleteCard = useCallback(() => dispatch({ type: "deleteCard" }), [])
+  const deleteCard = useCallback(() => {
+    deleteFlashcard(state.flashcard.id)
+    dispatch({ type: "deleteCard" })
+  }, [state.flashcard?.id])
 
   const initialize = useCallback(
     () => dispatch({ type: "initialize", payload: deck }),
