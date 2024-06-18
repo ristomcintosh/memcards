@@ -1,4 +1,4 @@
-import { Button } from "@/components/Button"
+import { Button } from "@/components/ui/button"
 import {
   Dialog,
   DialogPanel,
@@ -22,14 +22,12 @@ export const Completed = ({ restart }: { restart: () => void }) => {
             You have successfully completed all the flashcards in this deck.
           </Description>
           <div className="flex justify-evenly">
-            <Button onClick={restart}>Restart</Button>
-            <Link
-              href="/"
-              style={{ minWidth: 44, minHeight: 44 }}
-              className="border-2 border-brand-600 px-4 py-1 rounded shadow no-underline md:h-auto text-2xl md:text-xl h-12"
-            >
-              Home
-            </Link>
+            <Button size="lg" onClick={restart}>
+              Restart
+            </Button>
+            <Button asChild variant="link" size="lg">
+              <Link href="/">Home</Link>
+            </Button>
           </div>
         </DialogPanel>
       </div>

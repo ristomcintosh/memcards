@@ -1,6 +1,5 @@
 "use client"
 import { deleteDeck, updateDeck } from "@/actions/actions"
-import { Button } from "@/components/Button"
 import { DropdownMenu } from "@/components/DropdownMenu"
 import { TextInput } from "@/components/TextInput"
 import { Deck, DeckWithCardCount } from "@/types"
@@ -13,6 +12,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog"
+import { Button } from "@/components/ui/button"
 
 type DeckListProps = {
   decks: DeckWithCardCount[]
@@ -96,7 +96,7 @@ const RenameDeckForm = ({
           <TextInput label="Deck Name:" name="deckName" />
           <DialogFooter>
             <Button type="submit">Submit</Button>
-            <Button onClick={() => handleVisibility(false)} variant="text">
+            <Button onClick={() => handleVisibility(false)} variant="ghost">
               Cancel
             </Button>
           </DialogFooter>
@@ -122,10 +122,10 @@ const DeleteConfirmation = ({
           <DialogTitle>{`Are you sure you want to delete ${deck.name}?`}</DialogTitle>
         </DialogHeader>
         <DialogFooter>
-          <Button variant="warn" onClick={() => deleteDeck(deck.id)}>
+          <Button variant="destructive" onClick={() => deleteDeck(deck.id)}>
             Yes
           </Button>
-          <Button onClick={() => handleVisibility(false)} variant="text">
+          <Button onClick={() => handleVisibility(false)} variant="ghost">
             Cancel
           </Button>
         </DialogFooter>

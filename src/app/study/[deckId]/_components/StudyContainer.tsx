@@ -1,5 +1,5 @@
-import { Button } from "@/components/Button"
 import { DropdownMenu } from "@/components/DropdownMenu"
+import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { PropsWithChildren } from "react"
 

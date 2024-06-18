@@ -2,9 +2,7 @@
 import { Menu, MenuButton } from "@headlessui/react"
 import { useState } from "react"
 import { TextInput } from "@/components/TextInput"
-import { Button } from "@/components/Button"
 import { Plus } from "@/components/Plus"
-;<MenuItem text="Create Flashcard" />
 import {
   MenuItem,
   MenuItemAsLink,
@@ -19,6 +17,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog"
+import { Button } from "@/components/ui/button"
 
 export const CreateNew = () => {
   const [isCreateDeckFormOpen, showCreateDeckFrom] = useState(false)
@@ -82,7 +81,7 @@ const CreateDeckForm = ({ handleClose }: { handleClose: () => void }) => {
           <TextInput label="Deck Name:" name="deckName" />
           <DialogFooter>
             <Button type="submit">Submit</Button>
-            <Button onClick={handleClose} type="button" variant="text">
+            <Button onClick={handleClose} type="button" variant="ghost">
               Cancel
             </Button>
           </DialogFooter>
