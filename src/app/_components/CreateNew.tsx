@@ -11,23 +11,32 @@ import {
   MenuItemsAnimated,
 } from "@/components/DropdownMenu"
 import { motion } from "framer-motion"
-import { Dialog } from "@/components/Dialog"
 import { createDeck } from "@/actions/actions"
+import {
+  Dialog,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog"
 
 export const CreateNew = () => {
   const [isCreateDeckFormOpen, showCreateDeckFrom] = useState(false)
   return (
     <>
-      <CreateNewMenu handleClick={() => showCreateDeckFrom(true)} />
-      <CreateDeckForm
-        handleClick={() => showCreateDeckFrom(false)}
-        isOpen={isCreateDeckFormOpen}
-      />
+      <CreateNewMenu handleDeckCreation={() => showCreateDeckFrom(true)} />
+      {isCreateDeckFormOpen && (
+        <CreateDeckForm handleClose={() => showCreateDeckFrom(false)} />
+      )}
     </>
   )
 }
 
-const CreateNewMenu = ({ handleClick }: { handleClick: () => void }) => {
+const CreateNewMenu = ({
+  handleDeckCreation,
+}: {
+  handleDeckCreation: () => void
+}) => {
   return (
     <Menu>
       {({ open }) => (
@@ -45,7 +54,7 @@ const CreateNewMenu = ({ handleClick }: { handleClick: () => void }) => {
             animate={{ opacity: 1, y: 0 }}
             className="absolute mb-1 bottom-full right-full"
           >
-            <MenuItem text="Create Deck" onClick={handleClick} />
+            <MenuItem text="Create Deck" onClick={handleDeckCreation} />
             <MenuItemAsLink href="/create-flashcard">
               Create Flashcards
             </MenuItemAsLink>
@@ -56,29 +65,29 @@ const CreateNewMenu = ({ handleClick }: { handleClick: () => void }) => {
   )
 }
 
-const CreateDeckForm = ({
-  handleClick: onClose,
-  isOpen,
-}: {
-  handleClick: () => void
-  isOpen: boolean
-}) => {
+const CreateDeckForm = ({ handleClose }: { handleClose: () => void }) => {
   return (
-    <Dialog isOpen={isOpen} onClose={onClose} title="Create A New Deck">
-      <form
-        action={(formData) => {
-          createDeck(formData)
-          onClose()
-        }}
-      >
-        <TextInput label="Deck Name:" name="deckName" />
-        <div className="flex justify-around">
-          <Button type="submit">Submit</Button>
-          <Button onClick={onClose} variant="text">
-            Cancel
-          </Button>
-        </div>
-      </form>
+    <Dialog defaultOpen modal onOpenChange={(open) => !open && handleClose()}>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Create A New Deck</DialogTitle>
+        </DialogHeader>
+        <form
+          action={(formData) => {
+            console.log("submitted!")
+            createDeck(formData)
+            handleClose()
+          }}
+        >
+          <TextInput label="Deck Name:" name="deckName" />
+          <DialogFooter>
+            <Button type="submit">Submit</Button>
+            <Button onClick={handleClose} type="button" variant="text">
+              Cancel
+            </Button>
+          </DialogFooter>
+        </form>
+      </DialogContent>
     </Dialog>
   )
 }

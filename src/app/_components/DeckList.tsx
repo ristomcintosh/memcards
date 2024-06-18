@@ -1,12 +1,18 @@
 "use client"
 import { deleteDeck, updateDeck } from "@/actions/actions"
 import { Button } from "@/components/Button"
-import { Dialog } from "@/components/Dialog"
 import { DropdownMenu } from "@/components/DropdownMenu"
 import { TextInput } from "@/components/TextInput"
 import { Deck, DeckWithCardCount } from "@/types"
 import Link from "next/link"
 import { useState } from "react"
+import {
+  Dialog,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog"
 
 type DeckListProps = {
   decks: DeckWithCardCount[]
@@ -53,13 +59,13 @@ const Menu = ({ deck }: { deck: Deck }) => {
       />
       <RenameDeckForm
         deck={deck}
-        isOpen={isRenameDeckFormOpen}
-        onClose={() => showRenameDeckForm(false)}
+        open={isRenameDeckFormOpen}
+        handleVisibility={showRenameDeckForm}
       />
       <DeleteConfirmation
         deck={deck}
-        isOpen={isDeleteConfirmationOpen}
-        onClose={() => showDeleteConfirmation(false)}
+        open={isDeleteConfirmationOpen}
+        handleVisibility={showDeleteConfirmation}
       />
     </>
   )
@@ -67,57 +73,63 @@ const Menu = ({ deck }: { deck: Deck }) => {
 
 const RenameDeckForm = ({
   deck,
-  isOpen,
-  onClose,
+  open,
+  handleVisibility,
 }: {
   deck: Deck
-  isOpen: boolean
-  onClose: () => void
+  open: boolean
+  handleVisibility: (show: boolean) => void
 }) => {
   const updateDeckWithId = updateDeck.bind(null, deck.id)
   return (
-    <Dialog isOpen={isOpen} onClose={onClose} title={`Rename: ${deck.name}`}>
-      <form
-        action={(formData) => {
-          updateDeckWithId(formData)
-          onClose()
-        }}
-      >
-        <TextInput label="Deck Name:" name="deckName" />
-        <div className="flex justify-around">
-          <Button type="submit">Submit</Button>
-          <Button onClick={onClose} variant="text">
-            Cancel
-          </Button>
-        </div>
-      </form>
+    <Dialog open={open} onOpenChange={handleVisibility}>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>{`Rename: ${deck.name}`}</DialogTitle>
+        </DialogHeader>
+        <form
+          action={(formData) => {
+            updateDeckWithId(formData)
+            handleVisibility(false)
+          }}
+        >
+          <TextInput label="Deck Name:" name="deckName" />
+          <DialogFooter>
+            <Button type="submit">Submit</Button>
+            <Button onClick={() => handleVisibility(false)} variant="text">
+              Cancel
+            </Button>
+          </DialogFooter>
+        </form>
+      </DialogContent>
     </Dialog>
   )
 }
 
 const DeleteConfirmation = ({
   deck,
-  onClose,
-  isOpen,
+  handleVisibility: handleVisibility,
+  open,
 }: {
   deck: Deck
-  onClose: () => void
-  isOpen: boolean
+  handleVisibility: (show: boolean) => void
+  open: boolean
 }) => {
   return (
-    <Dialog
-      isOpen={isOpen}
-      onClose={onClose}
-      title={`Are you sure you want to delete ${deck.name}?`}
-    >
-      <div className="flex justify-around mt-4">
-        <Button variant="warn" onClick={() => deleteDeck(deck.id)}>
-          Yes
-        </Button>
-        <Button onClick={onClose} variant="text">
-          Cancel
-        </Button>
-      </div>
+    <Dialog open={open} onOpenChange={handleVisibility}>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>{`Are you sure you want to delete ${deck.name}?`}</DialogTitle>
+        </DialogHeader>
+        <DialogFooter>
+          <Button variant="warn" onClick={() => deleteDeck(deck.id)}>
+            Yes
+          </Button>
+          <Button onClick={() => handleVisibility(false)} variant="text">
+            Cancel
+          </Button>
+        </DialogFooter>
+      </DialogContent>
     </Dialog>
   )
 }
