@@ -77,7 +77,7 @@ const ProgressBar = ({ progress }: { progress: number }) => (
       aria-valuenow={progress}
       aria-valuemin={0}
       aria-valuemax={100}
-      className="absolute inset-y-0 bg-gradient-to-tr from-brand-600 to-brand-200"
+      className="absolute inset-y-0 bg-gradient-to-tr from-brand-500 to-brand-100"
       style={{
         width: progress + "%",
       }}

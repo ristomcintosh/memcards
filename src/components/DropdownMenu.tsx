@@ -10,6 +10,7 @@ import { motion, HTMLMotionProps } from "framer-motion"
 import { HTMLAttributes, PropsWithChildren } from "react"
 import { VerticalDots } from "./VerticalDots"
 import Link, { LinkProps } from "next/link"
+import { cn } from "@/utils/misc"
 
 export type DropdownMenuItems = {
   name: string
@@ -41,7 +42,7 @@ export const MenuItem = ({ text, ...delegated }: MenuItemProps) => {
   return (
     <HUIMenuItem>
       <button
-        className="w-full text-center data-[active]:bg-brand-800 data-[active]:bg-opacity-60 text-base whitespace-nowrap p-2 border-b-2 last:border-0 border-brand-700 border-opacity-60"
+        className="w-full text-center data-[active]:bg-brand-500/20 text-base whitespace-nowrap p-2 border-b last:border-0 border-gray-900/50"
         {...delegated}
       >
         {text}
@@ -57,7 +58,7 @@ export const MenuItemAsLink = ({
   return (
     <HUIMenuItem>
       <Link
-        className="w-full text-center block data-[active]:bg-brand-800 data-[active]:bg-opacity-60 text-base whitespace-nowrap p-2 border-b-2 last:border-0 border-brand-700 border-opacity-60"
+        className="w-full text-center block data-[active]:bg-brand-500/20 text-base whitespace-nowrap p-2 border-b last:border-0 border-gray-900/50"
         {...delegated}
       />
     </HUIMenuItem>
@@ -71,15 +72,16 @@ export const MenuItemsAnimated = ({
   className,
   ...delegated
 }: PropsWithChildren<Props>) => {
-  const baseStyles =
-    "border rounded shadow border-brand-700 bg-brand-500 focus:outline-none text-gray-100"
   return (
     <MenuItems
       as={motion.div}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ bounce: 0, duration: 0.15 }}
-      className={`${baseStyles} ${className}`}
+      className={cn(
+        "border rounded shadow focus:outline-none text-brand-900 border-gray-900/50 bg-gray-50",
+        className
+      )}
       {...delegated}
     >
       {children}
