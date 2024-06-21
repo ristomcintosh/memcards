@@ -1,7 +1,6 @@
 "use client"
 import { deleteDeck, updateDeck } from "@/actions/actions"
 import { DropdownMenu } from "@/components/DropdownMenu"
-import { TextInput } from "@/components/TextInput"
 import { Deck, DeckWithCardCount } from "@/types"
 import Link from "next/link"
 import { useState } from "react"
@@ -13,6 +12,16 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form"
+import { useForm } from "react-hook-form"
+import { Input } from "@/components/ui/input"
 
 type DeckListProps = {
   decks: DeckWithCardCount[]
@@ -80,27 +89,56 @@ const RenameDeckForm = ({
   open: boolean
   handleVisibility: (show: boolean) => void
 }) => {
-  const updateDeckWithId = updateDeck.bind(null, deck.id)
+  const form = useForm<Pick<Deck, "name">>({
+    defaultValues: {
+      name: deck.name,
+    },
+  })
   return (
     <Dialog open={open} onOpenChange={handleVisibility}>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>{`Rename: ${deck.name}`}</DialogTitle>
         </DialogHeader>
-        <form
-          action={(formData) => {
-            updateDeckWithId(formData)
-            handleVisibility(false)
-          }}
-        >
-          <TextInput label="Deck Name:" name="deckName" />
-          <DialogFooter>
-            <Button type="submit">Submit</Button>
-            <Button onClick={() => handleVisibility(false)} variant="ghost">
-              Cancel
-            </Button>
-          </DialogFooter>
-        </form>
+        <Form {...form}>
+          <form
+            onSubmit={form.handleSubmit((formData) => {
+              updateDeck(deck.id, formData.name)
+              handleVisibility(false)
+            })}
+            className="gap-6 flex flex-col"
+          >
+            <FormField
+              control={form.control}
+              name="name"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Deck Name</FormLabel>
+                  <FormControl>
+                    <Input {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <DialogFooter>
+              <Button
+                disabled={!form.formState.isDirty}
+                aria-disabled={!form.formState.isDirty}
+                type="submit"
+              >
+                Submit
+              </Button>
+              <Button
+                type="button"
+                onClick={() => handleVisibility(false)}
+                variant="ghost"
+              >
+                Cancel
+              </Button>
+            </DialogFooter>
+          </form>
+        </Form>
       </DialogContent>
     </Dialog>
   )

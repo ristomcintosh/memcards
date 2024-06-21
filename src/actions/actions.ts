@@ -3,12 +3,8 @@ import { revalidatePath } from "next/cache"
 import * as DBService from "@/service/dbService"
 import { Deck, Flashcard } from "@/types"
 
-export const updateDeck = async (id: Deck["id"], formData: FormData) => {
-  const name = formData.get("deckName")
-
-  if (!name) return
-
-  await DBService.updateDeck({ id, name: name.toString() })
+export const updateDeck = async (id: Deck["id"], deckName: string) => {
+  await DBService.updateDeck({ id, name: deckName })
 
   revalidatePath("/")
 }
@@ -18,12 +14,8 @@ export const deleteDeck = async (id: Deck["id"]) => {
   revalidatePath("/")
 }
 
-export const createDeck = async (formData: FormData) => {
-  const name = formData.get("deckName")
-
-  if (!name) return
-
-  await DBService.createDeck(name.toString())
+export const createDeck = async (deckName: string) => {
+  await DBService.createDeck(deckName)
 
   revalidatePath("/")
 }

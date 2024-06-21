@@ -1,7 +1,14 @@
 "use client"
 import { Menu, MenuButton } from "@headlessui/react"
 import { useState } from "react"
-import { TextInput } from "@/components/TextInput"
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form"
 import { Plus } from "@/components/Plus"
 import {
   MenuItem,
@@ -18,6 +25,9 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
+import { useForm } from "react-hook-form"
+import { Input } from "@/components/ui/input"
+import { Deck } from "@/types"
 
 export const CreateNew = () => {
   const [isCreateDeckFormOpen, showCreateDeckFrom] = useState(false)
@@ -65,27 +75,42 @@ const CreateNewMenu = ({
 }
 
 const CreateDeckForm = ({ handleClose }: { handleClose: () => void }) => {
+  const form = useForm<Pick<Deck, "name">>()
   return (
     <Dialog defaultOpen modal onOpenChange={(open) => !open && handleClose()}>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Create A New Deck</DialogTitle>
         </DialogHeader>
-        <form
-          action={(formData) => {
-            console.log("submitted!")
-            createDeck(formData)
-            handleClose()
-          }}
-        >
-          <TextInput label="Deck Name:" name="deckName" />
-          <DialogFooter>
-            <Button type="submit">Submit</Button>
-            <Button onClick={handleClose} type="button" variant="ghost">
-              Cancel
-            </Button>
-          </DialogFooter>
-        </form>
+        <Form {...form}>
+          <form
+            onSubmit={form.handleSubmit((formData) => {
+              createDeck(formData.name)
+              handleClose()
+            })}
+            className="gap-6 flex flex-col"
+          >
+            <FormField
+              control={form.control}
+              name="name"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Deck Name:</FormLabel>
+                  <FormControl>
+                    <Input {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <DialogFooter>
+              <Button type="submit">Submit</Button>
+              <Button onClick={handleClose} type="button" variant="ghost">
+                Cancel
+              </Button>
+            </DialogFooter>
+          </form>
+        </Form>
       </DialogContent>
     </Dialog>
   )
