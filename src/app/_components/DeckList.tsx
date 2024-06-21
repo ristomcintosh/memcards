@@ -119,9 +119,12 @@ const DeleteConfirmation = ({
     <Dialog open={open} onOpenChange={handleVisibility}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>{`Are you sure you want to delete ${deck.name}?`}</DialogTitle>
+          <DialogTitle>Are you sure you want to delete</DialogTitle>
+          <DialogTitle className="text-red-500 text-xl">
+            {deck.name}
+          </DialogTitle>
         </DialogHeader>
-        <DialogFooter>
+        <DialogFooter className="flex-col-reverse">
           <Button variant="destructive" onClick={() => deleteDeck(deck.id)}>
             Yes
           </Button>
