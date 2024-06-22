@@ -157,9 +157,14 @@ const DeleteConfirmation = ({
     <Dialog open={open} onOpenChange={handleVisibility}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Are you sure you want to delete</DialogTitle>
-          <DialogTitle className="text-red-500 text-xl dark:text-red-700">
-            {deck.name}
+          <DialogTitle data-testid="delete-confirmation-title">
+            <span>Are you sure you want to delete </span>
+            <span className="block">
+              <span className="text-red-500 text-xl dark:text-red-700">
+                {deck.name}
+              </span>
+              <span>?</span>
+            </span>
           </DialogTitle>
         </DialogHeader>
         <DialogFooter className="flex-col-reverse">

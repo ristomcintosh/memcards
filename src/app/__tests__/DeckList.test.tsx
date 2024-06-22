@@ -31,9 +31,9 @@ describe(DeckList.name, () => {
       screen.getByText("Delete").click()
     })
 
-    expect(
-      screen.getByText("Are you sure you want to delete Deck 1?")
-    ).toBeInTheDocument()
+    expect(screen.getByTestId("delete-confirmation-title")).toHaveTextContent(
+      "Are you sure you want to delete Deck 1?"
+    )
 
     screen.getByRole("button", { name: "Yes" }).click()
     expect(deleteDeck).toHaveBeenCalledWith("some-id")
