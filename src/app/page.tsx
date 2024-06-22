@@ -8,7 +8,7 @@ export default async function Home() {
   return (
     <DefaultLayout>
       <div className="flex flex-col items-center h-full">
-        <div className="relative w-full max-w-2xl min-h-full py-4">
+        <div className="relative w-full max-w-2xl min-h-full pb-4 pt-6">
           <h1 className="sr-only">Deck List</h1>
           <div className="relative max-w-xs mx-auto">
             <DeckList decks={deckList} />

@@ -55,7 +55,7 @@ const Header = ({
   deleteCard: DeleteCard
   editCard: EditCard
 }) => (
-  <section className="flex items-center justify-between p-4 dark:bg-zinc-700">
+  <section className="flex items-center justify-between p-4 bg-zinc-50 dark:bg-zinc-700 gap-4 shadow">
     <DropdownMenu
       name="Flashcard Options"
       items={[
@@ -92,7 +92,7 @@ const Footer = ({
   onFlip: OnFlip
   onNextCard: OnNextCard
 }) => (
-  <section className="py-3 dark:bg-zinc-700">
+  <section className="py-3 dark:bg-zinc-700 bg-zinc-50 border-t">
     <div className="flex justify-around max-w-md mx-auto">
       <Button size="lg" variant="outline" onClick={onFlip}>
         Flip

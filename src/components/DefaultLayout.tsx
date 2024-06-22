@@ -16,7 +16,7 @@ export default function DefaultLayout({
 
 const Navbar = () => {
   return (
-    <nav className="max-w-2xl px-4 py-4 text-lg dark:bg-zinc-700">
+    <nav className="px-4 py-4 text-lg dark:bg-zinc-700 bg-zinc-50 shadow">
       <Link href="/">Memcards</Link>
     </nav>
   )
