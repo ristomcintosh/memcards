@@ -9,14 +9,14 @@ export default function DefaultLayout({
   return (
     <div className="flex flex-col h-full">
       <Navbar />
-      <main className="flex-1 px-2 bg-gray-100">{children}</main>
+      <main className="flex-1 px-2">{children}</main>
     </div>
   )
 }
 
 const Navbar = () => {
   return (
-    <nav className="max-w-2xl px-4 py-4 text-lg">
+    <nav className="max-w-2xl px-4 py-4 text-lg dark:bg-zinc-700">
       <Link href="/">Memcards</Link>
     </nav>
   )

@@ -14,7 +14,7 @@ export const Flashcard = ({ cardSide, flashcard }: FlashcardProps) => {
     <motion.div
       variants={flashcardVariants}
       animate={cardSide === "front" ? "flipToFront" : "flipToBack"}
-      className="relative flex flex-col items-center justify-center w-3/4 max-w-md bg-white shadow-lg rounded-xl"
+      className="relative flex flex-col items-center justify-center w-3/4 max-w-md bg-zinc-50 dark:bg-zinc-600 shadow-lg rounded-xl"
       style={{ minHeight: "250px" }}
     >
       <FlashcardContent

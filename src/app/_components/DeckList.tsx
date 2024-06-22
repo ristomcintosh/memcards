@@ -158,7 +158,7 @@ const DeleteConfirmation = ({
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Are you sure you want to delete</DialogTitle>
-          <DialogTitle className="text-red-500 text-xl">
+          <DialogTitle className="text-red-500 text-xl dark:text-red-700">
             {deck.name}
           </DialogTitle>
         </DialogHeader>

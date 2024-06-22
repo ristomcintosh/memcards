@@ -33,7 +33,7 @@ export function StudyContainer({
         deleteCard={controls.deleteCard}
         editCard={controls.editCard}
       />
-      <main className="flex-1 px-2 overflow-x-hidden overflow-y-auto bg-gray-100">
+      <main className="flex-1 px-2 overflow-x-hidden overflow-y-auto">
         <div className="flex flex-col min-h-full pt-4 pb-6">
           <h1 className="text-3xl text-center">{title}</h1>
           <section className="flex items-center justify-center flex-1">
@@ -55,7 +55,7 @@ const Header = ({
   deleteCard: DeleteCard
   editCard: EditCard
 }) => (
-  <section className="flex items-center justify-between p-4">
+  <section className="flex items-center justify-between p-4 dark:bg-zinc-700">
     <DropdownMenu
       name="Flashcard Options"
       items={[
@@ -71,7 +71,7 @@ const Header = ({
 )
 
 const ProgressBar = ({ progress }: { progress: number }) => (
-  <div className="relative flex-1 h-3 max-w-lg overflow-hidden bg-gray-300 rounded-lg shadow-inner">
+  <div className="relative flex-1 h-3 max-w-lg overflow-hidden bg-zinc-300 dark:bg-zinc-400 rounded-lg shadow-inner">
     <div
       role="progressbar"
       aria-valuenow={progress}
@@ -92,7 +92,7 @@ const Footer = ({
   onFlip: OnFlip
   onNextCard: OnNextCard
 }) => (
-  <section className="py-3">
+  <section className="py-3 dark:bg-zinc-700">
     <div className="flex justify-around max-w-md mx-auto">
       <Button size="lg" variant="outline" onClick={onFlip}>
         Flip
