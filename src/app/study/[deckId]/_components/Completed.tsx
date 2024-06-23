@@ -15,9 +15,14 @@ type CompletedProps = {
 }
 
 export const Completed = ({ restart, totalCards }: CompletedProps) => {
+  const isDeckEmpty = totalCards === 0
   return (
     <Dialog open={true}>
-      <DialogContent closeIcon={false} data-testid="completed-modal">
+      <DialogContent
+        className="max-w-md"
+        closeIcon={false}
+        data-testid="completed-modal"
+      >
         <DialogHeader>
           <DialogTitle>Congratulations! 🎉</DialogTitle>
         </DialogHeader>
@@ -25,21 +30,35 @@ export const Completed = ({ restart, totalCards }: CompletedProps) => {
         <DialogDescription>
           You have successfully completed all the flashcards in this deck.
         </DialogDescription>
+        {isDeckEmpty && <AddNewFlashcardMessage />}
         <DialogFooter>
-          {totalCards > 0 && (
+          {!isDeckEmpty && (
             <Button size="lg" onClick={restart}>
               Restart
             </Button>
           )}
-          <Button
-            asChild
-            variant={totalCards > 0 ? "link" : "default"}
-            size="lg"
-          >
+          <Button asChild variant={!isDeckEmpty ? "link" : "default"} size="lg">
             <Link href="/">Home</Link>
           </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
+  )
+}
+
+const AddNewFlashcardMessage = () => {
+  return (
+    <DialogDescription>
+      😅 Oops, no flashcards here!{` `}
+      <Link
+        className="text-brand-500 hover:underline"
+        href={{
+          pathname: "/create-flashcard",
+          query: { deckId: "deckId" },
+        }}
+      >
+        Add some!
+      </Link>
+    </DialogDescription>
   )
 }
