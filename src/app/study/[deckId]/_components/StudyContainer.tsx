@@ -35,7 +35,7 @@ export function StudyContainer({
       />
       <main className="flex-1 px-2 overflow-x-hidden overflow-y-auto">
         <div className="flex flex-col min-h-full pt-4 pb-6">
-          <h1 className="text-3xl text-center">{title}</h1>
+          <h1 className="text-3xl text-center font-semibold">{title}</h1>
           <section className="flex items-center justify-center flex-1">
             {children}
           </section>

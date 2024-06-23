@@ -37,6 +37,9 @@ const config = {
       colors: {
         brand: colors.teal,
       },
+      fontFamily: {
+        sans: ["var(--font-inter)"],
+      },
     },
   },
   plugins: [require("tailwindcss-animate")],
