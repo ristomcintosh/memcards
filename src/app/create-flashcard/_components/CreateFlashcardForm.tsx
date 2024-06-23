@@ -36,7 +36,7 @@ export const CreateFlashcardForm = ({ decks }: CreateFlashcardFormProps) => {
 
   return (
     <Form {...form}>
-      <form onSubmit={handleSubmit} className="gap-6 flex flex-col">
+      <form onSubmit={handleSubmit}>
         <FormField
           control={form.control}
           name="deckId"

@@ -53,7 +53,7 @@ const CreateNewMenu = ({
           <MenuButton
             as={motion.button}
             animate={{ rotate: open ? 225 : 0 }}
-            className=" w-10 text-gray-900 rounded-full shadow-lg bg-brand-500 focus:outline-none focus-visible:outline-black"
+            className="w-12 text-gray-900 rounded-full shadow-lg bg-brand-500 focus:outline-none focus-visible:outline-black"
             aria-label="Create a new deck or new flashcard"
           >
             <Plus />

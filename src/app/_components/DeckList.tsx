@@ -33,7 +33,7 @@ export const DeckList = ({ decks }: DeckListProps) => {
   return decks.map((deck) => (
     <div
       key={deck.id}
-      className="flex items-center justify-between pl-2 mb-2 text-2xl border-b-2 border-gray-300 last:mb-0"
+      className="flex justify-between pl-2 mb-2.5 text-2xl border-b-2 border-gray-300 last:mb-0"
       data-testid={`deck-${deck.id}`}
     >
       <Link
