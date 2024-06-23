@@ -9,10 +9,15 @@ import {
 } from "@/components/ui/dialog"
 import Link from "next/link"
 
-export const Completed = ({ restart }: { restart: () => void }) => {
+type CompletedProps = {
+  restart: () => void
+  totalCards: number
+}
+
+export const Completed = ({ restart, totalCards }: CompletedProps) => {
   return (
     <Dialog open={true}>
-      <DialogContent closeIcon={false}>
+      <DialogContent closeIcon={false} data-testid="completed-modal">
         <DialogHeader>
           <DialogTitle>Congratulations! 🎉</DialogTitle>
         </DialogHeader>
@@ -21,10 +26,16 @@ export const Completed = ({ restart }: { restart: () => void }) => {
           You have successfully completed all the flashcards in this deck.
         </DialogDescription>
         <DialogFooter>
-          <Button size="lg" onClick={restart}>
-            Restart
-          </Button>
-          <Button asChild variant="link" size="lg">
+          {totalCards > 0 && (
+            <Button size="lg" onClick={restart}>
+              Restart
+            </Button>
+          )}
+          <Button
+            asChild
+            variant={totalCards > 0 ? "link" : "default"}
+            size="lg"
+          >
             <Link href="/">Home</Link>
           </Button>
         </DialogFooter>

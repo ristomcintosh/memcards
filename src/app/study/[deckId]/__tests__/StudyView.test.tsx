@@ -1,6 +1,6 @@
 import { decks } from "@/tests/testData"
 import { StudyView } from "../_components/StudyView"
-import { act, render, screen } from "@testing-library/react"
+import { act, render, screen, within } from "@testing-library/react"
 import { deleteFlashcard } from "@/actions/actions"
 
 jest.mock("@/actions/actions")
@@ -42,62 +42,6 @@ describe(StudyView.name, () => {
     expect(screen.getByText(nextCard)).toBeInTheDocument()
   })
 
-  it("shows the completed modal after viewing all cards", () => {
-    render(<StudyView deck={decks[0]} />)
-
-    const nextButton = screen.getByRole("button", { name: "Next" })
-
-    act(() => {
-      nextButton.click()
-    })
-
-    act(() => {
-      nextButton.click()
-    })
-
-    act(() => {
-      nextButton.click()
-    })
-
-    act(() => {
-      nextButton.click()
-    })
-
-    expect(screen.getByText("Congratulations! 🎉")).toBeInTheDocument()
-  })
-
-  it("restarts the study session", () => {
-    render(<StudyView deck={decks[0]} />)
-
-    const nextButton = screen.getByRole("button", { name: "Next" })
-
-    act(() => {
-      nextButton.click()
-    })
-
-    act(() => {
-      nextButton.click()
-    })
-
-    act(() => {
-      nextButton.click()
-    })
-
-    act(() => {
-      nextButton.click()
-    })
-
-    const restartButton = screen.getByRole("button", { name: "Restart" })
-
-    act(() => {
-      restartButton.click()
-    })
-
-    expect(
-      screen.getByText("What is the capital of France?")
-    ).toBeInTheDocument()
-  })
-
   it("deletes the current card being shown and show the next card", () => {
     const nextCard = "What is the capital of Portugal?"
     render(<StudyView deck={decks[0]} />)
@@ -114,5 +58,111 @@ describe(StudyView.name, () => {
 
     expect(deleteFlashcard).toHaveBeenCalled()
     expect(screen.getByText(nextCard)).toBeInTheDocument()
+  })
+
+  describe("Completed deck modal", () => {
+    it("shows the completed modal after viewing all cards", () => {
+      render(<StudyView deck={decks[0]} />)
+
+      const nextButton = screen.getByRole("button", { name: "Next" })
+
+      act(() => {
+        nextButton.click()
+      })
+
+      act(() => {
+        nextButton.click()
+      })
+
+      act(() => {
+        nextButton.click()
+      })
+
+      act(() => {
+        nextButton.click()
+      })
+
+      expect(screen.getByText("Congratulations! 🎉")).toBeInTheDocument()
+    })
+
+    it("restarts the study session", () => {
+      render(<StudyView deck={decks[0]} />)
+
+      const nextButton = screen.getByRole("button", { name: "Next" })
+
+      act(() => {
+        nextButton.click()
+      })
+
+      act(() => {
+        nextButton.click()
+      })
+
+      act(() => {
+        nextButton.click()
+      })
+
+      act(() => {
+        nextButton.click()
+      })
+
+      const restartButton = screen.getByRole("button", { name: "Restart" })
+
+      act(() => {
+        restartButton.click()
+      })
+
+      expect(
+        screen.getByText("What is the capital of France?")
+      ).toBeInTheDocument()
+    })
+
+    it("does not show the restart button when after deleting all cards", () => {
+      const { rerender } = render(<StudyView deck={decks[0]} />)
+
+      act(() => {
+        screen.getByLabelText("Flashcard Options").click()
+      })
+
+      act(() => {
+        screen.getByRole("menuitem", { name: "Delete" }).click()
+      })
+
+      act(() => {
+        screen.getByLabelText("Flashcard Options").click()
+      })
+
+      act(() => {
+        screen.getByRole("menuitem", { name: "Delete" }).click()
+      })
+
+      act(() => {
+        screen.getByLabelText("Flashcard Options").click()
+      })
+
+      act(() => {
+        screen.getByRole("menuitem", { name: "Delete" }).click()
+      })
+
+      act(() => {
+        screen.getByLabelText("Flashcard Options").click()
+      })
+
+      act(() => {
+        screen.getByRole("menuitem", { name: "Delete" }).click()
+      })
+
+      // deck without cards
+      const deckWithoutCards = {
+        ...decks[0],
+        flashcards: [],
+      }
+      rerender(<StudyView deck={deckWithoutCards} />)
+
+      const completedModal = screen.getByTestId("completed-modal")
+      expect(screen.getByText("Congratulations! 🎉")).toBeInTheDocument
+      expect(screen.queryByText("Restart")).not.toBeInTheDocument()
+      expect(within(completedModal).getByText("Home")).toBeInTheDocument()
+    })
   })
 })
