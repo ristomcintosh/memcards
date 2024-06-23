@@ -7,15 +7,16 @@ import {
   DialogFooter,
   DialogTitle,
 } from "@/components/ui/dialog"
+import { DeckWithFlashcards } from "@/types"
 import Link from "next/link"
 
 type CompletedProps = {
   restart: () => void
-  totalCards: number
+  deck: DeckWithFlashcards
 }
 
-export const Completed = ({ restart, totalCards }: CompletedProps) => {
-  const isDeckEmpty = totalCards === 0
+export const Completed = ({ restart, deck }: CompletedProps) => {
+  const isDeckEmpty = deck.flashcards.length === 0
   return (
     <Dialog open={true}>
       <DialogContent
@@ -30,7 +31,7 @@ export const Completed = ({ restart, totalCards }: CompletedProps) => {
         <DialogDescription>
           You have successfully completed all the flashcards in this deck.
         </DialogDescription>
-        {isDeckEmpty && <AddNewFlashcardMessage />}
+        {isDeckEmpty && <NoFlashcardsMessage deckId={deck.id} />}
         <DialogFooter>
           {!isDeckEmpty && (
             <Button size="lg" onClick={restart}>
@@ -46,7 +47,7 @@ export const Completed = ({ restart, totalCards }: CompletedProps) => {
   )
 }
 
-const AddNewFlashcardMessage = () => {
+const NoFlashcardsMessage = ({ deckId }: { deckId: string }) => {
   return (
     <DialogDescription>
       😅 Oops, no flashcards here!{` `}
@@ -54,7 +55,7 @@ const AddNewFlashcardMessage = () => {
         className="text-brand-500 hover:underline"
         href={{
           pathname: "/create-flashcard",
-          query: { deckId: "deckId" },
+          query: { deckId },
         }}
       >
         Add some!

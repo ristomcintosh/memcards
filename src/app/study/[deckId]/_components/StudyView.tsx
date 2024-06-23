@@ -42,7 +42,7 @@ export const StudyView = ({ deck }: StudyViewProps) => {
           )}
         </>
       ) : (
-        <Completed restart={initialize} totalCards={deck.flashcards.length} />
+        <Completed restart={initialize} deck={deck} />
       )}
     </StudyContainer>
   )

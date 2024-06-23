@@ -1,9 +1,10 @@
 import { render, screen } from "@testing-library/react"
 import { Completed } from "../_components/Completed"
+import { decks } from "@/tests/testData"
 
 describe(Completed.name, () => {
   it("renders", () => {
-    render(<Completed restart={jest.fn()} totalCards={3} />)
+    render(<Completed restart={jest.fn()} deck={decks[0]} />)
 
     expect(screen.getByText("Congratulations! 🎉")).toBeInTheDocument()
     expect(
@@ -16,7 +17,8 @@ describe(Completed.name, () => {
   })
 
   it("does not show the restart button when there are no cards left in deck", () => {
-    render(<Completed restart={jest.fn()} totalCards={0} />)
+    const deckWithNoCards = { ...decks[0], flashcards: [] }
+    render(<Completed restart={jest.fn()} deck={deckWithNoCards} />)
 
     expect(screen.queryByText("Restart")).not.toBeInTheDocument()
     expect(screen.getByText("Home")).toBeInTheDocument()

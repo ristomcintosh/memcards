@@ -19,6 +19,7 @@ import {
 } from "@/components/ui/select"
 
 import { Flashcard, Deck } from "@/types"
+import { useSearchParams } from "next/navigation"
 
 import { useForm } from "react-hook-form"
 
@@ -28,7 +29,15 @@ type CreateFlashcardFormProps = {
   decks: Deck[]
 }
 export const CreateFlashcardForm = ({ decks }: CreateFlashcardFormProps) => {
-  const form = useForm<CreateFlashcardFormValues>()
+  const queryParam = useSearchParams()
+  const defaultDeckId = getDeckIdFromQueryParam(queryParam.get("deckId"), decks)
+
+  const form = useForm<CreateFlashcardFormValues>({
+    defaultValues: {
+      deckId: defaultDeckId,
+    },
+  })
+
   const handleSubmit = form.handleSubmit((values) => {
     createFlashcard(values)
     form.reset({ deckId: values.deckId, front: "", back: "" })
@@ -91,4 +100,8 @@ export const CreateFlashcardForm = ({ decks }: CreateFlashcardFormProps) => {
       </form>
     </Form>
   )
+}
+
+function getDeckIdFromQueryParam(deckId: string | null, decks: Deck[]) {
+  return deckId ? decks.find((deck) => deck.id === deckId)?.id : ""
 }
