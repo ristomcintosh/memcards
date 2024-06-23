@@ -24,7 +24,10 @@ type DropdownMenuProps = {
 
 export const DropdownMenu = ({ items, name: menuName }: DropdownMenuProps) => (
   <Menu>
-    <MenuButton aria-label={menuName} className="w-5">
+    <MenuButton
+      aria-label={menuName}
+      className="w-8 h-8 p-1 hover:bg-zinc-300 hover:rounded-full"
+    >
       <VerticalDots />
     </MenuButton>
     <MenuItemsAnimated anchor="right">
