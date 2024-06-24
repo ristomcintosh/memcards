@@ -2,10 +2,12 @@ import { updateDeck } from "@/actions/actions"
 import { Deck } from "@/types"
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogFooter,
   DialogHeader,
   DialogTitle,
+  DialogTrigger,
 } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
 import {
@@ -19,22 +21,15 @@ import {
 import { useForm } from "react-hook-form"
 import { Input } from "@/components/ui/input"
 
-export const RenameDeckForm = ({
-  deck,
-  open,
-  handleVisibility,
-}: {
+type RenameDeckFormProps = {
   deck: Deck
-  open: boolean
-  handleVisibility: (show: boolean) => void
-}) => {
-  const form = useForm<Pick<Deck, "name">>({
-    defaultValues: {
-      name: deck.name,
-    },
-  })
+  closeForm: () => void
+}
+
+export const RenameDeckForm = ({ deck, closeForm }: RenameDeckFormProps) => {
+  const form = useForm<Pick<Deck, "name">>()
   return (
-    <Dialog open={open} onOpenChange={handleVisibility}>
+    <Dialog defaultOpen onOpenChange={() => closeForm()}>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>{`Rename: ${deck.name}`}</DialogTitle>
@@ -43,13 +38,14 @@ export const RenameDeckForm = ({
           <form
             onSubmit={form.handleSubmit((formData) => {
               updateDeck(deck.id, formData.name)
-              handleVisibility(false)
+              closeForm()
             })}
             className="gap-6 flex flex-col"
           >
             <FormField
               control={form.control}
               name="name"
+              defaultValue={deck.name}
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Deck Name</FormLabel>
@@ -68,13 +64,11 @@ export const RenameDeckForm = ({
               >
                 Submit
               </Button>
-              <Button
-                type="button"
-                onClick={() => handleVisibility(false)}
-                variant="ghost"
-              >
-                Cancel
-              </Button>
+              <DialogClose asChild>
+                <Button type="button" variant="ghost">
+                  Cancel
+                </Button>
+              </DialogClose>
             </DialogFooter>
           </form>
         </Form>

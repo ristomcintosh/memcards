@@ -2,6 +2,7 @@ import { deleteDeck } from "@/actions/actions"
 import { Deck } from "@/types"
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogFooter,
   DialogHeader,
@@ -11,15 +12,13 @@ import { Button } from "@/components/ui/button"
 
 export const DeleteConfirmation = ({
   deck,
-  handleVisibility: handleVisibility,
-  open,
+  handleClose,
 }: {
   deck: Deck
-  handleVisibility: (show: boolean) => void
-  open: boolean
+  handleClose: () => void
 }) => {
   return (
-    <Dialog open={open} onOpenChange={handleVisibility}>
+    <Dialog defaultOpen onOpenChange={handleClose}>
       <DialogContent>
         <DialogHeader>
           <DialogTitle data-testid="delete-confirmation-title">
@@ -33,12 +32,18 @@ export const DeleteConfirmation = ({
           </DialogTitle>
         </DialogHeader>
         <DialogFooter className="flex-col-reverse">
-          <Button variant="destructive" onClick={() => deleteDeck(deck.id)}>
+          <Button
+            variant="destructive"
+            onClick={async () => {
+              await deleteDeck(deck.id)
+              handleClose()
+            }}
+          >
             Yes
           </Button>
-          <Button onClick={() => handleVisibility(false)} variant="ghost">
-            Cancel
-          </Button>
+          <DialogClose asChild>
+            <Button variant="ghost">Cancel</Button>
+          </DialogClose>
         </DialogFooter>
       </DialogContent>
     </Dialog>
