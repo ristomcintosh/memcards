@@ -1,4 +1,5 @@
 import { VerticalDots } from "@/components/VerticalDots"
+import { Delete, Edit } from "@/components/menu-items"
 import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
@@ -70,9 +71,11 @@ const Header = ({
         <VerticalDots />
       </DropdownMenuTrigger>
       <DropdownMenuContent>
-        <DropdownMenuItem onSelect={() => editCard()}>Edit</DropdownMenuItem>
+        <DropdownMenuItem onSelect={() => editCard()}>
+          <Edit />
+        </DropdownMenuItem>
         <DropdownMenuItem onSelect={() => deleteCard()}>
-          Delete
+          <Delete />
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

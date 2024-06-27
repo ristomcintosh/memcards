@@ -1,8 +1,6 @@
 "use client"
 import { DeckWithCardCount } from "@/types"
 import Link from "next/link"
-import { Trash2 } from "lucide-react"
-import { PencilLine } from "lucide-react"
 import {
   ContextMenu,
   ContextMenuContent,
@@ -17,6 +15,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { VerticalDots } from "@/components/VerticalDots"
+import { Rename, Delete } from "../../components/menu-items"
 
 type MenuProps = {
   handleRename: () => void
@@ -70,14 +69,3 @@ export const LinkWithContextMenu = ({
     </ContextMenu>
   )
 }
-const Rename = () => (
-  <>
-    <PencilLine className="w-4 h-4 mr-2" />
-    <span>Rename</span>
-  </>
-)
-const Delete = () => (
-  <>
-    <Trash2 className="w-4 h-4 mr-2" /> <span>Delete</span>
-  </>
-)
