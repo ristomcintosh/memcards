@@ -1,5 +1,11 @@
-import { DropdownMenu } from "@/components/DropdownMenu"
+import { VerticalDots } from "@/components/VerticalDots"
 import { Button } from "@/components/ui/button"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
 import Link from "next/link"
 import { PropsWithChildren } from "react"
 
@@ -56,13 +62,21 @@ const Header = ({
   editCard: EditCard
 }) => (
   <section className="flex items-center justify-between p-4 bg-zinc-50 dark:bg-zinc-700 gap-4 shadow">
-    <DropdownMenu
-      name="Flashcard Options"
-      items={[
-        { name: "Edit", action: editCard },
-        { name: "Delete", action: deleteCard },
-      ]}
-    />
+    <DropdownMenu modal={false}>
+      <DropdownMenuTrigger
+        aria-label="Flashcard Options"
+        className="w-8 h-8 p-1 hover:bg-zinc-300 hover:rounded-full"
+      >
+        <VerticalDots />
+      </DropdownMenuTrigger>
+      <DropdownMenuContent>
+        <DropdownMenuItem onSelect={() => editCard()}>Edit</DropdownMenuItem>
+        <DropdownMenuItem onSelect={() => deleteCard()}>
+          Delete
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+
     <ProgressBar progress={progress} />
     <nav>
       <Link href="/">Home</Link>
@@ -92,7 +106,7 @@ const Footer = ({
   onFlip: OnFlip
   onNextCard: OnNextCard
 }) => (
-  <section className="py-3 dark:bg-zinc-700 bg-zinc-50 border-t">
+  <section className="py-3 dark:bg-zinc-700 dark:border-t-zinc-400/80 bg-zinc-50 border-t">
     <div className="flex justify-around max-w-md mx-auto">
       <Button size="lg" variant="outline" onClick={onFlip}>
         Flip

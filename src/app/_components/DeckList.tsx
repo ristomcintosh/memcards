@@ -44,7 +44,7 @@ export const DeckList = ({ decks }: DeckListProps) => {
       <ModalManager
         modalType={modalType}
         deck={selectedDeck}
-        closeModal={() => closeModal()}
+        closeModal={closeModal}
       />
     </>
   )

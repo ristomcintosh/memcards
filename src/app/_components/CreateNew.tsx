@@ -1,5 +1,4 @@
 "use client"
-import { Menu, MenuButton } from "@headlessui/react"
 import { useState } from "react"
 import {
   Form,
@@ -10,12 +9,6 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { Plus } from "@/components/Plus"
-import {
-  MenuItem,
-  MenuItemAsLink,
-  MenuItemsAnimated,
-} from "@/components/DropdownMenu"
-import { motion } from "framer-motion"
 import { createDeck } from "@/actions/actions"
 import {
   Dialog,
@@ -28,6 +21,13 @@ import { Button } from "@/components/ui/button"
 import { useForm } from "react-hook-form"
 import { Input } from "@/components/ui/input"
 import { Deck } from "@/types"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import Link from "next/link"
 
 export const CreateNew = () => {
   const [isCreateDeckFormOpen, showCreateDeckFrom] = useState(false)
@@ -45,34 +45,24 @@ const CreateNewMenu = ({
   handleDeckCreation,
 }: {
   handleDeckCreation: () => void
-}) => {
-  return (
-    <Menu>
-      {({ open }) => (
-        <>
-          <MenuButton
-            as={motion.button}
-            animate={{ rotate: open ? 225 : 0 }}
-            className="w-12 text-gray-900 rounded-full shadow-lg bg-brand-500 focus:outline-none focus-visible:outline-black"
-            aria-label="Create a new deck or new flashcard"
-          >
-            <Plus />
-          </MenuButton>
-          <MenuItemsAnimated
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="absolute mb-1 bottom-full right-full"
-          >
-            <MenuItem text="Create Deck" onClick={handleDeckCreation} />
-            <MenuItemAsLink href="/create-flashcard">
-              Create Flashcards
-            </MenuItemAsLink>
-          </MenuItemsAnimated>
-        </>
-      )}
-    </Menu>
-  )
-}
+}) => (
+  <DropdownMenu modal={false}>
+    <DropdownMenuTrigger
+      className="w-12 transition-transform ease-in data-[state=open]:rotate-[225deg] text-zinc-900 rounded-full shadow-lg bg-brand-500"
+      aria-label="Create a new deck or new flashcard"
+    >
+      <Plus />
+    </DropdownMenuTrigger>
+    <DropdownMenuContent>
+      <DropdownMenuItem onSelect={handleDeckCreation}>
+        Create Deck
+      </DropdownMenuItem>
+      <DropdownMenuItem asChild>
+        <Link href="/create-flashcard">Create Flashcards</Link>
+      </DropdownMenuItem>
+    </DropdownMenuContent>
+  </DropdownMenu>
+)
 
 const CreateDeckForm = ({ handleClose }: { handleClose: () => void }) => {
   const form = useForm<Pick<Deck, "name">>()
