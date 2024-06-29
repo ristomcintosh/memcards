@@ -1,6 +1,7 @@
-import { act, render, screen } from "@testing-library/react"
+import { render, screen } from "@testing-library/react"
 import { DeckList } from "../_components/DeckList"
 import { deleteDeck } from "@/actions/actions"
+import userEvent from "@testing-library/user-event"
 
 jest.mock("@/actions/actions")
 
@@ -20,35 +21,32 @@ describe(DeckList.name, () => {
     expect(screen.getByLabelText("card count 3")).toBeInTheDocument()
   })
 
-  it("shows the delete confirmation dialog and calls deleteDeck when 'Yes' is clicked", () => {
+  it("shows the delete confirmation dialog and calls deleteDeck when 'Yes' is clicked", async () => {
+    const user = userEvent.setup()
     render(<DeckList decks={testDeckList} />)
 
-    act(() => {
-      screen.getByLabelText("Deck Options").click()
-    })
+    const deckOptions = screen.getByLabelText("Deck Options")
+    await user.click(deckOptions)
 
-    act(() => {
-      screen.getByText("Delete").click()
-    })
+    const deleteButton = await screen.findByText("Delete")
+    await user.click(deleteButton)
 
     expect(screen.getByTestId("delete-confirmation-title")).toHaveTextContent(
       "Are you sure you want to delete Deck 1?"
     )
 
-    screen.getByRole("button", { name: "Yes" }).click()
+    await user.click(screen.getByRole("button", { name: "Yes" }))
     expect(deleteDeck).toHaveBeenCalledWith("some-id")
   })
 
-  it("Show the rename dialog", () => {
+  it("Show the rename dialog", async () => {
+    const user = userEvent.setup()
     render(<DeckList decks={testDeckList} />)
 
-    act(() => {
-      screen.getByLabelText("Deck Options").click()
-    })
+    const deckOptions = screen.getByLabelText("Deck Options")
+    await user.click(deckOptions)
 
-    act(() => {
-      screen.getByText("Rename").click()
-    })
+    await user.click(screen.getByText("Rename"))
 
     expect(screen.getByText("Rename: Deck 1")).toBeInTheDocument()
     expect(screen.getByRole("button", { name: "Cancel" })).toBeInTheDocument()

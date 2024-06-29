@@ -1,6 +1,7 @@
 import { decks } from "@/tests/testData"
 import { StudyView } from "../_components/StudyView"
 import { act, render, screen, within } from "@testing-library/react"
+import userEvent from "@testing-library/user-event"
 import { deleteFlashcard } from "@/actions/actions"
 
 jest.mock("@/actions/actions")
@@ -42,19 +43,11 @@ describe(StudyView.name, () => {
     expect(screen.getByText(nextCard)).toBeInTheDocument()
   })
 
-  it("deletes the current card being shown and show the next card", () => {
+  it("deletes the current card being shown and show the next card", async () => {
     const nextCard = "What is the capital of Portugal?"
     render(<StudyView deck={decks[0]} />)
 
-    act(() => {
-      screen.getByLabelText("Flashcard Options").click()
-    })
-
-    const deleteButton = screen.getByRole("menuitem", { name: "Delete" })
-
-    act(() => {
-      deleteButton.click()
-    })
+    await deleteFlashcards(1)
 
     expect(deleteFlashcard).toHaveBeenCalled()
     expect(screen.getByText(nextCard)).toBeInTheDocument()
@@ -117,52 +110,38 @@ describe(StudyView.name, () => {
       ).toBeInTheDocument()
     })
 
-    it("does not show the restart button when after deleting all cards", () => {
+    it("does not show the restart button when after deleting all cards", async () => {
       const { rerender } = render(<StudyView deck={decks[0]} />)
 
-      act(() => {
-        screen.getByLabelText("Flashcard Options").click()
-      })
+      await deleteFlashcards(4)
 
-      act(() => {
-        screen.getByRole("menuitem", { name: "Delete" }).click()
-      })
-
-      act(() => {
-        screen.getByLabelText("Flashcard Options").click()
-      })
-
-      act(() => {
-        screen.getByRole("menuitem", { name: "Delete" }).click()
-      })
-
-      act(() => {
-        screen.getByLabelText("Flashcard Options").click()
-      })
-
-      act(() => {
-        screen.getByRole("menuitem", { name: "Delete" }).click()
-      })
-
-      act(() => {
-        screen.getByLabelText("Flashcard Options").click()
-      })
-
-      act(() => {
-        screen.getByRole("menuitem", { name: "Delete" }).click()
-      })
-
-      // deck without cards
       const deckWithoutCards = {
         ...decks[0],
         flashcards: [],
       }
       rerender(<StudyView deck={deckWithoutCards} />)
 
-      const completedModal = screen.getByTestId("completed-modal")
+      const completedModal = await screen.findByTestId("completed-modal")
       expect(screen.getByText("Congratulations! 🎉")).toBeInTheDocument
       expect(screen.queryByText("Restart")).not.toBeInTheDocument()
       expect(within(completedModal).getByText("Home")).toBeInTheDocument()
     })
   })
 })
+
+const deleteFlashcards = async (num: number) => {
+  const user = userEvent.setup()
+  for (let i = 0; i < num; i++) {
+    const flashcardOptions = screen.getByRole("button", {
+      name: "Flashcard Options",
+    })
+
+    await user.click(flashcardOptions)
+
+    const deleteButton = await screen.findByRole("menuitem", {
+      name: "Delete",
+    })
+
+    await user.click(deleteButton)
+  }
+}
