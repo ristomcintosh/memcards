@@ -1,12 +1,10 @@
-[![Build Status](https://travis-ci.com/Risto-Mcintosh/memcards-v2.0.svg?branch=master)](https://travis-ci.com/Risto-Mcintosh/memcards-v2.0)
 # Memcards
 
 A flashcard app to help you remember things easily. Study pre-made decks or create your own.
-Make flashcards more effective with photos provided by [Unsplash](https://unsplash.com/)!
+Make flashcards more effective with photos provided by Unsplash!
 
 ![Memcards demo](demo/demo.gif)
 
-## [View Demo](https://memcards.netlify.com/)
 
 ## Frontend
 
