@@ -27,12 +27,10 @@ export const StudyView = ({ deck }: StudyViewProps) => {
     <StudyContainer
       title={deck.name}
       progress={progress}
-      controls={{
-        flipCard,
-        nextCard,
-        deleteCard,
-        editCard,
-      }}
+      flipCard={flipCard}
+      nextCard={nextCard}
+      deleteCard={deleteCard}
+      editCard={editCard}
     >
       {flashcard ? (
         <>
