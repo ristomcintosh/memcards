@@ -1,5 +1,3 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
 # dependencies
 /node_modules
 /.pnp
@@ -40,3 +38,9 @@ next-env.d.ts
 # SQLite database (if using SQLite)
 prisma/dev.db
 prisma/*dev.db*
+
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
