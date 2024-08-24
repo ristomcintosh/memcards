@@ -22,6 +22,8 @@ jobs:
         run: npm run lint
   build:
     runs-on: ubuntu-latest
+    env:
+      DATABASE_URL: "file:./test.db"
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -29,7 +31,7 @@ jobs:
           node-version: "20"
           cache: "npm"
       - run: npm ci
+      - name: Set up Prisma and apply migrations
+        run: npx prisma migrate deploy
       - name: build
-        env:
-          DATABASE_URL: "file:./test.db"
         run: npm run build
