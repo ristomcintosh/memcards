@@ -30,4 +30,6 @@ jobs:
           cache: "npm"
       - run: npm ci
       - name: build
+        env:
+          DATABASE_URL: "file:./test.db"
         run: npm run build
