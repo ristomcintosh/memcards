@@ -1,5 +1,6 @@
 import { getDecks } from "@/service/dbService"
 import { CreateFlashcardForm } from "./_components/CreateFlashcardForm"
+import { Suspense } from "react"
 
 export default async function CreateFlashcard() {
   const decks = await getDecks()
@@ -9,7 +10,9 @@ export default async function CreateFlashcard() {
         Create A New Flashcard
       </h1>
       <div className="w-full max-w-xs">
-        <CreateFlashcardForm decks={decks} />
+        <Suspense fallback={<div>Loading...</div>}>
+          <CreateFlashcardForm decks={decks} />
+        </Suspense>
       </div>
     </div>
   )
