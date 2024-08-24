@@ -49,7 +49,7 @@ const CreateNewMenu = ({
   <DropdownMenu modal={false}>
     <DropdownMenuTrigger
       className="w-12 transition-transform ease-in data-[state=open]:rotate-[225deg] text-zinc-900 rounded-full shadow-lg bg-brand-500"
-      aria-label="Create a new deck or new flashcard"
+      aria-label="Create"
     >
       <Plus />
     </DropdownMenuTrigger>

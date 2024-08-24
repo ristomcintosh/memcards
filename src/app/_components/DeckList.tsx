@@ -28,7 +28,7 @@ export const DeckList = ({ decks }: DeckListProps) => {
         <div
           key={deck.id}
           className="flex items-center justify-between gap-2 px-2.5 py-1 text-2xl border-b-2 border-gray-300 last:mb-0 hover:bg-gray-200 dark:hover:bg-gray-700"
-          data-testid={`deck-${deck.id}`}
+          data-testid={`deck-${deck.name}`}
         >
           <LinkWithContextMenu
             deck={deck}

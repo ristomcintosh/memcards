@@ -1,6 +1,5 @@
-import { render, screen, act } from "@testing-library/react"
+import { render, screen } from "@testing-library/react"
 import { CreateNew } from "../_components/CreateNew"
-import { createDeck } from "@/actions/actions"
 import userEvent from "@testing-library/user-event"
 
 jest.mock("@/actions/actions")
@@ -10,9 +9,7 @@ describe(CreateNew.name, () => {
     const user = userEvent.setup()
     render(<CreateNew />)
 
-    const createButton = screen.getByLabelText(
-      "Create a new deck or new flashcard"
-    )
+    const createButton = screen.getByLabelText("Create")
 
     await user.click(createButton)
 
@@ -29,9 +26,7 @@ describe(CreateNew.name, () => {
     const user = userEvent.setup()
     render(<CreateNew />)
 
-    const createButton = screen.getByLabelText(
-      "Create a new deck or new flashcard"
-    )
+    const createButton = screen.getByLabelText("Create")
 
     await user.click(createButton)
 
@@ -44,31 +39,5 @@ describe(CreateNew.name, () => {
     await user.click(cancelButton)
 
     expect(screen.queryByText("Create a new deck")).not.toBeInTheDocument()
-  })
-
-  it.skip("calls createDeck when the form is submitted", () => {
-    render(<CreateNew />)
-
-    const createButton = screen.getByLabelText(
-      "Create a new deck or new flashcard"
-    )
-
-    act(() => {
-      createButton.click()
-    })
-
-    const createNewDeckButton = screen.getByText("Create Deck")
-
-    act(() => {
-      createNewDeckButton.click()
-    })
-
-    const submitButton = screen.getByRole("button", { name: "Submit" })
-
-    act(() => {
-      submitButton.click()
-    })
-
-    expect(createDeck).toHaveBeenCalled()
   })
 })
