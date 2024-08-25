@@ -15,7 +15,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: lts/*
-      - uses: ./.github/actions/build.yaml
+      - uses: ./.github/actions/build-app-action
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
       - name: Seed the database
