@@ -39,7 +39,7 @@ test.describe("Create deck flow", () => {
 })
 
 test("Deck study flow", async ({ page }) => {
-  await page.goto("http://localhost:3000/")
+  await page.goto("/")
   await page.getByRole("link", { name: "Basic Portuguese" }).click()
 
   await expect(
