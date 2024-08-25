@@ -59,6 +59,7 @@ export const EditFlashcardForm = ({
             <FormField
               control={form.control}
               name="front"
+              rules={{ required: "Front is required" }}
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Front</FormLabel>
@@ -72,6 +73,7 @@ export const EditFlashcardForm = ({
             <FormField
               control={form.control}
               name="back"
+              rules={{ required: "Back is required" }}
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Back</FormLabel>

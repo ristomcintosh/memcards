@@ -83,6 +83,7 @@ const CreateDeckForm = ({ handleClose }: { handleClose: () => void }) => {
             <FormField
               control={form.control}
               name="name"
+              rules={{ required: "Deck name is required" }}
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Deck Name:</FormLabel>

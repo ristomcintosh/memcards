@@ -44,6 +44,7 @@ export const RenameDeckForm = ({ deck, closeForm }: RenameDeckFormProps) => {
             <FormField
               control={form.control}
               name="name"
+              rules={{ required: "Deck name is required" }}
               defaultValue={deck.name}
               render={({ field }) => (
                 <FormItem>

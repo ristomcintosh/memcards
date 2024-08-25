@@ -49,6 +49,7 @@ export const CreateFlashcardForm = ({ decks }: CreateFlashcardFormProps) => {
         <FormField
           control={form.control}
           name="deckId"
+          rules={{ required: "Select a deck" }}
           render={({ field }) => (
             <FormItem>
               <FormLabel>Deck</FormLabel>
@@ -73,6 +74,7 @@ export const CreateFlashcardForm = ({ decks }: CreateFlashcardFormProps) => {
         <FormField
           control={form.control}
           name="front"
+          rules={{ required: "Front is required" }}
           render={({ field }) => (
             <FormItem>
               <FormLabel>Front</FormLabel>
@@ -86,6 +88,7 @@ export const CreateFlashcardForm = ({ decks }: CreateFlashcardFormProps) => {
         <FormField
           control={form.control}
           name="back"
+          rules={{ required: "Back is required" }}
           render={({ field }) => (
             <FormItem>
               <FormLabel>Back</FormLabel>
