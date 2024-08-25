@@ -1,6 +1,6 @@
 import DefaultLayout from "@/components/DefaultLayout"
-import { DeckList } from "./_components/DeckList"
-import { CreateNew } from "./_components/CreateNew"
+import { DeckList } from "@/features/home-page/DeckList"
+import { CreateNew } from "@/features/home-page/CreateNew"
 import { getDecks } from "@/service/dbService"
 
 export default async function Home() {

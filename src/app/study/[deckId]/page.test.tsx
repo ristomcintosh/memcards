@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react"
-import Study from "../page"
+import Study from "./page"
 import { getDeckById } from "@/service/dbService"
 import { DeckWithFlashcards } from "@/types"
 

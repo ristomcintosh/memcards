@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react"
-import CreateFlashcard from "../page"
+import CreateFlashcard from "./page"
 import { getDecks } from "@/service/dbService"
 
 jest.mock("@/service/dbService")

@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react"
-import { DeckList } from "../_components/DeckList"
+import { DeckList } from "../DeckList"
 import { deleteDeck } from "@/actions/actions"
 import userEvent from "@testing-library/user-event"
 

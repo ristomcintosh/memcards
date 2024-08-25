@@ -1,7 +1,7 @@
 import { act, renderHook } from "@testing-library/react"
-import { useStudy } from "../useStudy"
 import { DeckWithFlashcards } from "@/types"
 import { deleteFlashcard } from "@/actions/actions"
+import { useStudy } from "../useStudy"
 
 jest.mock("@/actions/actions")
 

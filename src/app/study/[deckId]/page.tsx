@@ -1,5 +1,5 @@
+import { StudyView } from "@/features/study-page/StudyView"
 import { getDeckById } from "@/service/dbService"
-import { StudyView } from "./_components/StudyView"
 
 export default async function Study({
   params,

@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react"
-import { Completed } from "../_components/Completed"
+import { Completed } from "../Completed"
 import { decks } from "@/tests/testData"
 
 describe(Completed.name, () => {

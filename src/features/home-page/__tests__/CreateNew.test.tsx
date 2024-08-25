@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react"
-import { CreateNew } from "../_components/CreateNew"
+import { CreateNew } from "../CreateNew"
 import userEvent from "@testing-library/user-event"
 
 jest.mock("@/actions/actions")

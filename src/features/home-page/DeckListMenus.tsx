@@ -15,7 +15,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { VerticalDots } from "@/components/VerticalDots"
-import { Rename, Delete } from "../../components/menu-items"
+import { Rename, Delete } from "@/components/menu-items"
 
 type MenuProps = {
   handleRename: () => void

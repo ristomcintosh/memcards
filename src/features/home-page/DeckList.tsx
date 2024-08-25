@@ -1,8 +1,8 @@
 "use client"
 import { DeckWithCardCount } from "@/types"
+import { useCallback, useState } from "react"
 import { ModalManager, ModalType, useModalState } from "./ModalManger"
 import { LinkWithContextMenu, DeckMenu } from "./DeckListMenus"
-import { useCallback, useState } from "react"
 
 type DeckListProps = {
   decks: DeckWithCardCount[]

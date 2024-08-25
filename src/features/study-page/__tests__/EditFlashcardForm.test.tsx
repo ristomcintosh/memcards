@@ -1,5 +1,5 @@
 import { render, screen, fireEvent, waitFor } from "@testing-library/react"
-import { EditFlashcardForm } from "../_components/EditFlashcardForm"
+import { EditFlashcardForm } from "../EditFlashcardForm"
 import { updateFlashcard } from "@/actions/actions"
 
 jest.mock("@/actions/actions")
@@ -13,14 +13,7 @@ describe("EditFlashcardForm", () => {
   }
 
   it("renders the form fields", () => {
-    render(
-      <EditFlashcardForm
-        isOpen={true}
-        setOpen={() => {}}
-        flashcard={mockFlashcard}
-        editCard={() => {}}
-      />
-    )
+    render(<EditFlashcardForm flashcard={mockFlashcard} editCard={() => {}} />)
 
     expect(screen.getByLabelText("Front")).toBeInTheDocument()
     expect(screen.getByLabelText("Back")).toBeInTheDocument()
@@ -32,12 +25,7 @@ describe("EditFlashcardForm", () => {
     const editCardMock = jest.fn()
 
     render(
-      <EditFlashcardForm
-        isOpen={true}
-        setOpen={() => {}}
-        flashcard={mockFlashcard}
-        editCard={editCardMock}
-      />
+      <EditFlashcardForm flashcard={mockFlashcard} editCard={editCardMock} />
     )
 
     const frontInput = screen.getByLabelText("Front")

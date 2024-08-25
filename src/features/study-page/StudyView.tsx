@@ -1,7 +1,7 @@
 "use client"
 import { Flashcard } from "./Flashcard"
 import { StudyContainer } from "./StudyContainer"
-import { useStudy } from "../useStudy"
+import { useStudy } from "./useStudy"
 import { Completed } from "./Completed"
 import { DeckWithFlashcards } from "@/types"
 import { EditFlashcardForm } from "./EditFlashcardForm"

@@ -1,5 +1,5 @@
 import { decks } from "@/tests/testData"
-import { StudyView } from "../_components/StudyView"
+import { StudyView } from "../StudyView"
 import { act, render, screen, within } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import { deleteFlashcard } from "@/actions/actions"
