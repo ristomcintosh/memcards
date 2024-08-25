@@ -1,5 +1,6 @@
 import { StudyView } from "@/features/study-page/StudyView"
 import { getDeckById } from "@/service/dbService"
+import { notFound } from "next/navigation"
 
 export default async function Study({
   params,
@@ -8,8 +9,9 @@ export default async function Study({
 }) {
   const deck = await getDeckById(params.deckId)
 
-  // TODO: Handle no deck found
-  if (!deck) return <h1>{`Deck with id:${params.deckId} not found`}</h1>
+  if (!deck) {
+    notFound()
+  }
 
   return <StudyView deck={deck} />
 }
