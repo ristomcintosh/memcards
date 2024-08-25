@@ -4,8 +4,11 @@ runs:
   using: "composite"
   steps:
     - name: Install dependencies
+      shell: bash
       run: npm ci
     - name: Set up Prisma and apply migrations
+      shell: bash
       run: npx prisma migrate deploy
     - name: build
+      shell: bash
       run: npm run build
