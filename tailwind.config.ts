@@ -9,6 +9,7 @@ const config = {
     "./src/features/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   prefix: "",
+  darkMode: "selector",
   theme: {
     container: {
       center: true,

@@ -1,11 +1,9 @@
 "use server"
-import { Deck, DeckWithCardCount } from "@/types"
-import { DeckWithFlashcards } from "@/types"
+import { Deck, DeckWithCardCount, DeckWithFlashcards } from "@/types"
 import { prisma } from "@/utils/db.server"
 
 const computeCardCount = (deck: DeckWithFlashcards) => deck.flashcards.length
 
-// TODO don't need to return flashcards[] here
 export const getDecks = async (): Promise<DeckWithCardCount[]> => {
   const decksWithFlashcards = await prisma.deck.findMany({
     include: { flashcards: true },
