@@ -1,4 +1,5 @@
 import { test, expect } from "@playwright/test"
+import AxeBuilder from "@axe-core/playwright"
 
 test.beforeEach(async ({ page }) => {
   await page.goto("/")
@@ -70,5 +71,38 @@ test.describe("Study Session Scenarios", () => {
     await expect(page.getByText("Page Not Found")).toBeVisible()
 
     await page.getByRole("link", { name: "Home" }).click()
+  })
+})
+
+test.describe("Accessibility", () => {
+  test("Main page should have no accessibility violations", async ({
+    page,
+  }) => {
+    const accessibilityScanResults = await new AxeBuilder({ page }).analyze()
+
+    console.log(accessibilityScanResults.violations)
+
+    expect(accessibilityScanResults.violations.length).toBe(0)
+  })
+
+  test("Study page should have no accessibility violations", async ({
+    page,
+  }) => {
+    await page.getByRole("link", { name: "Basic Portuguese" }).click()
+
+    const accessibilityScanResults = await new AxeBuilder({ page }).analyze()
+
+    expect(accessibilityScanResults.violations.length).toBe(0)
+  })
+
+  test("Create flashcard page should have no accessibility violations", async ({
+    page,
+  }, testInfo) => {
+    await page.getByLabel("Create").click()
+    await page.getByRole("menuitem", { name: "Create Flashcards" }).click()
+
+    const accessibilityScanResults = await new AxeBuilder({ page }).analyze()
+
+    expect(accessibilityScanResults.violations.length).toBe(0)
   })
 })
