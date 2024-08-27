@@ -1,12 +1,12 @@
 "use client"
-import { createUser } from "@/actions/createUser"
+import { createAccount } from "@/actions/auth"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { useFormState, useFormStatus } from "react-dom"
 
 export default function CreateUser() {
-  const [state, action] = useFormState(createUser, { message: "" })
+  const [state, action] = useFormState(createAccount, { message: "" })
 
   return (
     <main className="flex items-center justify-center h-full">
@@ -32,7 +32,7 @@ function SubmitButton() {
 
   return (
     <Button type="submit" aria-disabled={pending}>
-      Add
+      Submit
     </Button>
   )
 }

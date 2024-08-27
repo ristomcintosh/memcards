@@ -10,9 +10,18 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model User {
+  id       String @id @default(cuid())
+  username String @unique
+  password String
+  decks    Deck[]
+}
+
 model Deck {
   id         String      @id @default(cuid())
   name       String
+  user       User        @relation(fields: [userId], references: [id])
+  userId     String
   flashcards Flashcard[]
 }
 
@@ -20,15 +29,6 @@ model Flashcard {
   id     String @id @default(cuid())
   front  String
   back   String
-  image  Image?
   deck   Deck   @relation(fields: [deckId], references: [id], onDelete: Cascade)
   deckId String
-}
-
-model Image {
-  id          String    @id @default(cuid())
-  src         String
-  thumb       String
-  flashcard   Flashcard @relation(fields: [flashcardId], references: [id])
-  flashcardId String    @unique
 }

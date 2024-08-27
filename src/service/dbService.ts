@@ -86,3 +86,12 @@ export const updateFlashcard = async ({
     data: { front, back },
   })
 }
+
+export const createUser = async (username: string, password: string) => {
+  await prisma.user.create({
+    data: {
+      username,
+      password,
+    },
+  })
+}

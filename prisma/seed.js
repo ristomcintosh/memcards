@@ -5,10 +5,19 @@ const prisma = new PrismaClient()
 async function main() {
   await prisma.flashcard.deleteMany()
   await prisma.deck.deleteMany()
+  await prisma.user.deleteMany()
+
+  const user = await prisma.user.create({
+    data: {
+      password: "password",
+      username: "user",
+    },
+  })
 
   const deck1 = await prisma.deck.create({
     data: {
       name: "World Capitals",
+      userId: user.id,
       flashcards: {
         create: [
           { front: "What is the capital of France?", back: "Paris" },
@@ -23,6 +32,7 @@ async function main() {
   const deck2 = await prisma.deck.create({
     data: {
       name: "Basic Portuguese",
+      userId: user.id,
       flashcards: {
         create: [
           { front: "What is 'hello' in Portuguese?", back: "Olá" },
