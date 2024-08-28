@@ -37,13 +37,20 @@ describe(createAccount.name, () => {
 })
 
 describe(login.name, () => {
-  it.each([{ password: "", expected: "Password is required" }])(
-    `returns $expected when password is $password`,
-    ({ password, expected }) => {
+  it.each`
+    username      | password      | expected
+    ${""}         | ${""}         | ${"Incorrect password or Username"}
+    ${"ab"}       | ${"password"} | ${"Incorrect password or Username"}
+    ${"username"} | ${"    "}     | ${"Incorrect password or Username"}
+  `(
+    `Validation - returns $expected when username is $username and password is $password`,
+    async ({ username, password, expected }) => {
       const payload = new FormData()
       payload.set("password", password)
+      payload.set("username", username)
 
-      expect(login({ message: "" }, payload)).toEqual({
+      const result = await login({ message: "" }, payload)
+      expect(result).toEqual({
         message: expected,
       })
     }

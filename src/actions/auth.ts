@@ -1,7 +1,7 @@
 "use server"
 import { z } from "zod"
 import bcrypt from "bcrypt"
-import { createUser as saveUser } from "@/service/dbService"
+import { getUserByUsername, createUser } from "@/service/dbService"
 
 const CreateUserSchema = z.object({
   username: z.string().min(3).max(20),
@@ -29,7 +29,7 @@ export const createAccount = async (
   const hashedPassword = await bcrypt.hash(password, 10)
 
   try {
-    await saveUser(username, hashedPassword)
+    await createUser(username, hashedPassword)
     return { message: "User created" }
   } catch (error) {
     return { message: "Error creating user" }
@@ -41,11 +41,33 @@ export type LoginActionState = {
 }
 
 const LoginSchema = z.object({
-  password: z.string({ required_error: "Password is required" }),
+  username: z.string().trim().min(1).min(3).max(20),
+  password: z.string().trim().min(1),
 })
 
 export const login = async (state: LoginActionState, payload: FormData) => {
   const validation = LoginSchema.safeParse({
     password: payload.get("password"),
+    username: payload.get("username"),
   })
+
+  if (!validation.success) {
+    return { message: "Incorrect password or Username" }
+  }
+
+  const { username, password } = validation.data
+
+  const user = await getUserByUsername(username)
+
+  if (!user) {
+    return { message: "Incorrect password or Username" }
+  }
+
+  const isValidPassword = await bcrypt.compare(password, user.password)
+
+  if (!isValidPassword) {
+    return { message: "Incorrect password or Username" }
+  }
+
+  return { message: "Login successful" }
 }
