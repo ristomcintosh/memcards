@@ -14,6 +14,7 @@ const config = {
   setupFilesAfterEnv: ["<rootDir>/jest.setup.ts"],
   moduleNameMapper: {
     "^@/(.*)$": "<rootDir>/src/$1",
+    "^jose$": require.resolve("jose"),
   },
   testPathIgnorePatterns: ["<rootDir>/e2e/"],
   testMatch: ["**/__tests__/**/*.[jt]s?(x)", "**/?(*.)+(test).[jt]s?(x)"],

@@ -1,3 +1,6 @@
+/**
+ * @jest-environment node
+ */
 import { createAccount, login } from "../auth"
 import { createUser } from "@/service/dbService"
 
@@ -9,11 +12,9 @@ describe(createAccount.name, () => {
     ${"a"}        | ${"a"}        | ${"Invalid input"}
     ${"a"}        | ${"password"} | ${"Invalid input"}
     ${"username"} | ${"a"}        | ${"Invalid input"}
-    ${"username"} | ${"password"} | ${"User created"}
   `(
     "Validation - returns $expected when username is $username and password is $password",
     async ({ username, password, expected }) => {
-      jest.mocked(createUser).mockResolvedValue(undefined)
       const payload = new FormData()
       payload.set("username", username)
       payload.set("password", password)
@@ -26,7 +27,6 @@ describe(createAccount.name, () => {
   )
 
   it("should not save plain text password", async () => {
-    jest.mocked(createUser).mockResolvedValue(undefined)
     const payload = new FormData()
     payload.set("username", "username")
     payload.set("password", "password")

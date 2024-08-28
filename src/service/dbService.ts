@@ -1,11 +1,15 @@
 "use server"
+import "server-only"
 import { Deck, DeckWithCardCount, DeckWithFlashcards } from "@/types"
 import { prisma } from "@/utils/db.server"
 
 const computeCardCount = (deck: DeckWithFlashcards) => deck.flashcards.length
 
-export const getDecks = async (): Promise<DeckWithCardCount[]> => {
+export const getDecks = async (
+  userId: string
+): Promise<DeckWithCardCount[]> => {
   const decksWithFlashcards = await prisma.deck.findMany({
+    where: { userId },
     include: { flashcards: true },
   })
   return decksWithFlashcards.map((deck) => ({
@@ -15,17 +19,18 @@ export const getDecks = async (): Promise<DeckWithCardCount[]> => {
 }
 
 export const getDeckById = async (
-  id: string
+  deckId: string,
+  userId: string
 ): Promise<DeckWithFlashcards | null> => {
   return await prisma.deck.findUnique({
-    where: { id },
+    where: { id: deckId, userId },
     include: { flashcards: true },
   })
 }
 
-export const deleteDeck = async (id: string) => {
+export const deleteDeck = async (deckId: string, userId: string) => {
   await prisma.deck.delete({
-    where: { id },
+    where: { id: deckId, userId },
     include: { flashcards: true },
   })
 }
@@ -38,10 +43,11 @@ export const updateDeck = async (deck: Partial<Deck>) => {
   })
 }
 
-export const createDeck = async (deckName: string) => {
+export const createDeck = async (deckName: string, userId: string) => {
   await prisma.deck.create({
     data: {
       name: deckName,
+      userId,
     },
   })
 }
@@ -88,7 +94,7 @@ export const updateFlashcard = async ({
 }
 
 export const createUser = async (username: string, password: string) => {
-  await prisma.user.create({
+  return await prisma.user.create({
     data: {
       username,
       password,

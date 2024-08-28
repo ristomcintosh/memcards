@@ -1,10 +1,11 @@
 import { render, screen } from "@testing-library/react"
 import Study from "./page"
-import { getDeckById } from "@/service/dbService"
 import { DeckWithFlashcards } from "@/types"
+import { getDeckById } from "@/actions/actions"
 
 const testDeck: DeckWithFlashcards = {
   id: "deck-id",
+  userId: "user-id",
   name: "Test Deck",
   flashcards: [
     {
@@ -16,7 +17,7 @@ const testDeck: DeckWithFlashcards = {
   ],
 }
 
-jest.mock("@/service/dbService")
+jest.mock("@/actions/actions")
 
 describe("Study Page", () => {
   it("renders", async () => {

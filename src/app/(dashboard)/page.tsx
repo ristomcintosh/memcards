@@ -1,6 +1,6 @@
 import { DeckList } from "@/features/home-page/DeckList"
 import { CreateNew } from "@/features/home-page/CreateNew"
-import { getDecks } from "@/service/dbService"
+import { getDecks } from "@/actions/actions"
 
 export default async function Home() {
   const deckList = await getDecks()

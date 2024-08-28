@@ -2,6 +2,8 @@
 import { z } from "zod"
 import bcrypt from "bcrypt"
 import { getUserByUsername, createUser } from "@/service/dbService"
+import { createSession } from "@/service/session"
+import { redirect } from "next/navigation"
 
 const CreateUserSchema = z.object({
   username: z.string().min(3).max(20),
@@ -29,8 +31,10 @@ export const createAccount = async (
   const hashedPassword = await bcrypt.hash(password, 10)
 
   try {
-    await createUser(username, hashedPassword)
-    return { message: "User created" }
+    const user = await createUser(username, hashedPassword)
+    await createSession(user.id)
+
+    redirect("/")
   } catch (error) {
     return { message: "Error creating user" }
   }
@@ -69,5 +73,7 @@ export const login = async (state: LoginActionState, payload: FormData) => {
     return { message: "Incorrect password or Username" }
   }
 
-  return { message: "Login successful" }
+  await createSession(user.id)
+
+  redirect("/")
 }

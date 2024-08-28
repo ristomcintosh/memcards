@@ -2,20 +2,54 @@
 import { revalidatePath } from "next/cache"
 import * as DBService from "@/service/dbService"
 import { Deck, Flashcard } from "@/types"
+import { verifySession } from "@/utils/verifySession"
+
+export const getDecks = async () => {
+  const session = await verifySession()
+  if (!session.isAuth) {
+    return []
+  }
+
+  return DBService.getDecks(session.userId)
+}
+
+export const getDeckById = async (deckId: Deck["id"]) => {
+  const session = await verifySession()
+  if (!session.isAuth) {
+    return null
+  }
+
+  return DBService.getDeckById(deckId, session.userId)
+}
 
 export const updateDeck = async (id: Deck["id"], deckName: string) => {
+  const session = await verifySession()
+  if (!session.isAuth) {
+    return null
+  }
+
   await DBService.updateDeck({ id, name: deckName })
 
   revalidatePath("/")
 }
 
-export const deleteDeck = async (id: Deck["id"]) => {
-  await DBService.deleteDeck(id)
+export const deleteDeck = async (deckId: Deck["id"]) => {
+  const session = await verifySession()
+  if (!session.isAuth) {
+    return
+  }
+
+  await DBService.deleteDeck(deckId, session.userId)
   revalidatePath("/")
 }
 
 export const createDeck = async (deckName: string) => {
-  await DBService.createDeck(deckName)
+  const session = await verifySession()
+  if (!session.isAuth) {
+    return
+  }
+
+  await DBService.createDeck(deckName, session.userId)
 
   revalidatePath("/")
 }
@@ -23,11 +57,21 @@ export const createDeck = async (deckName: string) => {
 export const createFlashcard = async (
   newFlashcard: Pick<Flashcard, "deckId" | "back" | "front">
 ) => {
+  const session = await verifySession()
+  if (!session.isAuth) {
+    return
+  }
+
   await DBService.createFlashcard(newFlashcard)
   revalidatePath("/")
 }
 
 export const deleteFlashcard = async (id: string) => {
+  const session = await verifySession()
+  if (!session.isAuth) {
+    return
+  }
+
   await DBService.deleteFlashcard(id)
   revalidatePath("/")
 }
@@ -41,6 +85,11 @@ export const updateFlashcard = async ({
   front: string
   back: string
 }) => {
+  const session = await verifySession()
+  if (!session.isAuth) {
+    return
+  }
+
   await DBService.updateFlashcard({
     id,
     front: front.toString(),
