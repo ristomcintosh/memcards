@@ -1,8 +1,8 @@
 import { render, screen } from "@testing-library/react"
 import CreateFlashcard from "./page"
-import { getDecks } from "@/service/dbService"
+import { getDecks } from "@/actions/actions"
 
-jest.mock("@/service/dbService")
+jest.mock("@/actions/actions")
 
 const mockUseSearchParams = jest.fn()
 jest.mock("next/navigation", () => ({
@@ -11,10 +11,11 @@ jest.mock("next/navigation", () => ({
 }))
 
 describe(CreateFlashcard.name, () => {
+  const testDecks = [
+    { id: "1", name: "deck 1", userId: "some-id", cardCount: 0 },
+  ]
   it("renders", async () => {
-    jest
-      .mocked(getDecks)
-      .mockResolvedValue([{ id: "1", name: "deck 1", cardCount: 0 }])
+    jest.mocked(getDecks).mockResolvedValue(testDecks)
     mockUseSearchParams.mockReturnValue(new URLSearchParams())
     render(await CreateFlashcard())
 
@@ -25,9 +26,7 @@ describe(CreateFlashcard.name, () => {
   })
 
   it("renders with deck 1 selected when deckId=1 is in query params", async () => {
-    jest
-      .mocked(getDecks)
-      .mockResolvedValue([{ id: "1", name: "deck 1", cardCount: 0 }])
+    jest.mocked(getDecks).mockResolvedValue(testDecks)
     mockUseSearchParams.mockReturnValue(new URLSearchParams("deckId=1"))
     render(await CreateFlashcard())
 
@@ -35,9 +34,7 @@ describe(CreateFlashcard.name, () => {
   })
 
   it("continues to show placeholder text if deckId form query params is not in deck list", async () => {
-    jest
-      .mocked(getDecks)
-      .mockResolvedValue([{ id: "1", name: "deck 1", cardCount: 0 }])
+    jest.mocked(getDecks).mockResolvedValue(testDecks)
     mockUseSearchParams.mockReturnValue(new URLSearchParams("deckId=bad-id"))
     render(await CreateFlashcard())
 

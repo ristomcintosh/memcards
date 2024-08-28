@@ -8,6 +8,7 @@ jest.mock("@/actions/actions")
 const testDeck: DeckWithFlashcards = {
   id: "1",
   name: "Test Deck",
+  userId: "user-id",
   flashcards: [
     {
       id: "1",

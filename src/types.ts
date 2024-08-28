@@ -1,5 +1,5 @@
-import { Deck, Flashcard, Image } from "@prisma/client"
-export type { Deck, Flashcard, Image }
+import { Deck, Flashcard } from "@prisma/client"
+export type { Deck, Flashcard }
 
 export type DeckWithFlashcards = Deck & {
   flashcards: Flashcard[]

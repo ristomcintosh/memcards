@@ -1,4 +1,4 @@
-import { getDecks } from "@/service/dbService"
+import { getDecks } from "@/actions/actions"
 import { CreateFlashcardForm } from "@/features/create-flashcard/CreateFlashcardForm"
 import { Suspense } from "react"
 

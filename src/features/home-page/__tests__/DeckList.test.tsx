@@ -9,6 +9,7 @@ describe(DeckList.name, () => {
   const testDeckList = [
     {
       id: "some-id",
+      userId: "user-id",
       name: "Deck 1",
       cardCount: 3,
     },

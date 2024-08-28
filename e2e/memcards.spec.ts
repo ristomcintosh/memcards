@@ -80,8 +80,6 @@ test.describe("Accessibility", () => {
   }) => {
     const accessibilityScanResults = await new AxeBuilder({ page }).analyze()
 
-    console.log(accessibilityScanResults.violations)
-
     expect(accessibilityScanResults.violations.length).toBe(0)
   })
 
