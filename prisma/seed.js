@@ -1,4 +1,6 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 const { PrismaClient } = require("@prisma/client")
+const bcrypt = require("bcrypt")
 
 const prisma = new PrismaClient()
 
@@ -9,7 +11,7 @@ async function main() {
 
   const user = await prisma.user.create({
     data: {
-      password: "password",
+      password: await bcrypt.hash("password", 10),
       username: "user",
     },
   })

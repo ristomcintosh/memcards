@@ -12,6 +12,7 @@ export class HomePage {
     await this.page.getByRole("menuitem", { name: "Create Deck" }).click()
     await this.page.getByLabel("Deck Name:").fill(deckName)
     await this.page.getByRole("button", { name: "Submit" }).click()
+    await this.page.getByText(deckName).waitFor({ state: "visible" })
   }
 
   async deleteDeck(deckName: string) {

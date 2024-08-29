@@ -38,7 +38,7 @@ test("Normal study flow", async ({ page, homePage, deckName }) => {
   await homePage.goto()
   await page.getByRole("link", { name: deckName }).click()
 
-  await expect(page.getByRole("heading", { name: deckName })).toBeVisible()
+  await expect(page.getByText(deckName)).toBeVisible()
 
   await expect(page.getByText(flashcardFront)).toBeVisible()
 

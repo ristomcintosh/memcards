@@ -59,7 +59,7 @@ const Header = ({
   deleteCard: DeleteCard
   editCard: EditCard
 }) => (
-  <section className="flex items-center justify-between p-4 bg-zinc-50 dark:bg-zinc-700 gap-4 shadow">
+  <header className="flex items-center justify-between p-4 bg-zinc-50 dark:bg-zinc-700 gap-4 shadow">
     <DropdownMenu modal={false}>
       <DropdownMenuTrigger
         aria-label="Flashcard Options"
@@ -81,13 +81,14 @@ const Header = ({
     <nav>
       <Link href="/">Home</Link>
     </nav>
-  </section>
+  </header>
 )
 
 const ProgressBar = ({ progress }: { progress: number }) => (
   <div className="relative flex-1 h-3 max-w-lg overflow-hidden bg-zinc-300 dark:bg-zinc-400 rounded-lg shadow-inner">
     <div
       role="progressbar"
+      aria-label="Progress"
       aria-valuenow={progress}
       aria-valuemin={0}
       aria-valuemax={100}
@@ -106,7 +107,7 @@ const Footer = ({
   onFlip: OnFlip
   onNextCard: OnNextCard
 }) => (
-  <section className="py-3 dark:bg-zinc-700 dark:border-t-zinc-400/80 bg-zinc-50 border-t">
+  <footer className="py-3 dark:bg-zinc-700 dark:border-t-zinc-400/80 bg-zinc-50 border-t">
     <div className="flex justify-around max-w-md mx-auto">
       <Button size="lg" variant="outline" onClick={onFlip}>
         Flip
@@ -115,5 +116,5 @@ const Footer = ({
         Next
       </Button>
     </div>
-  </section>
+  </footer>
 )

@@ -36,17 +36,30 @@ export const test = baseTest.extend<
       await page.locator('input[name="password"]').fill(account.password)
       await page.getByRole("button", { name: "Login" }).click()
 
-      if (await page.getByText("Incorrect password or Username").isVisible()) {
+      // Wait for either the success or error message
+      const errorLocator = page.getByText("Incorrect password or Username")
+      const createButtonLocator = page.getByLabel("Create")
+
+      const isLoginUnsuccessful = await errorLocator.isVisible()
+
+      if (isLoginUnsuccessful) {
+        console.log(
+          `Login unsuccessful for user ${account.username}, creating account...`
+        )
         await page.goto("http://127.0.0.1:3000/create-user")
         await page.getByLabel("Username").fill(account.username)
         await page.locator('input[name="password"]').fill(account.password)
         await page.getByRole("button", { name: "Submit" }).click()
+
+        // Explicitly wait for the "Create" button to appear
+        await expect(createButtonLocator).toBeVisible()
+      } else {
+        // Wait for the "Create" button to confirm successful login
+        await expect(createButtonLocator).toBeVisible()
+        console.log(`Login successful for user ${account.username}`)
       }
 
-      await expect(page.getByLabel("Create")).toBeVisible()
-
-      // End of authentication steps.
-
+      // Save storage state after successful login or account creation
       await page.context().storageState({ path: fileName })
       await page.close()
       await use(fileName)
