@@ -13,5 +13,6 @@ export class CreateFlashcardPage {
     await this.page.getByLabel("Front").fill(front)
     await this.page.getByLabel("Back").fill(back)
     await this.page.getByRole("button", { name: "Create" }).click()
+    await this.page.getByText(back).waitFor({ state: "detached" })
   }
 }

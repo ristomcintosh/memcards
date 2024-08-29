@@ -35,6 +35,8 @@ export const CreateFlashcardForm = ({ decks }: CreateFlashcardFormProps) => {
   const form = useForm<CreateFlashcardFormValues>({
     defaultValues: {
       deckId: defaultDeckId,
+      front: "",
+      back: "",
     },
   })
 
@@ -106,5 +108,8 @@ export const CreateFlashcardForm = ({ decks }: CreateFlashcardFormProps) => {
 }
 
 function getDeckIdFromQueryParam(deckId: string | null, decks: Deck[]) {
-  return deckId ? decks.find((deck) => deck.id === deckId)?.id : ""
+  if (deckId) {
+    return decks.find((deck) => deck.id === deckId)?.id ?? ""
+  }
+  return ""
 }

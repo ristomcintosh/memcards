@@ -10,5 +10,9 @@ test("Create flashcard page should have no accessibility violations", async ({
 
   const accessibilityScanResults = await new AxeBuilder({ page }).analyze()
 
+  if (accessibilityScanResults.violations.length > 0) {
+    console.log(accessibilityScanResults.violations)
+  }
+
   expect(accessibilityScanResults.violations.length).toBe(0)
 })

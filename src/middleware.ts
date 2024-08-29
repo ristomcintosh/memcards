@@ -6,7 +6,6 @@ const protectedRoutes = ["/", "/study", "/create-flashcard"]
 const publicRoutes = ["/login", "/create-user"]
 
 export default async function middleware(req: NextRequest) {
-  console.log("Middleware")
   const path = req.nextUrl.pathname
   const isProtectedRoute = protectedRoutes.includes(path)
   const isPublicRoute = publicRoutes.includes(path)
@@ -19,7 +18,6 @@ export default async function middleware(req: NextRequest) {
   }
 
   if (isPublicRoute && session?.userId) {
-    console.log("Redirecting to /")
     return NextResponse.redirect(new URL("/", req.nextUrl))
   }
 
