@@ -1,10 +1,10 @@
 import "server-only"
-import { decrypt } from "@/service/session"
+import { decrypt, SESSION_COOKIE } from "@/service/session"
 import { cookies } from "next/headers"
 import { redirect } from "next/navigation"
 
 export const verifySession = async () => {
-  const cookie = cookies().get("session")?.value
+  const cookie = cookies().get(SESSION_COOKIE)?.value
   const session = await decrypt(cookie)
 
   if (!session?.userId) {
