@@ -3,11 +3,13 @@ import { DarkModeToggle } from "./DarkModeToggle"
 
 export function NavBar() {
   return (
-    <header className="flex justify-between px-4 py-4 text-lg dark:bg-zinc-700 bg-zinc-50 shadow">
-      <nav>
-        <Link href="/">Memcards</Link>
-      </nav>
-      <DarkModeToggle />
+    <header className="dark:bg-zinc-700 bg-zinc-50 shadow">
+      <div className="flex justify-between px-4 py-4 text-lg max-w-screen-xl mx-auto">
+        <nav>
+          <Link href="/">Memcards</Link>
+        </nav>
+        <DarkModeToggle />
+      </div>
     </header>
   )
 }

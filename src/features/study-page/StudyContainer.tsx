@@ -59,28 +59,30 @@ const Header = ({
   deleteCard: DeleteCard
   editCard: EditCard
 }) => (
-  <header className="flex items-center justify-between p-4 bg-zinc-50 dark:bg-zinc-700 gap-4 shadow">
-    <DropdownMenu modal={false}>
-      <DropdownMenuTrigger
-        aria-label="Flashcard Options"
-        className="w-8 h-8 p-1 hover:bg-zinc-300 hover:rounded-full"
-      >
-        <VerticalDots />
-      </DropdownMenuTrigger>
-      <DropdownMenuContent>
-        <DropdownMenuItem onSelect={() => editCard()}>
-          <Edit />
-        </DropdownMenuItem>
-        <DropdownMenuItem onSelect={() => deleteCard()}>
-          <Delete />
-        </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
+  <header className=" bg-zinc-50 dark:bg-zinc-700  shadow">
+    <div className="flex items-center justify-between p-4 gap-4 max-w-screen-xl mx-auto">
+      <DropdownMenu modal={false}>
+        <DropdownMenuTrigger
+          aria-label="Flashcard Options"
+          className="w-8 h-8 p-1 hover:bg-zinc-300 hover:rounded-full"
+        >
+          <VerticalDots />
+        </DropdownMenuTrigger>
+        <DropdownMenuContent>
+          <DropdownMenuItem onSelect={() => editCard()}>
+            <Edit />
+          </DropdownMenuItem>
+          <DropdownMenuItem onSelect={() => deleteCard()}>
+            <Delete />
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
 
-    <ProgressBar progress={progress} />
-    <nav>
-      <Link href="/">Home</Link>
-    </nav>
+      <ProgressBar progress={progress} />
+      <nav>
+        <Link href="/">Home</Link>
+      </nav>
+    </div>
   </header>
 )
 
