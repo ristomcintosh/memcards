@@ -7,27 +7,3 @@
     @apply text-brand-500 hover:underline;
   }
 }
-
-@layer components {
-  .field-wrapper label {
-    margin-bottom: theme("spacing.2");
-    display: inline-block;
-    font-size: theme("spacing.4");
-  }
-
-  .field-wrapper {
-    margin-bottom: theme("spacing.6");
-  }
-
-  .field-wrapper:last-of-type {
-    margin-bottom: 0;
-  }
-
-  .field-wrapper:has(p[id$="form-error"]) {
-    @apply border-l-4 border-red-400 pl-2;
-  }
-
-  .field-wrapper p[id$="form-error"] {
-    @apply dark:text-red-400 mt-1;
-  }
-}

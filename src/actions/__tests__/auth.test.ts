@@ -50,11 +50,8 @@ describe(login.name, () => {
   `(
     `Validation - returns $expected when username is $username and password is $password`,
     async ({ username, password, expected }) => {
-      const payload = new FormData()
-      payload.set("password", password)
-      payload.set("username", username)
+      const result = await login({ username, password })
 
-      const result = await login({ message: "" }, payload)
       expect(result).toEqual(
         expect.objectContaining({
           message: expected,
@@ -64,11 +61,8 @@ describe(login.name, () => {
   )
 
   it("returns list of invalid inputs", async () => {
-    const payload = new FormData()
-    payload.set("username", "")
-    payload.set("password", "")
+    const result = await login({ username: "", password: "" })
 
-    const result = await login({ message: "" }, payload)
     expect(result).toEqual({
       message: "Failed to save because of 2 invalid field(s).",
       formErrors: {
@@ -80,11 +74,9 @@ describe(login.name, () => {
 
   it("returns Incorrect password or Username when user does not exist", async () => {
     jest.mocked(getUserByUsername).mockResolvedValue(null)
-    const payload = new FormData()
-    payload.set("username", "username")
-    payload.set("password", "password")
 
-    const result = await login({ message: "" }, payload)
+    const result = await login({ username: "username", password: "password" })
+
     expect(result).toEqual({
       message: "Incorrect password or Username",
     })
@@ -98,11 +90,8 @@ describe(login.name, () => {
     })
     mockedBcryptCompare.mockResolvedValue(false)
 
-    const payload = new FormData()
-    payload.set("username", "username")
-    payload.set("password", "incorrect")
+    const result = await login({ username: "username", password: "incorrect" })
 
-    const result = await login({ message: "" }, payload)
     expect(result).toEqual({
       message: "Incorrect password or Username",
     })

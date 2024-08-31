@@ -49,14 +49,15 @@ export type LoginActionState = {
   }
 }
 
+export type LoginPayload = {
+  username: string
+  password: string
+}
+
 export const login = async (
-  state: LoginActionState,
-  payload: FormData
+  payload: LoginPayload
 ): Promise<LoginActionState> => {
-  const validation = loginSchema.safeParse({
-    password: payload.get("password"),
-    username: payload.get("username"),
-  })
+  const validation = loginSchema.safeParse(payload)
 
   if (!validation.success) {
     const numberOfErrors = Object.keys(
