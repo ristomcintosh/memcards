@@ -4,6 +4,7 @@ import bcrypt from "bcrypt"
 import { getUserByUsername, createUser } from "@/service/dbService"
 import { createSession } from "@/service/session"
 import { redirect } from "next/navigation"
+import { loginSchema } from "./auth.schma"
 
 const CreateUserSchema = z.object({
   username: z.string().min(3).max(20),
@@ -42,21 +43,29 @@ export const createAccount = async (
 
 export type LoginActionState = {
   message: string
+  formErrors?: {
+    username?: string[]
+    password?: string[]
+  }
 }
 
-const LoginSchema = z.object({
-  username: z.string().trim().min(1).min(3).max(20),
-  password: z.string().trim().min(1),
-})
-
-export const login = async (state: LoginActionState, payload: FormData) => {
-  const validation = LoginSchema.safeParse({
+export const login = async (
+  state: LoginActionState,
+  payload: FormData
+): Promise<LoginActionState> => {
+  const validation = loginSchema.safeParse({
     password: payload.get("password"),
     username: payload.get("username"),
   })
 
   if (!validation.success) {
-    return { message: "Incorrect password or Username" }
+    const numberOfErrors = Object.keys(
+      validation.error.formErrors.fieldErrors
+    ).length
+    return {
+      message: `Failed to save because of ${numberOfErrors} invalid field(s).`,
+      formErrors: validation.error.formErrors.fieldErrors,
+    }
   }
 
   const { username, password } = validation.data
