@@ -14,39 +14,60 @@ jest.mock("bcrypt", () => ({
 
 describe(createAccount.name, () => {
   it.each`
-    username      | password      | expected
-    ${"a"}        | ${"a"}        | ${"Invalid input"}
-    ${"a"}        | ${"password"} | ${"Invalid input"}
-    ${"username"} | ${"a"}        | ${"Invalid input"}
+    username      | password       | email                | expected
+    ${""}         | ${""}          | ${""}                | ${"Failed to save because of 3 invalid field(s)."}
+    ${"username"} | ${"    "}      | ${"email@email.com"} | ${"Failed to save because of 1 invalid field(s)."}
+    ${"username"} | ${"password1"} | ${""}                | ${"Failed to save because of 1 invalid field(s)."}
   `(
     "Validation - returns $expected when username is $username and password is $password",
-    async ({ username, password, expected }) => {
-      const payload = new FormData()
-      payload.set("username", username)
-      payload.set("password", password)
+    async ({ username, password, email, expected }) => {
+      const result = await createAccount({ username, password, email })
 
-      const result = await createAccount({ message: "" }, payload)
-      expect(result).toEqual({
-        message: expected,
-      })
+      expect(result).toEqual(
+        expect.objectContaining({
+          message: expected,
+        })
+      )
     }
   )
 
   it("should not save plain text password", async () => {
-    const payload = new FormData()
-    payload.set("username", "username")
-    payload.set("password", "password")
+    await createAccount({
+      email: "email",
+      username: "username",
+      password: "password",
+    })
 
-    await createAccount({ message: "" }, payload)
     expect(createUser).not.toHaveBeenCalledWith("username", "password")
+  })
+
+  it("returns list of invalid fields", async () => {
+    const result = await createAccount({
+      email: "",
+      username: "",
+      password: "",
+    })
+
+    expect(result).toEqual({
+      message: "Failed to save because of 3 invalid field(s).",
+      errors: {
+        email: ["Please enter a valid email."],
+        username: ["Username must be at least 2 characters long."],
+        password: [
+          "Must be at least 8 characters long",
+          "Should contain at least one letter.",
+          "Should contain at least one number.",
+        ],
+      },
+    })
   })
 })
 
 describe(login.name, () => {
   it.each`
     username      | password  | expected
-    ${""}         | ${""}     | ${"Failed to save because of 2 invalid field(s)."}
-    ${"username"} | ${"    "} | ${"Failed to save because of 1 invalid field(s)."}
+    ${""}         | ${""}     | ${"Failed because of 2 invalid field(s)."}
+    ${"username"} | ${"    "} | ${"Failed because of 1 invalid field(s)."}
   `(
     `Validation - returns $expected when username is $username and password is $password`,
     async ({ username, password, expected }) => {
@@ -64,7 +85,7 @@ describe(login.name, () => {
     const result = await login({ username: "", password: "" })
 
     expect(result).toEqual({
-      message: "Failed to save because of 2 invalid field(s).",
+      message: "Failed because of 2 invalid field(s).",
       formErrors: {
         username: ["Username is required"],
         password: ["Password is required"],

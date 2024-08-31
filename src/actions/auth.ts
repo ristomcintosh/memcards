@@ -1,31 +1,38 @@
 "use server"
-import { z } from "zod"
 import bcrypt from "bcrypt"
 import { getUserByUsername, createUser } from "@/service/dbService"
 import { createSession } from "@/service/session"
 import { redirect } from "next/navigation"
-import { loginSchema } from "./auth.schma"
+import { CreateUserSchema, loginSchema } from "./auth.schma"
 
-const CreateUserSchema = z.object({
-  username: z.string().min(3).max(20),
-  password: z.string().min(8).max(40),
-})
-
-export type ActionState = {
+type CreateAccountResult = {
   message: string
+  errors?: {
+    username?: string[]
+    password?: string[]
+    email?: string[]
+  }
+}
+
+export type CreateAccountPayload = {
+  email: string
+  username: string
+  password: string
 }
 
 export const createAccount = async (
-  state: ActionState,
-  payload: FormData
-): Promise<ActionState> => {
-  const validation = CreateUserSchema.safeParse({
-    username: payload.get("username"),
-    password: payload.get("password"),
-  })
+  payload: CreateAccountPayload
+): Promise<CreateAccountResult> => {
+  const validation = CreateUserSchema.safeParse(payload)
 
   if (!validation.success) {
-    return { message: "Invalid input" }
+    const numberOfErrors = Object.keys(
+      validation.error.formErrors.fieldErrors
+    ).length
+    return {
+      message: `Failed to save because of ${numberOfErrors} invalid field(s).`,
+      errors: validation.error.formErrors.fieldErrors,
+    }
   }
 
   const { username, password } = validation.data
@@ -41,7 +48,7 @@ export const createAccount = async (
   }
 }
 
-export type LoginActionState = {
+type LoginResult = {
   message: string
   formErrors?: {
     username?: string[]
@@ -54,9 +61,7 @@ export type LoginPayload = {
   password: string
 }
 
-export const login = async (
-  payload: LoginPayload
-): Promise<LoginActionState> => {
+export const login = async (payload: LoginPayload): Promise<LoginResult> => {
   const validation = loginSchema.safeParse(payload)
 
   if (!validation.success) {
@@ -64,7 +69,7 @@ export const login = async (
       validation.error.formErrors.fieldErrors
     ).length
     return {
-      message: `Failed to save because of ${numberOfErrors} invalid field(s).`,
+      message: `Failed because of ${numberOfErrors} invalid field(s).`,
       formErrors: validation.error.formErrors.fieldErrors,
     }
   }
