@@ -101,7 +101,9 @@ export const CreateFlashcardForm = ({ decks }: CreateFlashcardFormProps) => {
             </FormItem>
           )}
         />
-        <Button type="submit">Create</Button>
+        <Button className="mt-7" type="submit">
+          Create
+        </Button>
       </form>
     </Form>
   )

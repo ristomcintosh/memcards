@@ -50,10 +50,16 @@ export const LinkWithContextMenu = ({
     <ContextMenu modal={false}>
       <ContextMenuTrigger asChild>
         <div className="flex-grow flex justify-between">
-          <Link className="flex-grow" href={`/study/${deck.id}`}>
+          <Link
+            className="flex-grow text-inherit hover:no-underline"
+            aria-describedby="card-count"
+            href={`/study/${deck.id}`}
+          >
             {deck.name}
           </Link>
-          <p aria-label={`card count ${deck.cardCount}`}>{deck.cardCount}</p>
+          <p id="card-count" aria-label={`card count ${deck.cardCount}`}>
+            {deck.cardCount}
+          </p>
         </div>
       </ContextMenuTrigger>
       <ContextMenuContent>

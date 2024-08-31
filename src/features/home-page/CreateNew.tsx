@@ -58,7 +58,12 @@ const CreateNewMenu = ({
         Create Deck
       </DropdownMenuItem>
       <DropdownMenuItem asChild>
-        <Link href="/create-flashcard">Create Flashcards</Link>
+        <Link
+          className="text-inherit hover:no-underline"
+          href="/create-flashcard"
+        >
+          Create Flashcards
+        </Link>
       </DropdownMenuItem>
     </DropdownMenuContent>
   </DropdownMenu>

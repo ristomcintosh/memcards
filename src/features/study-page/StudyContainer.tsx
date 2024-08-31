@@ -80,7 +80,9 @@ const Header = ({
 
       <ProgressBar progress={progress} />
       <nav>
-        <Link href="/">Home</Link>
+        <Link href="/" className="text-inherit hover:no-underline">
+          Home
+        </Link>
       </nav>
     </div>
   </header>

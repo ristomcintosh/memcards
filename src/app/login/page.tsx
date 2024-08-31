@@ -61,7 +61,7 @@ export default function LoginPage() {
               name="username"
               rules={{ required: "Username is required" }}
               render={({ field }) => (
-                <FormItem className="mb-6">
+                <FormItem>
                   <FormLabel>Username</FormLabel>
                   <FormControl>
                     <Input {...field} />
