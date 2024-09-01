@@ -1,10 +1,6 @@
 "use client"
-import {
-  createAccount,
-  CreateAccountPayload,
-  CreateAccountResult,
-} from "@/actions/auth"
-import { CreateUserSchema } from "@/actions/auth.schma"
+import { createAccount, CreateAccountResult } from "@/actions/auth"
+import { CreateUserSchema } from "@/actions/auth.schema"
 import { Button } from "@/components/ui/button"
 import {
   Form,
@@ -23,16 +19,21 @@ import { SubmitErrorHandler, useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 
 export default function LoginPage() {
-  const form = useForm<CreateAccountPayload>({
+  const form = useForm<CreateUserSchema>({
     resolver: zodResolver(CreateUserSchema),
     reValidateMode: "onBlur",
     shouldFocusError: false,
+    defaultValues: {
+      email: "",
+      username: "",
+      password: "",
+    },
   })
 
   const [formMessage, setFormMessage] = useState("")
 
-  const handleSubmit = (event: CreateAccountPayload) => {
-    createAccount(event).then((result) => {
+  const handleSubmit = async (event: CreateUserSchema) => {
+    return createAccount(event).then((result) => {
       if (result?.errors) {
         Object.entries(result.errors).forEach(([field, errors]) => {
           form.setError(field as keyof CreateAccountResult["errors"], {
@@ -46,9 +47,7 @@ export default function LoginPage() {
     })
   }
 
-  const handleInvalid: SubmitErrorHandler<CreateAccountPayload> = (
-    fieldErrors
-  ) => {
+  const handleInvalid: SubmitErrorHandler<CreateUserSchema> = (fieldErrors) => {
     const invalidFieldsCount = Object.keys(fieldErrors).length
     setFormMessage(
       `Failed to save because of ${invalidFieldsCount} invalid field(s).`
@@ -123,7 +122,7 @@ export default function LoginPage() {
               )}
             />
             <Button className="mt-7" size="lg" type="submit">
-              Sign up
+              {form.formState.isSubmitting ? "Loading..." : "Sign up"}
             </Button>
           </form>
         </Form>

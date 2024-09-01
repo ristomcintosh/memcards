@@ -1,5 +1,6 @@
 "use client"
-import { login, LoginPayload } from "@/actions/auth"
+import { login } from "@/actions/auth"
+import { LoginSchema } from "@/actions/auth.schema"
 import { Button } from "@/components/ui/button"
 import {
   Form,
@@ -16,21 +17,27 @@ import { useState } from "react"
 import { SubmitErrorHandler, useForm } from "react-hook-form"
 
 export default function LoginPage() {
-  const form = useForm<LoginPayload>({
+  const form = useForm<LoginSchema>({
     reValidateMode: "onBlur",
     shouldFocusError: false,
+    defaultValues: {
+      username: "",
+      password: "",
+    },
   })
 
   const [formMessage, setFormMessage] = useState("")
 
-  const handleSubmit = (event: LoginPayload) => {
-    login(event).then((result) => {
-      form.setError("password", { message: result?.message })
-      setFormMessage(result?.message)
+  const handleSubmit = async (event: LoginSchema) => {
+    return login(event).then((result) => {
+      if (result?.message) {
+        setFormMessage(result?.message)
+        form.setError("password", { message: result?.message })
+      }
     })
   }
 
-  const handleInvalid: SubmitErrorHandler<LoginPayload> = (fieldErrors) => {
+  const handleInvalid: SubmitErrorHandler<LoginSchema> = (fieldErrors) => {
     const invalidFields = Object.keys(fieldErrors).join(", ")
     setFormMessage(`Missing the following field(s): ${invalidFields}`)
   }
@@ -85,7 +92,7 @@ export default function LoginPage() {
               )}
             />
             <Button className="mt-7" size="lg" type="submit">
-              Log in
+              {form.formState.isSubmitting ? "Logging in..." : "Log in"}
             </Button>
           </form>
         </Form>

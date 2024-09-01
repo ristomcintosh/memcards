@@ -3,7 +3,7 @@ import bcrypt from "bcrypt"
 import { getUserByUsernameOrEmail, createUser } from "@/service/dbService"
 import { createSession } from "@/service/session"
 import { redirect } from "next/navigation"
-import { CreateUserSchema, loginSchema } from "./auth.schma"
+import { CreateUserSchema, LoginSchema } from "./auth.schema"
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library"
 import { ensureError } from "@/utils/errors"
 
@@ -16,15 +16,9 @@ export type CreateAccountResult = {
   }
 }
 
-export type CreateAccountPayload = {
-  email: string
-  username: string
-  password: string
-}
-
 export const createAccount = async (
-  payload: CreateAccountPayload
-): Promise<CreateAccountResult> => {
+  payload: CreateUserSchema
+): Promise<CreateAccountResult | undefined> => {
   const validation = CreateUserSchema.safeParse(payload)
 
   if (!validation.success) {
@@ -80,13 +74,10 @@ type LoginResult = {
   }
 }
 
-export type LoginPayload = {
-  username: string
-  password: string
-}
-
-export const login = async (payload: LoginPayload): Promise<LoginResult> => {
-  const validation = loginSchema.safeParse(payload)
+export const login = async (
+  payload: LoginSchema
+): Promise<LoginResult | undefined> => {
+  const validation = LoginSchema.safeParse(payload)
 
   if (!validation.success) {
     const numberOfErrors = Object.keys(
