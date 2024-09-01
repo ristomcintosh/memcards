@@ -4,8 +4,10 @@ import { getUserByUsername, createUser } from "@/service/dbService"
 import { createSession } from "@/service/session"
 import { redirect } from "next/navigation"
 import { CreateUserSchema, loginSchema } from "./auth.schma"
+import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library"
+import { ensureError } from "@/utils/errors"
 
-type CreateAccountResult = {
+export type CreateAccountResult = {
   message: string
   errors?: {
     username?: string[]
@@ -41,11 +43,33 @@ export const createAccount = async (
   try {
     const user = await createUser(username, hashedPassword)
     await createSession(user.id)
+  } catch (err: unknown) {
+    const error = ensureError(err)
+    if (isUniqueConstraintError(error)) {
+      const target = error.meta?.target
+      if (!Array.isArray(target)) {
+        return { message: "The email or username is already taken." }
+      }
 
-    redirect("/")
-  } catch (error) {
+      const field = target.includes("email") ? "email" : "username"
+
+      return {
+        message: `User with this ${field} already exists.`,
+        errors: { [field]: ["Already taken"] },
+      }
+    }
     return { message: "Error creating user" }
   }
+
+  redirect("/")
+}
+
+function isUniqueConstraintError(
+  error: Error
+): error is PrismaClientKnownRequestError {
+  return (
+    error instanceof PrismaClientKnownRequestError && error.code === "P2002"
+  )
 }
 
 type LoginResult = {

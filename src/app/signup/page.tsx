@@ -1,5 +1,9 @@
 "use client"
-import { login, CreateAccountPayload } from "@/actions/auth"
+import {
+  createAccount,
+  CreateAccountPayload,
+  CreateAccountResult,
+} from "@/actions/auth"
 import { CreateUserSchema } from "@/actions/auth.schma"
 import { Button } from "@/components/ui/button"
 import {
@@ -28,9 +32,17 @@ export default function LoginPage() {
   const [formMessage, setFormMessage] = useState("")
 
   const handleSubmit = (event: CreateAccountPayload) => {
-    login(event).then((result) => {
-      form.setError("password", { message: result.message })
-      setFormMessage(result.message)
+    createAccount(event).then((result) => {
+      if (result?.errors) {
+        Object.entries(result.errors).forEach(([field, errors]) => {
+          form.setError(field as keyof CreateAccountResult["errors"], {
+            type: "custom",
+            message: errors.join(" "),
+          })
+        })
+      }
+
+      if (result?.message) setFormMessage(result.message)
     })
   }
 
@@ -57,7 +69,7 @@ export default function LoginPage() {
           {formMessage}
         </p>
         {formMessage && (
-          <div className="mb-4 bg-zinc-500 p-2 rounded flex gap-x-2 items-center">
+          <div className="mb-4 dark:bg-zinc-500 bg-amber-200 p-2 rounded flex gap-x-2 items-center">
             <CircleAlert />
             <p aria-hidden="true">{formMessage}</p>
           </div>

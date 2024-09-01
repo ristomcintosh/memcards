@@ -49,7 +49,7 @@ export default function LoginPage() {
           {formMessage}
         </p>
         {formMessage && (
-          <div className="mb-4 bg-zinc-500 p-2 rounded flex gap-x-2 items-center">
+          <div className="mb-4 dark:bg-zinc-500 bg-amber-200 p-2 rounded flex gap-x-2 items-center">
             <CircleAlert />
             <p aria-hidden="true">{formMessage}</p>
           </div>

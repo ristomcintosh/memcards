@@ -2,6 +2,7 @@
  * @jest-environment node
  */
 
+import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library"
 import { createAccount, login } from "../auth"
 import { createUser, getUserByUsername } from "@/service/dbService"
 
@@ -61,6 +62,33 @@ describe(createAccount.name, () => {
       },
     })
   })
+
+  it.each(["email", "username"])(
+    `returns %s already exists message`,
+    async (field) => {
+      jest.mocked(createUser).mockRejectedValue(
+        new PrismaClientKnownRequestError(
+          `Unique constraint failed on the fields: (${field})`,
+          {
+            code: "P2002",
+            meta: { modelName: "User", target: [field] },
+            clientVersion: "5.19.0",
+          }
+        )
+      )
+
+      const result = await createAccount({
+        email: "email@gmail.com",
+        username: "username",
+        password: "password1",
+      })
+
+      expect(result).toEqual({
+        message: `User with this ${field} already exists.`,
+        errors: { [field]: ["Already taken"] },
+      })
+    }
+  )
 })
 
 describe(login.name, () => {
