@@ -1,7 +1,6 @@
-import { test as base, expect } from "./fixtures/auth"
+import { test as base, expect } from "./fixtures/base"
 import { CreateFlashcardPage } from "./pages/create-flashcard-page"
 import { HomePage } from "./pages/home-page"
-import AxeBuilder from "@axe-core/playwright"
 
 const test = base.extend<{
   homePage: HomePage
@@ -68,6 +67,7 @@ test("should have no accessibility violations", async ({
   page,
   homePage,
   deckName,
+  makeAxeBuilder,
 }) => {
   const createFlashCardPage = new CreateFlashcardPage(page)
   await createFlashCardPage.goto()
@@ -81,11 +81,7 @@ test("should have no accessibility violations", async ({
   await homePage.goto()
   await page.getByRole("link", { name: deckName }).click()
 
-  const accessibilityScanResults = await new AxeBuilder({ page }).analyze()
-
-  if (accessibilityScanResults.violations.length > 0) {
-    console.log(accessibilityScanResults.violations)
-  }
+  const accessibilityScanResults = await makeAxeBuilder().analyzeWithLogger()
 
   expect(accessibilityScanResults.violations.length).toBe(0)
 })

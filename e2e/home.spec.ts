@@ -1,5 +1,4 @@
-import { test, expect } from "./fixtures/auth"
-import AxeBuilder from "@axe-core/playwright"
+import { test, expect } from "./fixtures/base"
 
 test.beforeEach(async ({ page }) => {
   await page.goto("/")
@@ -35,8 +34,8 @@ test("Cancel deck creation", async ({ page }) => {
   await expect(page.getByText("Create A New Deck")).not.toBeVisible()
 })
 
-test("should have no accessibility violations", async ({ page }) => {
-  const accessibilityScanResults = await new AxeBuilder({ page }).analyze()
+test("should have no accessibility violations", async ({ makeAxeBuilder }) => {
+  const accessibilityScanResults = await makeAxeBuilder().analyzeWithLogger()
 
   expect(accessibilityScanResults.violations.length).toBe(0)
 })
