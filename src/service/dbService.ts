@@ -93,17 +93,24 @@ export const updateFlashcard = async ({
   })
 }
 
-export const createUser = async (username: string, password: string) => {
+export const createUser = async (
+  username: string,
+  email: string,
+  password: string
+) => {
   return await prisma.user.create({
     data: {
       username,
+      email,
       password,
     },
   })
 }
 
-export const getUserByUsername = async (username: string) => {
-  return await prisma.user.findUnique({
-    where: { username },
+export const getUserByUsernameOrEmail = async (username: string) => {
+  return await prisma.user.findFirst({
+    where: {
+      OR: [{ username }, { email: username }],
+    },
   })
 }

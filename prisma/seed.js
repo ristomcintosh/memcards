@@ -13,6 +13,7 @@ async function main() {
     data: {
       password: await bcrypt.hash("password", 10),
       username: "user",
+      email: "email@email.com",
     },
   })
 

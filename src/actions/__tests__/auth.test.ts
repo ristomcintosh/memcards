@@ -4,7 +4,7 @@
 
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library"
 import { createAccount, login } from "../auth"
-import { createUser, getUserByUsername } from "@/service/dbService"
+import { createUser, getUserByUsernameOrEmail } from "@/service/dbService"
 
 const mockedBcryptCompare = jest.fn()
 jest.mock("@/service/dbService")
@@ -122,7 +122,7 @@ describe(login.name, () => {
   })
 
   it("returns Incorrect password or Username when user does not exist", async () => {
-    jest.mocked(getUserByUsername).mockResolvedValue(null)
+    jest.mocked(getUserByUsernameOrEmail).mockResolvedValue(null)
 
     const result = await login({ username: "username", password: "password" })
 
@@ -132,10 +132,11 @@ describe(login.name, () => {
   })
 
   it("returns Incorrect password or Username when password is incorrect", async () => {
-    jest.mocked(getUserByUsername).mockResolvedValue({
+    jest.mocked(getUserByUsernameOrEmail).mockResolvedValue({
       id: "1",
       username: "username",
       password: "password",
+      email: "email",
     })
     mockedBcryptCompare.mockResolvedValue(false)
 

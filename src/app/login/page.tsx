@@ -25,8 +25,8 @@ export default function LoginPage() {
 
   const handleSubmit = (event: LoginPayload) => {
     login(event).then((result) => {
-      form.setError("password", { message: result.message })
-      setFormMessage(result.message)
+      form.setError("password", { message: result?.message })
+      setFormMessage(result?.message)
     })
   }
 
@@ -62,7 +62,7 @@ export default function LoginPage() {
               rules={{ required: "Username is required" }}
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Username</FormLabel>
+                  <FormLabel>Username or email</FormLabel>
                   <FormControl>
                     <Input {...field} />
                   </FormControl>

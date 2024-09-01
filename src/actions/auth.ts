@@ -1,6 +1,6 @@
 "use server"
 import bcrypt from "bcrypt"
-import { getUserByUsername, createUser } from "@/service/dbService"
+import { getUserByUsernameOrEmail, createUser } from "@/service/dbService"
 import { createSession } from "@/service/session"
 import { redirect } from "next/navigation"
 import { CreateUserSchema, loginSchema } from "./auth.schma"
@@ -37,11 +37,11 @@ export const createAccount = async (
     }
   }
 
-  const { username, password } = validation.data
+  const { username, password, email } = validation.data
   const hashedPassword = await bcrypt.hash(password, 10)
 
   try {
-    const user = await createUser(username, hashedPassword)
+    const user = await createUser(username, email, hashedPassword)
     await createSession(user.id)
   } catch (err: unknown) {
     const error = ensureError(err)
@@ -100,7 +100,7 @@ export const login = async (payload: LoginPayload): Promise<LoginResult> => {
 
   const { username, password } = validation.data
 
-  const user = await getUserByUsername(username)
+  const user = await getUserByUsernameOrEmail(username)
 
   if (!user) {
     return { message: "Incorrect password or Username" }

@@ -110,8 +110,8 @@ export default function LoginPage() {
               rules={{ required: "Password is required" }}
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Password</FormLabel>
-                  <FormDescription>
+                  <FormLabel className="mb-1">Password</FormLabel>
+                  <FormDescription className="mb-2">
                     Must be at least 8 characters long, contain at least one
                     letter and one number
                   </FormDescription>
