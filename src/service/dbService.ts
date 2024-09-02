@@ -1,21 +1,23 @@
 "use server"
 import "server-only"
-import { Deck, DeckWithCardCount, DeckWithFlashcards } from "@/types"
+import { Deck, DeckWithFlashcards } from "@/types"
 import { prisma } from "@/utils/db.server"
 
-const computeCardCount = (deck: DeckWithFlashcards) => deck.flashcards.length
-
-export const getDecks = async (
-  userId: string
-): Promise<DeckWithCardCount[]> => {
-  const decksWithFlashcards = await prisma.deck.findMany({
-    where: { userId },
-    include: { flashcards: true },
+export const getDecks = async (userId: string) => {
+  return await prisma.user.findUnique({
+    where: { id: userId },
+    include: {
+      decks: {
+        include: {
+          _count: {
+            select: {
+              flashcards: true,
+            },
+          },
+        },
+      },
+    },
   })
-  return decksWithFlashcards.map((deck) => ({
-    ...deck,
-    cardCount: computeCardCount(deck),
-  }))
 }
 
 export const getDeckById = async (

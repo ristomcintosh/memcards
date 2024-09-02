@@ -1,16 +1,27 @@
 "use server"
 import { revalidatePath } from "next/cache"
 import * as DBService from "@/service/dbService"
-import { Deck, Flashcard } from "@/types"
+import { Deck, DeckWithCardCount, Flashcard } from "@/types"
 import { verifySession } from "@/utils/verifySession"
 
-export const getDecks = async () => {
+export const getDecks = async (): Promise<DeckWithCardCount[]> => {
   const session = await verifySession()
   if (!session.isAuth) {
     return []
   }
 
-  return DBService.getDecks(session.userId)
+  const user = await DBService.getDecks(session.userId)
+
+  if (!user) return []
+
+  if (!user.hasBeenOnboarded) {
+    console.log("User has not been onboarded")
+  }
+
+  return user.decks.map((deck) => ({
+    ...deck,
+    cardCount: deck._count.flashcards,
+  }))
 }
 
 export const getDeckById = async (deckId: Deck["id"]) => {

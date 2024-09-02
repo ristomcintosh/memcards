@@ -11,11 +11,12 @@ datasource db {
 }
 
 model User {
-  id       String @id @default(cuid())
-  username String @unique
-  email    String @unique
-  password String
-  decks    Deck[]
+  id               String  @id @default(cuid())
+  username         String  @unique
+  email            String  @unique
+  password         String
+  decks            Deck[]
+  hasBeenOnboarded Boolean @default(false)
 }
 
 model Deck {
