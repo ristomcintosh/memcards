@@ -14,10 +14,6 @@ export const getDecks = async (): Promise<DeckWithCardCount[]> => {
 
   if (!user) return []
 
-  if (!user.hasBeenOnboarded) {
-    console.log("User has not been onboarded")
-  }
-
   return user.decks.map((deck) => ({
     ...deck,
     cardCount: deck._count.flashcards,

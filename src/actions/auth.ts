@@ -1,6 +1,10 @@
 "use server"
 import bcrypt from "bcrypt"
-import { getUserByUsernameOrEmail, createUser } from "@/service/dbService"
+import {
+  getUserByUsernameOrEmail,
+  createUser,
+  copyTutorialDeckToUser,
+} from "@/service/dbService"
 import { createSession } from "@/service/session"
 import { redirect } from "next/navigation"
 import { CreateUserSchema, LoginSchema } from "./auth.schema"
@@ -36,6 +40,7 @@ export const createAccount = async (
 
   try {
     const user = await createUser(username, email, hashedPassword)
+    await copyTutorialDeckToUser(user.id)
     await createSession(user.id)
   } catch (err: unknown) {
     const error = ensureError(err)

@@ -8,7 +8,9 @@ async function main() {
   await prisma.flashcard.deleteMany()
   await prisma.deck.deleteMany()
   await prisma.user.deleteMany()
+  await prisma.sharedDeck.deleteMany()
 
+  console.log("🌱 seeding user")
   const user = await prisma.user.create({
     data: {
       password: await bcrypt.hash("password", 10),
@@ -17,22 +19,8 @@ async function main() {
     },
   })
 
-  const deck1 = await prisma.deck.create({
-    data: {
-      name: "World Capitals",
-      userId: user.id,
-      flashcards: {
-        create: [
-          { front: "What is the capital of France?", back: "Paris" },
-          { front: "What is the capital of Portugal?", back: "Lisbon" },
-          { front: "What is the capital of Spain?", back: "Madrid" },
-          { front: "What is the capital of Italy?", back: "Rome" },
-        ],
-      },
-    },
-  })
-
-  const deck2 = await prisma.deck.create({
+  console.log("🌱 seeding deck")
+  await prisma.deck.create({
     data: {
       name: "Basic Portuguese",
       userId: user.id,
@@ -47,7 +35,28 @@ async function main() {
     },
   })
 
-  console.log({ deck1, deck2 })
+  console.log("🌱 seeding shared deck")
+  await prisma.sharedDeck.create({
+    data: {
+      name: "Getting Started",
+      flashcards: {
+        create: [
+          {
+            front: "🎉 Welcome to Memcards! Press the Flip button below",
+            back: "Press Next to move to the next card",
+          },
+          {
+            front: "You can Edit or delete this card using the menu (top left)",
+            back: "Press Next",
+          },
+          {
+            front: "Create your own decks and cards on the main page",
+            back: "Happy studying! 😁",
+          },
+        ],
+      },
+    },
+  })
 }
 
 main()

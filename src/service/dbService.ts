@@ -46,10 +46,10 @@ export const updateDeck = async (deck: Partial<Deck>) => {
 }
 
 export const createDeck = async (deckName: string, userId: string) => {
-  await prisma.deck.create({
+  return await prisma.deck.create({
     data: {
       name: deckName,
-      userId,
+      userId: userId,
     },
   })
 }
@@ -113,6 +113,28 @@ export const getUserByUsernameOrEmail = async (username: string) => {
   return await prisma.user.findFirst({
     where: {
       OR: [{ username }, { email: username }],
+    },
+  })
+}
+
+export const copyTutorialDeckToUser = async (userId: string) => {
+  const tutorialDeck = await prisma.sharedDeck.findFirst({
+    include: {
+      flashcards: {
+        select: { front: true, back: true },
+      },
+    },
+  })
+
+  if (!tutorialDeck) return
+
+  await prisma.deck.create({
+    data: {
+      name: tutorialDeck.name,
+      userId,
+      flashcards: {
+        create: tutorialDeck.flashcards,
+      },
     },
   })
 }
