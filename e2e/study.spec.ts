@@ -3,38 +3,50 @@ import { CreateFlashcardPage } from "./pages/create-flashcard-page"
 import { HomePage } from "./pages/home-page"
 
 const test = base.extend<{
-  homePage: HomePage
+  createNewDeck: () => Promise<string>
   createFlashCardPage: CreateFlashcardPage
-  deckName: string
 }>({
-  deckName: `Deck ${crypto.randomUUID()}`,
-  homePage: [
-    async ({ page, deckName }, use) => {
+  createNewDeck: [
+    async ({ page }, use) => {
       const homePage = new HomePage(page)
-      await homePage.goto()
-      await homePage.createDeck(deckName)
+      const setup = async () => {
+        const deckName = `Deck ${crypto.randomUUID()}`
+        await homePage.goto()
+        await homePage.createDeck(deckName)
+        return deckName
+      }
 
-      await use(homePage)
+      await use(setup)
 
       await homePage.goto()
-      await homePage.deleteDeck(deckName)
+      await homePage.deleteAllDecks()
     },
     { auto: true },
   ],
+  createFlashCardPage: async ({ page }, use) => {
+    const createFlashCardPage = new CreateFlashcardPage(page)
+    await use(createFlashCardPage)
+  },
 })
 
-test("Normal study flow", async ({ page, homePage, deckName }) => {
-  const createFlashCardPage = new CreateFlashcardPage(page)
+test("Normal study flow", async ({
+  page,
+  createNewDeck,
+  createFlashCardPage,
+}) => {
+  const deckName = await createNewDeck()
+
   await createFlashCardPage.goto()
   const flashcardFront = "What is 'hello' in Portuguese?"
   const flashcardBack = "Olá"
   await createFlashCardPage.createFlashcard(
+    deckName,
     flashcardFront,
-    flashcardBack,
-    deckName
+    flashcardBack
   )
 
-  await homePage.goto()
+  await page.goto("/")
+
   await page.getByRole("link", { name: deckName }).click()
 
   await expect(page.getByText(deckName)).toBeVisible()
@@ -52,10 +64,9 @@ test("Normal study flow", async ({ page, homePage, deckName }) => {
 
 test("try to study a deck with no flashcards", async ({
   page,
-  homePage,
-  deckName,
+  createNewDeck,
 }) => {
-  await homePage.goto()
+  const deckName = await createNewDeck()
   await page.getByRole("link", { name: deckName }).click()
 
   await expect(
@@ -65,20 +76,15 @@ test("try to study a deck with no flashcards", async ({
 
 test("should have no accessibility violations", async ({
   page,
-  homePage,
-  deckName,
+  createNewDeck,
+  createFlashCardPage,
   makeAxeBuilder,
 }) => {
-  const createFlashCardPage = new CreateFlashcardPage(page)
+  const deckName = await createNewDeck()
   await createFlashCardPage.goto()
-  const flashcardFront = "What is 'hello' in Portuguese?"
-  const flashcardBack = "Olá"
-  await createFlashCardPage.createFlashcard(
-    flashcardFront,
-    flashcardBack,
-    deckName
-  )
-  await homePage.goto()
+  await createFlashCardPage.createFlashcard(deckName)
+
+  await page.goto("/")
   await page.getByRole("link", { name: deckName }).click()
 
   const accessibilityScanResults = await makeAxeBuilder().analyzeWithLogger()

@@ -7,12 +7,19 @@ export class CreateFlashcardPage {
     await this.page.goto("/create-flashcard")
   }
 
-  async createFlashcard(front: string, back: string, deckName: string) {
+  async createFlashcard(
+    deckName: string,
+    front: string = "Test Front",
+    back: string = "Test Back"
+  ) {
     await this.page.getByLabel("Deck").click()
     await this.page.getByLabel(deckName).click()
     await this.page.getByLabel("Front").fill(front)
     await this.page.getByLabel("Back").fill(back)
     await this.page.getByRole("button", { name: "Create" }).click()
-    await this.page.getByText(back).waitFor({ state: "detached" })
+    await this.page
+      .getByTestId("toast-title")
+      .getByText("Flashcard created!")
+      .waitFor({ state: "visible" })
   }
 }

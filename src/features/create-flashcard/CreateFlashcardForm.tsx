@@ -17,6 +17,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+import { useToast } from "@/components/ui/toast/use-toast"
 
 import { Flashcard, Deck } from "@/types"
 import { useSearchParams } from "next/navigation"
@@ -31,6 +32,7 @@ type CreateFlashcardFormProps = {
 export const CreateFlashcardForm = ({ decks }: CreateFlashcardFormProps) => {
   const queryParam = useSearchParams()
   const defaultDeckId = getDeckIdFromQueryParam(queryParam.get("deckId"), decks)
+  const { toast } = useToast()
 
   const form = useForm<CreateFlashcardFormValues>({
     defaultValues: {
@@ -40,9 +42,12 @@ export const CreateFlashcardForm = ({ decks }: CreateFlashcardFormProps) => {
     },
   })
 
-  const handleSubmit = form.handleSubmit((values) => {
-    createFlashcard(values)
+  const handleSubmit = form.handleSubmit(async (values) => {
+    await createFlashcard(values)
     form.reset({ deckId: values.deckId, front: "", back: "" })
+    toast({
+      title: "Flashcard created!",
+    })
   })
 
   return (

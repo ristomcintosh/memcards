@@ -1,6 +1,7 @@
 import { Page } from "@playwright/test"
 
 export class HomePage {
+  private deckNames = new Set<string>()
   constructor(public readonly page: Page) {}
 
   async goto() {
@@ -13,6 +14,7 @@ export class HomePage {
     await this.page.getByLabel("Deck Name:").fill(deckName)
     await this.page.getByRole("button", { name: "Submit" }).click()
     await this.page.getByText(deckName).waitFor({ state: "visible" })
+    this.deckNames.add(deckName)
   }
 
   async deleteDeck(deckName: string) {
@@ -22,5 +24,11 @@ export class HomePage {
       .click()
     await this.page.getByRole("menuitem", { name: "Delete" }).click()
     await this.page.getByRole("button", { name: "Yes" }).click()
+  }
+
+  async deleteAllDecks() {
+    for (const deckName of this.deckNames) {
+      await this.deleteDeck(deckName)
+    }
   }
 }
