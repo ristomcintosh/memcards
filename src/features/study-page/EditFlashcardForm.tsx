@@ -84,7 +84,9 @@ export const EditFlashcardForm = ({
                 </FormItem>
               )}
             />
-            <Button type="submit">Save</Button>
+            <Button className="mt-6" type="submit">
+              Save
+            </Button>
           </form>
         </Form>
       </DialogContent>
