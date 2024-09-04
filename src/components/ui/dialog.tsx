@@ -42,8 +42,8 @@ const DialogContent = React.forwardRef<
     <DialogPrimitive.Content
       ref={ref}
       className={cn(
-        `fixed left-[50%] top-[50%] z-50 grid w-full max-w-sm rounded translate-x-[-50%] translate-y-[-50%] gap-4 border
-        border-zinc-200 bg-white p-6 shadow-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out
+        `fixed left-[50%] top-[50%] z-50 grid w-full max-w-md rounded translate-x-[-50%] translate-y-[-50%] gap-4 border
+        border-zinc-200 bg-white p-9 shadow-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out
         data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95
         data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2
         data-[state=open]:slide-in-from-top-[48%] sm:rounded-lg dark:border-zinc-700 dark:bg-zinc-700 dark:text-zinc-50 text-zinc-900`,
@@ -54,7 +54,7 @@ const DialogContent = React.forwardRef<
       {children}
       {closeIcon && (
         <DialogPrimitive.Close className="absolute right-2 top-2 rounded-sm opacity-80 ring-offset-white transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-zinc-950 focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-zinc-100 data-[state=open]:text-zinc-500 dark:ring-offset-zinc-950 dark:focus:ring-zinc-300 dark:data-[state=open]:bg-zinc-800 dark:data-[state=open]:text-zinc-400">
-          <X className="h-5 w-5" />
+          <X className="h-7 w-7" />
           <span className="sr-only">Close</span>
         </DialogPrimitive.Close>
       )}
@@ -98,7 +98,7 @@ const DialogTitle = React.forwardRef<
   <DialogPrimitive.Title
     ref={ref}
     className={cn(
-      "text-xl font-semibold leading-none tracking-tight text-center",
+      "text-xl font-semibold leading-none tracking-tight text-center break-words hyphens-auto",
       className
     )}
     {...props}

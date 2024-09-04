@@ -20,7 +20,7 @@ export const DeckList = ({ decks }: DeckListProps) => {
           data-testid={`deck-${deck.name}`}
         >
           <Link
-            className="flex-grow text-inherit hover:no-underline break-all"
+            className="flex-grow text-inherit hover:no-underline break-words hyphens-auto"
             aria-describedby="card-count"
             href={`/study/${deck.id}`}
           >

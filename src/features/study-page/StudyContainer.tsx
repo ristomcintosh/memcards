@@ -37,10 +37,12 @@ export function StudyContainer({
   return (
     <div className="flex flex-col h-screen">
       <Header progress={progress} deleteCard={deleteCard} editCard={editCard} />
-      <main className="flex-1 px-2 overflow-x-hidden overflow-y-auto">
+      <main className="flex-1 px-4 overflow-x-hidden overflow-y-auto">
         <div className="flex flex-col min-h-full pt-4 pb-6">
-          <h1 className="text-3xl text-center font-semibold">{title}</h1>
-          <section className="flex items-center justify-center flex-1">
+          <h1 className="text-3xl text-center font-semibold break-words hyphens-auto">
+            {title}
+          </h1>
+          <section className="flex items-center justify-center flex-1 flex-col sm:flex-row py-4">
             {children}
           </section>
         </div>
