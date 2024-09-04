@@ -23,9 +23,13 @@ export const makeAxeBuilder: TestFixture<
 export class AxeBuilder extends AxeBuilderBase {
   analyzeWithLogger = async () => {
     const results = await this.analyze()
-    console.log("Accessibility violations:", results.violations.length)
     if (results.violations.length > 0) {
+      console.log("Accessibility violations:", results.violations.length)
       console.log(results.violations)
+      console.log(
+        "Nodes with violations:",
+        results.violations.map((v) => v.nodes)
+      )
     }
     return results
   }

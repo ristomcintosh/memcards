@@ -65,6 +65,7 @@ test("Normal study flow", async ({
 test("try to study a deck with no flashcards", async ({
   page,
   createNewDeck,
+  makeAxeBuilder,
 }) => {
   const deckName = await createNewDeck()
   await page.getByRole("link", { name: deckName }).click()
@@ -72,6 +73,10 @@ test("try to study a deck with no flashcards", async ({
   await expect(
     page.getByText("😅 Oops, no flashcards here! Add some!")
   ).toBeVisible()
+
+  const accessibilityScanResults = await makeAxeBuilder().analyzeWithLogger()
+
+  expect(accessibilityScanResults.violations.length).toBe(0)
 })
 
 test("should have no accessibility violations", async ({

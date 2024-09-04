@@ -52,7 +52,6 @@ const NoFlashcardsMessage = ({ deckId }: { deckId: string }) => {
     <DialogDescription>
       😅 Oops, no flashcards here!{` `}
       <Link
-        className="text-brand-500 hover:underline"
         href={{
           pathname: "/create-flashcard",
           query: { deckId },

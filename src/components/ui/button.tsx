@@ -12,7 +12,7 @@ const buttonVariants = cva(
         default:
           "bg-brand-500 text-zinc-900 hover:bg-brand-500/80 dark:bg-brand-400 dark:text-zinc-900 dark:hover:bg-brand-400/80",
         destructive:
-          "bg-red-500 text-zinc-50 hover:bg-red-500/90 dark:bg-red-700 dark:hover:bg-red-700/80",
+          "bg-red-700 text-zinc-50 dark:text-zinc-900 hover:bg-red-700/90 dark:bg-red-400 dark:hover:bg-red-400/80",
         outline: `border-2 border-brand-500 hover:bg-brand-500/30 text-brand-800 hover:text-brand-900
           dark:border-brand-400 dark:hover:bg-zinc-800/80 dark:text-inherit dark:hover:text-inherit dark:hover:border-brand-400/80`,
         secondary:

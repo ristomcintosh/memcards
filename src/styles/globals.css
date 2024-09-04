@@ -4,6 +4,6 @@
 
 @layer base {
   a {
-    @apply text-brand-500 hover:underline;
+    @apply text-brand-700 hover:underline dark:text-brand-400;
   }
 }
