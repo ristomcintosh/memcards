@@ -8,11 +8,21 @@ export type ModalType = "rename" | "delete" | null
 export function useModalState() {
   const [modalType, setModalType] = useState<ModalType>(null)
 
-  const openModal = useCallback((type: ModalType) => setModalType(type), [])
-
   const closeModal = useCallback(() => setModalType(null), [])
 
-  return { modalType, closeModal, openModal }
+  const [selectedDeck, setSelectedDeck] = useState<DeckWithCardCount | null>(
+    null
+  )
+
+  const toggleModal = useCallback(
+    (deck: DeckWithCardCount, type: ModalType) => {
+      setSelectedDeck(deck)
+      setModalType(type)
+    },
+    []
+  )
+
+  return { modalType, closeModal, selectedDeck, toggleModal }
 }
 
 type ModalManagerProps = {
