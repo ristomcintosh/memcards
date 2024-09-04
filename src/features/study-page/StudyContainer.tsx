@@ -70,7 +70,7 @@ const Header = ({
         >
           <VerticalDots />
         </DropdownMenuTrigger>
-        <DropdownMenuContent>
+        <DropdownMenuContent align="start" side="bottom">
           <DropdownMenuItem onSelect={() => editCard()}>
             <Edit />
           </DropdownMenuItem>

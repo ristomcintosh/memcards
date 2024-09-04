@@ -55,7 +55,7 @@ export default function LoginPage() {
   }
 
   return (
-    <main className="flex items-center justify-center border-l-8 border-brand-500 border-t-8 py-4 min-h-full">
+    <main className="flex items-center justify-center border-l-8 border-brand-500 dark:bg-zinc-600 sm:dark:bg-inherit border-t-8 py-4 min-h-full">
       <div className="w-full sm:max-w-lg p-14 sm:bg-zinc-50 dark:bg-zinc-600 sm:shadow-lg sm:rounded-xl">
         <div className="mb-8">
           <h1 className="text-4xl mb-4">Sign up</h1>

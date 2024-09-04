@@ -53,7 +53,7 @@ const CreateNewMenu = ({
     >
       <Plus />
     </DropdownMenuTrigger>
-    <DropdownMenuContent>
+    <DropdownMenuContent align="end" side="top" alignOffset={10}>
       <DropdownMenuItem onSelect={handleDeckCreation}>
         Create Deck
       </DropdownMenuItem>

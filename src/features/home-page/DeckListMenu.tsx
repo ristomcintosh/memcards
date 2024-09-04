@@ -22,7 +22,7 @@ export const DeckMenu = ({ handleRename, handleDelete }: MenuProps) => (
     >
       <VerticalDots />
     </DropdownMenuTrigger>
-    <DropdownMenuContent>
+    <DropdownMenuContent align="end">
       <DropdownMenuItem onSelect={() => handleRename()}>
         <Rename />
       </DropdownMenuItem>
