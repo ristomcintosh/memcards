@@ -7,7 +7,7 @@ export default function NotFound() {
     <div className="h-full flex flex-col">
       <NavBar />
       <div className="flex flex-col items-center justify-center flex-1">
-        <h1 className="text-4xl mb-4">Page Not Found 😅</h1>
+        <h1 className="text-4xl mb-4 text-center">Page Not Found 😅</h1>
         <Button asChild size="lg">
           <Link href="/">Home</Link>
         </Button>
