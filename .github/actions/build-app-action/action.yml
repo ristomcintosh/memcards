@@ -5,9 +5,6 @@ runs:
   steps:
     - name: Download deps
       uses: bahmutov/npm-install@v1
-    - name: Copy test env vars
-      shell: bash
-      run: cp .env.example .env
     - name: Set up Prisma and apply migrations
       shell: bash
       run: npx prisma migrate deploy

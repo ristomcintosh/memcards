@@ -58,6 +58,9 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: lts/*
+      - name: Copy test env vars
+        shell: bash
+        run: cp .env.example .env
       - uses: ./.github/actions/build-app-action
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
