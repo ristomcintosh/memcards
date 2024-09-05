@@ -8,7 +8,6 @@ async function main() {
   await prisma.flashcard.deleteMany()
   await prisma.deck.deleteMany()
   await prisma.user.deleteMany()
-  await prisma.sharedDeck.deleteMany()
 
   console.log("🌱 seeding user")
   const user = await prisma.user.create({
@@ -16,6 +15,27 @@ async function main() {
       password: await bcrypt.hash("password", 10),
       username: "user",
       email: "email@email.com",
+    },
+  })
+
+  console.log("🌱 seeding getting started deck to user")
+  const tutorialDeck = await prisma.sharedDeck.findFirst({
+    include: {
+      flashcards: {
+        select: { front: true, back: true },
+      },
+    },
+  })
+
+  if (!tutorialDeck) throw new Error("Tutorial deck not found")
+
+  await prisma.deck.create({
+    data: {
+      name: tutorialDeck.name,
+      userId: user.id,
+      flashcards: {
+        create: tutorialDeck.flashcards,
+      },
     },
   })
 
@@ -30,29 +50,6 @@ async function main() {
           { front: "What is 'thank you' in Portuguese?", back: "Obrigado" },
           { front: "What is 'blue' in Portuguese?", back: "Azul" },
           { front: "What is 'green' in Portuguese?", back: "Verde" },
-        ],
-      },
-    },
-  })
-
-  console.log("🌱 seeding shared deck")
-  await prisma.sharedDeck.create({
-    data: {
-      name: "Getting Started",
-      flashcards: {
-        create: [
-          {
-            front: "🎉 Welcome to Memcards! Press the Flip button below",
-            back: "Press Next to move to the next card",
-          },
-          {
-            front: "You can Edit or delete this card using the menu (top left)",
-            back: "Press Next",
-          },
-          {
-            front: "Create your own decks and cards on the main page",
-            back: "Happy studying! 😁",
-          },
         ],
       },
     },
