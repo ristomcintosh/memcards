@@ -1,15 +1,18 @@
 import { render, screen, fireEvent, waitFor } from "@testing-library/react"
 import { EditFlashcardForm } from "../EditFlashcardForm"
 import { updateFlashcard } from "@/actions/actions"
+import { Flashcard } from "@/types"
 
 jest.mock("@/actions/actions")
 
 describe("EditFlashcardForm", () => {
-  const mockFlashcard = {
+  const mockFlashcard: Flashcard = {
     id: "1",
     front: "Front of card",
     back: "Back of card",
     deckId: "deck-id",
+    createdAt: new Date(),
+    updatedAt: new Date(),
   }
 
   it("renders the form fields", () => {

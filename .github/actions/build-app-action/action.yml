@@ -3,9 +3,10 @@ name: "Build App"
 runs:
   using: "composite"
   steps:
-    - name: Install dependencies
-      shell: bash
-      run: npm ci
+    - name: Download deps
+      uses: bahmutov/npm-install@v1
+    - name: Copy test env vars
+      run: cp .env.example .env
     - name: Set up Prisma and apply migrations
       shell: bash
       run: npx prisma migrate deploy

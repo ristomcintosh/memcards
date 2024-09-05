@@ -137,6 +137,9 @@ describe(login.name, () => {
       username: "username",
       password: "password",
       email: "email",
+      createdAt: new Date(),
+      updatedAt: new Date(),
+      hasBeenOnboarded: false,
     })
     mockedBcryptCompare.mockResolvedValue(false)
 

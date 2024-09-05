@@ -36,8 +36,8 @@ next-env.d.ts
 
 # DB
 # SQLite database (if using SQLite)
-prisma/dev.db
-prisma/*dev.db*
+prisma/data.db
+prisma/*data.db*
 
 # Playwright
 /test-results/

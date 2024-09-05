@@ -7,7 +7,8 @@ on:
     branches: [main]
 
 jobs:
-  unit-test:
+  lint:
+    name: 🧹 ESLint
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -15,18 +16,56 @@ jobs:
         with:
           node-version: "20"
           cache: "npm"
-      - run: npm ci
-      - name: test
-        run: npm test
+      - name: Download deps
+        uses: bahmutov/npm-install@v1
       - name: lint
         run: npm run lint
-  build:
+
+  type-check:
+    name: 📋 Type Check
     runs-on: ubuntu-latest
-    env:
-      DATABASE_URL: "file:./test.db"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+      - name: Download deps
+        uses: bahmutov/npm-install@v1
+      - name: type check
+        run: npm run type-check
+
+  jest-test:
+    name: 🃏 Jest
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+      - name: Download deps
+        uses: bahmutov/npm-install@v1
+      - name: test
+        run: npm test
+
+  playwright:
+    name: 🎭 Playwright
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: lts/*
       - uses: ./.github/actions/build-app-action
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+      - name: Run Playwright tests
+        run: npx playwright test
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30

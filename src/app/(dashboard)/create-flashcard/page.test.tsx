@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/react"
 import CreateFlashcard from "./page"
 import { getDecks } from "@/actions/actions"
+import { DeckWithCardCount } from "@/types"
 
 jest.mock("@/actions/actions")
 
@@ -11,8 +12,15 @@ jest.mock("next/navigation", () => ({
 }))
 
 describe(CreateFlashcard.name, () => {
-  const testDecks = [
-    { id: "1", name: "deck 1", userId: "some-id", cardCount: 0 },
+  const testDecks: DeckWithCardCount[] = [
+    {
+      id: "1",
+      name: "deck 1",
+      userId: "some-id",
+      createdAt: new Date(),
+      updatedAt: new Date(),
+      cardCount: 0,
+    },
   ]
   it("renders", async () => {
     jest.mocked(getDecks).mockResolvedValue(testDecks)

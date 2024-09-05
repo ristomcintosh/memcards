@@ -2,16 +2,19 @@ import { render, screen } from "@testing-library/react"
 import { DeckList } from "../DeckList"
 import { deleteDeck } from "@/actions/actions"
 import userEvent from "@testing-library/user-event"
+import { DeckWithCardCount } from "@/types"
 
 jest.mock("@/actions/actions")
 
 describe(DeckList.name, () => {
-  const testDeckList = [
+  const testDeckList: DeckWithCardCount[] = [
     {
       id: "some-id",
       userId: "user-id",
       name: "Deck 1",
       cardCount: 3,
+      createdAt: new Date(),
+      updatedAt: new Date(),
     },
   ]
 

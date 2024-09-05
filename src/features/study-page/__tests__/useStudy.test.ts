@@ -9,18 +9,24 @@ const testDeck: DeckWithFlashcards = {
   id: "1",
   name: "Test Deck",
   userId: "user-id",
+  createdAt: new Date(),
+  updatedAt: new Date(),
   flashcards: [
     {
       id: "1",
       deckId: "1",
       front: "Front of card 1",
       back: "Back of card 1",
+      createdAt: new Date(),
+      updatedAt: new Date(),
     },
     {
       id: "2",
       deckId: "1",
       front: "Front of card 2",
       back: "Back of card 2",
+      createdAt: new Date(),
+      updatedAt: new Date(),
     },
   ],
 }
