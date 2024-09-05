@@ -62,7 +62,7 @@ export const CreateFlashcardForm = ({ decks }: CreateFlashcardFormProps) => {
               <FormLabel>Deck</FormLabel>
               <Select onValueChange={field.onChange} defaultValue={field.value}>
                 <FormControl>
-                  <SelectTrigger>
+                  <SelectTrigger aria-label="Select a deck">
                     <SelectValue placeholder="Select a deck" />
                   </SelectTrigger>
                 </FormControl>
