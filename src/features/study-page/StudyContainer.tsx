@@ -1,4 +1,4 @@
-import { VerticalDots } from "@/components/VerticalDots"
+import { LogoText } from "@/components/Logo"
 import { Delete, Edit } from "@/components/menu-items"
 import { Button } from "@/components/ui/button"
 import {
@@ -7,6 +7,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { ChevronLeft, Settings } from "lucide-react"
 import Link from "next/link"
 import { PropsWithChildren } from "react"
 
@@ -63,12 +64,22 @@ const Header = ({
 }) => (
   <header className=" bg-zinc-50 dark:bg-zinc-700  shadow">
     <div className="flex items-center justify-between p-4 gap-4 max-w-screen-xl mx-auto">
+      <nav>
+        <Link href="/" aria-label="Home" className="text-inherit">
+          <LogoText aria-hidden className="hidden sm:w-36 sm:block" />
+          <ChevronLeft
+            className="text-inherit w-10 h-10 sm:hidden"
+            aria-hidden
+          />
+        </Link>
+      </nav>
+      <ProgressBar progress={progress} />
       <DropdownMenu modal={false}>
         <DropdownMenuTrigger
           aria-label="Flashcard Options"
-          className="w-8 h-8 p-1 hover:bg-zinc-300 hover:rounded-full"
+          className="p-1 hover:bg-zinc-300 hover:rounded-full"
         >
-          <VerticalDots />
+          <Settings className="w-8 h-8" />
         </DropdownMenuTrigger>
         <DropdownMenuContent align="start" side="bottom">
           <DropdownMenuItem onSelect={() => editCard()}>
@@ -79,13 +90,6 @@ const Header = ({
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
-
-      <ProgressBar progress={progress} />
-      <nav>
-        <Link href="/" className="text-inherit hover:no-underline">
-          Home
-        </Link>
-      </nav>
     </div>
   </header>
 )

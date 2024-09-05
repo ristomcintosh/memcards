@@ -30,21 +30,25 @@ export function DarkModeToggle() {
   }
 
   return (
-    <label
-      className="focus-within:outline-2 outline-offset-4 focus-within:outline focus-within:outline-brand-400"
-      aria-label="Toggle Theme"
-    >
+    <div className="focus-within:outline-2 outline-offset-4 focus-within:outline focus-within:outline-brand-400">
       <input
         id="toggle-theme"
+        aria-label="Toggle Theme"
         onChange={(evt) => handleDarkModeToggle(evt, setIsDarkMode)}
         type="checkbox"
         checked={isDarkMode}
         className="sr-only"
+        aria-describedby="theme-value"
       />
-      <div className="flex items-center gap-1">
-        {isDarkMode ? <DarkModeIcon /> : <LightModeIcon />}
-      </div>
-    </label>
+      <label htmlFor="toggle-theme">
+        <div className="flex items-center gap-1" aria-hidden>
+          {isDarkMode ? <DarkModeIcon /> : <LightModeIcon />}
+        </div>
+      </label>
+      <p className="sr-only" id="theme-value">
+        {isDarkMode ? "Dark" : "Light"}
+      </p>
+    </div>
   )
 }
 
