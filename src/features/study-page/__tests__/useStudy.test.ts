@@ -152,6 +152,8 @@ describe(useStudy.name, () => {
       deckId: "1",
       front: "Front of card 1",
       back: "Back of card 1",
+      createdAt: expect.any(Date),
+      updatedAt: expect.any(Date),
     })
 
     act(() => {
@@ -168,6 +170,8 @@ describe(useStudy.name, () => {
       deckId: "1",
       front: "Front of card edited!",
       back: "Back of card 1 edited!",
+      createdAt: expect.any(Date),
+      updatedAt: expect.any(Date),
     })
     expect(result.current.isEditing).toBe(false)
   })
