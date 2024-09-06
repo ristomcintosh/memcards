@@ -61,5 +61,5 @@ CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
 INSERT INTO SharedDeck VALUES('cm0ofisyv00006wy1pfu3uvm9','Getting Started',1725488869927,1725488869927);
 
 INSERT INTO SharedFlashcard VALUES('cm0ofisyv00016wy14dvajeph','🎉 Welcome to Memcards! Press the Flip button below','Press Next to move to the next card','cm0ofisyv00006wy1pfu3uvm9',1725488869927,1725488869927);
-INSERT INTO SharedFlashcard VALUES('cm0ofisyv00026wy1z5pl7qw3','You can Edit or delete this card using the menu (top left)','Press Next','cm0ofisyv00006wy1pfu3uvm9',1725488869927,1725488869927);
+INSERT INTO SharedFlashcard VALUES('cm0ofisyv00026wy1z5pl7qw3','You can Edit or delete this card using the menu above','Press Next','cm0ofisyv00006wy1pfu3uvm9',1725488869927,1725488869927);
 INSERT INTO SharedFlashcard VALUES('cm0ofisyv00036wy1jwleeem7','Create your own decks and cards on the main page','Happy studying! 😁','cm0ofisyv00006wy1pfu3uvm9',1725488869927,1725488869927);

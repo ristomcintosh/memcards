@@ -81,7 +81,7 @@ const Header = ({
         >
           <Settings className="w-8 h-8" />
         </DropdownMenuTrigger>
-        <DropdownMenuContent align="start" side="bottom">
+        <DropdownMenuContent align="end" side="bottom">
           <DropdownMenuItem onSelect={() => editCard()}>
             <Edit />
           </DropdownMenuItem>
