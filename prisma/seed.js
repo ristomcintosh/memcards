@@ -27,7 +27,8 @@ async function main() {
     },
   })
 
-  if (!tutorialDeck) throw new Error("Tutorial deck not found")
+  if (!tutorialDeck)
+    throw new Error("Tutorial deck not found, Did you run the migration?")
 
   await prisma.deck.create({
     data: {
