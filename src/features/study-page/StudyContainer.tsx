@@ -36,7 +36,7 @@ export function StudyContainer({
   children,
 }: PropsWithChildren<StudyContainerProps>) {
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex flex-col h-svh">
       <Header progress={progress} deleteCard={deleteCard} editCard={editCard} />
       <main className="flex-1 px-4 overflow-x-hidden overflow-y-auto">
         <div className="flex flex-col min-h-full pt-4 pb-6">
