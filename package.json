@@ -12,7 +12,8 @@
     "test:watch": "jest --watch",
     "test:e2e": "playwright test",
     "prisma:studio": "prisma studio",
-    "prisma:seed": "prisma db seed"
+    "prisma:seed": "prisma db seed",
+    "vercel": "prisma generate && prisma migrate deploy && next build"
   },
   "prisma": {
     "seed": "node prisma/seed.js"
