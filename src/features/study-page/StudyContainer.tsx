@@ -62,13 +62,14 @@ const Header = ({
   deleteCard: DeleteCard
   editCard: EditCard
 }) => (
-  <header className=" bg-zinc-50 dark:bg-zinc-700  shadow">
-    <div className="flex items-center justify-between p-4 gap-4 max-w-screen-xl mx-auto">
-      <nav>
-        <Link href="/" aria-label="Home" className="text-inherit">
-          <LogoText aria-hidden className="hidden sm:w-36 sm:block" />
+  <header className=" bg-zinc-50 dark:bg-zinc-700 shadow">
+    <div className="grid grid-cols-4 items-center p-4 gap-4 max-w-screen-xl mx-auto">
+      <nav className="justify-self-start flex place-items-center">
+        <Link href="/" aria-label="Home" className="text-inherit inline-block">
+          <LogoText aria-hidden className="hidden sm:block sm:w-36" />
           <ChevronLeft
-            className="text-inherit w-10 h-10 sm:hidden"
+            className="text-inherit sm:hidden"
+            size={40}
             aria-hidden
           />
         </Link>
@@ -77,9 +78,9 @@ const Header = ({
       <DropdownMenu modal={false}>
         <DropdownMenuTrigger
           aria-label="Flashcard Options"
-          className="p-1 hover:bg-zinc-300 hover:rounded-full"
+          className="justify-self-end p-1 hover:bg-zinc-300 hover:rounded-full"
         >
-          <Settings className="w-8 h-8" />
+          <Settings size={32} />
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" side="bottom">
           <DropdownMenuItem onSelect={() => editCard()}>
@@ -95,7 +96,7 @@ const Header = ({
 )
 
 const ProgressBar = ({ progress }: { progress: number }) => (
-  <div className="relative flex-1 h-3 max-w-lg overflow-hidden bg-zinc-300 dark:bg-zinc-400 rounded-lg shadow-inner">
+  <div className="col-span-2 justify-self-center w-full relative h-3 max-w-lg overflow-hidden bg-zinc-300 dark:bg-zinc-400 rounded-lg shadow-inner">
     <div
       role="progressbar"
       aria-label="Progress"
