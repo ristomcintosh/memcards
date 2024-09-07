@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { DarkModeToggle } from "./DarkModeToggle"
 import { LogoText } from "./Logo"
+import { Logout } from "@/features/home-page/Logout"
 
 export function NavBar() {
   return (
@@ -11,7 +12,10 @@ export function NavBar() {
             <LogoText aria-hidden />
           </Link>
         </nav>
-        <DarkModeToggle />
+        <div className="flex items-center gap-x-2">
+          <DarkModeToggle />
+          <Logout />
+        </div>
       </div>
     </header>
   )

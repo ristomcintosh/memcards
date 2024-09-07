@@ -30,7 +30,7 @@ export function DarkModeToggle() {
   }
 
   return (
-    <div className="focus-within:outline-2 outline-offset-4 focus-within:outline focus-within:outline-brand-400">
+    <div className="text-sm font-medium focus-within:outline-2 outline-offset-4 focus-within:outline focus-within:outline-brand-400">
       <input
         id="toggle-theme"
         aria-label="Toggle Theme"

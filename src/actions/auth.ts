@@ -5,7 +5,7 @@ import {
   createUser,
   copyTutorialDeckToUser,
 } from "@/service/dbService"
-import { createSession } from "@/service/session"
+import { createSession, deleteSession } from "@/service/session"
 import { redirect } from "next/navigation"
 import { CreateUserSchema, LoginSchema } from "./auth.schema"
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library"
@@ -111,4 +111,9 @@ export const login = async (
   await createSession(user.id)
 
   redirect("/")
+}
+
+export const logout = async () => {
+  deleteSession()
+  redirect("/login")
 }
