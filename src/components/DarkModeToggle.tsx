@@ -40,7 +40,7 @@ export function DarkModeToggle() {
         className="sr-only"
         aria-describedby="theme-value"
       />
-      <label htmlFor="toggle-theme">
+      <label htmlFor="toggle-theme" className="cursor-pointer">
         <div className="flex items-center gap-1" aria-hidden>
           {isDarkMode ? <DarkModeIcon /> : <LightModeIcon />}
         </div>

@@ -14,8 +14,8 @@ export const Flashcard = ({ cardSide, flashcard }: FlashcardProps) => {
     <motion.div
       variants={flashcardVariants}
       animate={cardSide === "front" ? "flipToFront" : "flipToBack"}
-      className="relative py-4 px-6 flex-grow flex items-center justify-center w-full sm:w-3/4 max-w-lg bg-zinc-50 dark:bg-zinc-600 shadow-lg rounded-xl break-words hyphens-auto"
-      style={{ minHeight: "300px", maxHeight: "600px" }}
+      className="relative py-4 px-6 flex-grow flex items-center justify-center w-full max-w-xs  sm:max-w-lg bg-zinc-50 dark:bg-zinc-600 shadow-lg rounded-xl break-words hyphens-auto"
+      style={{ minHeight: "300px", maxHeight: "500px" }}
     >
       <FlashcardContent
         cardSide={cardSide}
@@ -33,7 +33,10 @@ type FlashcardContentProps = {
 const FlashcardContent = ({ cardSide, text }: FlashcardContentProps) => {
   const defaultStyles = cardSide === "back" ? { rotateY: 180 } : {}
   return (
-    <motion.p style={{ ...defaultStyles }} className="text-4xl text-center">
+    <motion.p
+      style={{ ...defaultStyles }}
+      className="text-2xl sm:text-3xl text-center"
+    >
       {text}
     </motion.p>
   )

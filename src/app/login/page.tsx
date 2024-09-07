@@ -51,7 +51,7 @@ export default function LoginPage() {
       <div className="flex sm:items-center justify-center flex-1">
         <div className="w-full sm:max-w-lg p-8 sm:p-14 sm:bg-zinc-50 dark:bg-zinc-600 sm:shadow-lg sm:rounded-xl">
           <div className="mb-8">
-            <h1 className="text-4xl mb-4">Log in</h1>
+            <h1 className="mb-4">Log in</h1>
             <p className="flex flex-wrap gap-x-1">
               <span>Need a Memcards account?</span>
               <Link href="/signup">Create an account</Link>

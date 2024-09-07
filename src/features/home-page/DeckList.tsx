@@ -21,7 +21,6 @@ export const DeckList = ({ decks }: DeckListProps) => {
         >
           <Link
             className="flex-grow text-inherit hover:no-underline break-words hyphens-auto"
-            aria-describedby="card-count"
             href={`/study/${deck.id}`}
           >
             {deck.name}
