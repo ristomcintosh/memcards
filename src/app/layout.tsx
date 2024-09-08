@@ -1,4 +1,3 @@
-import { cn } from "@/utils/misc"
 import { inter } from "@/styles/fonts"
 import "../styles/globals.css"
 import { SetThemeScript } from "@/components/SetThemeScript"
@@ -15,8 +14,8 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={cn(inter.variable, "h-full")}>
-      <body className="h-full bg-zinc-100 dark:bg-zinc-800 dark:text-zinc-50 text-zinc-800">
+    <html lang="en" className={inter.variable}>
+      <body>
         <SetThemeScript />
         {children}
         <Toaster />
