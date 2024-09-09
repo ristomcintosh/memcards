@@ -1,6 +1,6 @@
 import { LogoText } from "@/components/Logo"
 import { Delete, Edit } from "@/components/menu-items"
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui"
 import {
   DropdownMenu,
   DropdownMenuContent,

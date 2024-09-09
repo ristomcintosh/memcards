@@ -1,7 +1,7 @@
 "use client"
 import { createAccount, CreateAccountResult } from "@/actions/auth"
 import { CreateUserSchema } from "@/actions/auth.schema"
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui"
 import {
   Form,
   FormControl,
@@ -51,7 +51,7 @@ export default function LoginPage() {
   const handleInvalid: SubmitErrorHandler<CreateUserSchema> = (fieldErrors) => {
     const invalidFieldsCount = Object.keys(fieldErrors).length
     setFormMessage(
-      `Failed to save because of ${invalidFieldsCount} invalid field(s).`
+      `Failed to save because of ${invalidFieldsCount} invalid field(s).`,
     )
   }
 

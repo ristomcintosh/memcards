@@ -1,5 +1,5 @@
 import { useFormStatus } from "react-dom"
-import { Button, ButtonProps } from "./ui/button"
+import { Button, ButtonProps } from "./ui/button/button"
 import { forwardRef } from "react"
 
 export const SubmitButton = forwardRef<HTMLButtonElement, ButtonProps>(
@@ -11,5 +11,5 @@ export const SubmitButton = forwardRef<HTMLButtonElement, ButtonProps>(
         {pending ? "Loading..." : "Submit"}
       </Button>
     )
-  }
+  },
 )

@@ -1,5 +1,5 @@
 import { NavBar } from "@/components/NavBar"
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui"
 import Link from "next/link"
 
 export default function NotFound() {

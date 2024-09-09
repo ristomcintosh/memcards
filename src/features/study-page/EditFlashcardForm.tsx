@@ -1,5 +1,5 @@
 import { updateFlashcard } from "@/actions/actions"
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui"
 import {
   DialogHeader,
   Dialog,

@@ -1,6 +1,6 @@
 "use client"
 import { NavBar } from "@/components/NavBar"
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui"
 import { useTransition } from "react"
 
 export default function Error({ reset }: { reset: () => void }) {

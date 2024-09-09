@@ -2,7 +2,7 @@
 import { login } from "@/actions/auth"
 import { LoginSchema } from "@/actions/auth.schema"
 import { LogoTextIcon } from "@/components/Logo"
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui"
 import {
   Form,
   FormControl,
