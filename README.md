@@ -4,7 +4,7 @@
 <img src="./demo/logo.png" width="80%" style="max-width: 400px"/>
 </p>
 
-[**Memcards**](https://memcards.vercel.app/login) is a minimal flashcard app that helps you memorize things.
+[**Memcards**](https://memcards.vercel.app/login) is a minimally designed flashcard app to help you memorize things efficiently.
 
 ## Tech Stack
 
