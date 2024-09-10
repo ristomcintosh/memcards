@@ -12,20 +12,20 @@ const buttonVariants = cva(
         default:
           "bg-brand-500 text-zinc-900 hover:bg-brand-500/80 dark:bg-brand-400 dark:text-zinc-900 dark:hover:bg-brand-400/80",
         destructive:
-          "bg-red-700 text-zinc-50 dark:text-zinc-900 hover:bg-red-700/90 dark:bg-red-400 dark:hover:bg-red-400/80",
+          "bg-destructive-700 text-zinc-50 dark:text-zinc-900 hover:bg-destructive-700/90 dark:bg-destructive-400 dark:hover:bg-destructive-400/80",
+        destructiveSecondary:
+          "text-destructive-700 hover:bg-zinc-200 dark:text-destructive-300 dark:hover:bg-zinc-800 dark:hover:text-destructive-400",
         outline: `border-2 border-brand-500 hover:bg-brand-500/30 text-brand-800 hover:text-brand-900
-          dark:border-brand-400 dark:hover:bg-zinc-800/80 dark:text-inherit dark:hover:text-inherit dark:hover:border-brand-400/80`,
-        secondary:
-          "bg-zinc-100 text-zinc-900 hover:bg-zinc-100/80 dark:bg-zinc-800 dark:text-white dark:hover:bg-zinc-800/80",
+          dark:border-brand-400 dark:hover:bg-brand-400/30 dark:text-brand-400 dark:hover:text-inherit dark:hover:border-brand-400/80`,
         ghost:
-          "hover:bg-zinc-100 hover:text-zinc-900 dark:hover:bg-zinc-800 dark:hover:text-white",
-        link: "text-zinc-900 underline-offset-4 hover:underline dark:text-white",
+          "text-inherit hover:text-brand-700 hover:bg-zinc-200 dark:text-inherit dark:hover:text-brand-500 dark:hover:bg-zinc-800",
+        link: "text-brand-700  underline-offset-4 hover:underline dark:text-brand-400",
       },
       size: {
         default: "h-10 rounded px-4 py-2",
         sm: "h-9 rounded px-3 text-sm",
         lg: "h-11 rounded px-8 text-xl",
-        icon: "h-10 w-10 rounded-lg",
+        icon: "h-10 w-10 rounded-md",
       },
     },
     defaultVariants: {

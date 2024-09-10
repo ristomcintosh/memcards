@@ -17,8 +17,8 @@ const meta: Meta<typeof Button> = {
       options: [
         "default",
         "destructive",
+        "destructiveSecondary",
         "outline",
-        "secondary",
         "ghost",
         "link",
       ],
@@ -33,18 +33,19 @@ const meta: Meta<typeof Button> = {
       },
     },
   },
+  decorators: [
+    (Story) => (
+      <div className="bg-zinc-50 dark:bg-zinc-700 h-svh p-10">
+        <Story />
+      </div>
+    ),
+  ],
 }
 
 export default meta
 type Story = StoryObj<typeof Button>
 
 export const Default: Story = {}
-
-export const Secondary: Story = {
-  args: {
-    variant: "secondary",
-  },
-}
 
 export const Outline: Story = {
   args: {
@@ -55,6 +56,12 @@ export const Outline: Story = {
 export const Destructive: Story = {
   args: {
     variant: "destructive",
+  },
+}
+
+export const DestructiveSecondary: Story = {
+  args: {
+    variant: "destructiveSecondary",
   },
 }
 
@@ -74,5 +81,6 @@ export const IconButton: Story = {
   args: {
     children: <Edit />,
     size: "icon",
+    "aria-label": "Edit",
   },
 }

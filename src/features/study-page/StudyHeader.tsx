@@ -7,7 +7,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { ChevronLeft, Settings } from "lucide-react"
+import { ChevronLeft, PencilLine, Settings, Trash2 } from "lucide-react"
 import Link from "next/link"
 
 export type StudyHeaderProps = {
@@ -37,13 +37,18 @@ export const StudyHeader = ({
       <div className=" sm:block hidden">
         <menu className="flex gap-x-1 justify-end">
           <li>
-            <Button variant="ghost" onClick={() => editCard()}>
-              Edit
+            <Button variant="ghost" size="icon" onClick={() => editCard()}>
+              <PencilLine />
             </Button>
           </li>
           <li>
-            <Button variant="ghost" onClick={() => deleteCard()}>
-              Delete
+            <Button
+              variant="destructiveSecondary"
+              size="icon"
+              onClick={() => deleteCard()}
+              aria-label="Delete"
+            >
+              <Trash2 />
             </Button>
           </li>
         </menu>
@@ -59,7 +64,10 @@ export const StudyHeader = ({
           <DropdownMenuItem onSelect={() => editCard()}>
             <Edit />
           </DropdownMenuItem>
-          <DropdownMenuItem onSelect={() => deleteCard()}>
+          <DropdownMenuItem
+            onSelect={() => deleteCard()}
+            className="text-destructive-500 focus:text-destructive-600 dark:text-destructive-400 dark:focus:text-destructive-400"
+          >
             <Delete />
           </DropdownMenuItem>
         </DropdownMenuContent>
