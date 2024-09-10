@@ -24,7 +24,7 @@ export const DeleteConfirmation = ({
           <DialogTitle data-testid="delete-confirmation-title">
             <span>Are you sure you want to delete </span>
             <span className="block">
-              <span className="text-red-700 text-xl dark:text-red-400">
+              <span className="text-destructive-700 text-xl dark:text-destructive-400">
                 {deck.name}
               </span>
               <span>?</span>

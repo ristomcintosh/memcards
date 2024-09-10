@@ -38,6 +38,19 @@ const config = {
       },
       colors: {
         brand: colors.teal,
+        destructive: {
+          "50": "#fef2f2",
+          "100": "#fde3e3",
+          "200": "#fdcbcb",
+          "300": "#faa7a7",
+          "400": "#f57474",
+          "500": "#eb4848",
+          "600": "#d82a2a",
+          "700": "#c72323",
+          "800": "#961e1e",
+          "900": "#7d1f1f",
+          "950": "#440b0b",
+        },
       },
       fontFamily: {
         sans: ["var(--font-inter)", "sans-serif"],
