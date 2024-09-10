@@ -2,9 +2,17 @@ name: CI
 
 on:
   push:
-    branches: [main]
-  pull_request:
-    branches: [main]
+    paths:
+      - "src/**"
+      - "prisma/**"
+      - "e2e/**"
+      - "jest.config.js"
+      - "next.config.mjs"
+      - "tsconfig.json"
+      - "package.json"
+      - "package-lock.json"
+      - ".github/workflows/ci.yml"
+      - ".github/actions/**"
 
 jobs:
   lint:
