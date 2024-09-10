@@ -37,7 +37,12 @@ export const StudyHeader = ({
       <div className=" sm:block hidden">
         <menu className="flex gap-x-1 justify-end">
           <li>
-            <Button variant="ghost" size="icon" onClick={() => editCard()}>
+            <Button
+              variant="ghost"
+              size="icon"
+              aria-label="Edit"
+              onClick={() => editCard()}
+            >
               <PencilLine />
             </Button>
           </li>
