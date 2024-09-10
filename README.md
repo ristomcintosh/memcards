@@ -1,39 +1,55 @@
 # Memcards
 
-A flashcard app to help you remember things easily. Study pre-made decks or create your own.
+<p align="center">
+<img src="./demo/logo.png" width="80%" style="max-width: 400px"/>
+</p>
+
+[**Memcards**](https://memcards.vercel.app/login) is a minimal flashcard app that helps you memorize things.
+
+## Tech Stack
+
+Memcards is developed using a range of technologies, including:
+
+- Next.js
+- Tailwind CSS
+- TypeScript
+- Playwright
+- Storybook
 
 ## How to run
 
-1. Copy the `.env.example` file to `.env`
+To get a local build running, you'll need the following:
+
+### Prerequisites
+
+- Git
+- Node
+- NextJS
+- Docker (for Postgres database)
+
+### Installation Steps
 
 ```bash
+git clone git@github.com:ristomcintosh/memcards-v2.git
+cd memcards-v2
 cp .env.example .env
-```
-
-2. Install the dependencies
-
-```bash
 npm install
-```
-
-3. migration the database
-
-```bash
-npx prisma migrate dev
-```
-
-4. Run the app
-
-```bash
+docker compose up -d # start the database
+npx prisma migrate dev # setup and seed the database
 npm run dev
 ```
 
-Optional: seed the database with some pre-made decks
+The app should now be running on [http://localhost:3000](http://localhost:3000).
 
-```bash
-npx prisma db seed
-```
+You can login with the test user (created by the [seed script](./prisma/seed.js)):
 
-## Demo
+- Username: `user`
+- Password: `password`
 
-![Memcards demo](demo/demo.gif)
+<br/>
+<br/>
+<br/>
+
+<div align="center">
+  <img src="demo/demo.gif" width="300" />
+</div>
