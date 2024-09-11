@@ -1,5 +1,6 @@
 import { inter } from "@/styles/fonts"
 import "../styles/globals.css"
+import { Analytics } from "@vercel/analytics/react"
 import { SetThemeScript } from "@/components/SetThemeScript"
 import { Toaster } from "@/components/ui/toast/toaster"
 
@@ -16,6 +17,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter.variable}>
       <body>
+        <Analytics />
         <SetThemeScript />
         {children}
         <Toaster />
