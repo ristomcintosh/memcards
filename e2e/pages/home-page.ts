@@ -23,7 +23,7 @@ export class HomePage {
       .getByLabel("Deck Options")
       .click()
     await this.page.getByRole("menuitem", { name: "Delete" }).click()
-    await this.page.getByRole("button", { name: "Yes" }).click()
+    await this.page.getByRole("button", { name: "Continue" }).click()
   }
 
   async deleteAllDecks() {

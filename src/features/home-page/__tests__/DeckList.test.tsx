@@ -36,10 +36,10 @@ describe(DeckList.name, () => {
     await user.click(deleteButton)
 
     expect(screen.getByTestId("delete-confirmation-title")).toHaveTextContent(
-      "Are you sure you want to delete Deck 1?"
+      "Are you sure you want to delete Deck 1?",
     )
 
-    await user.click(screen.getByRole("button", { name: "Yes" }))
+    await user.click(screen.getByRole("button", { name: "Continue" }))
     expect(deleteDeck).toHaveBeenCalledWith("some-id")
   })
 

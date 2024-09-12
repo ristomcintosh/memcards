@@ -11,7 +11,7 @@ export const DeleteConfirmation = ({
 }) => (
   <AlertDialog
     title={
-      <span>
+      <span data-testid="delete-confirmation-title">
         <span>Are you sure you want to delete </span>
         <div>
           <span className="text-destructive-700 text-xl dark:text-destructive-400">

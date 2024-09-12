@@ -19,7 +19,7 @@ test("Create and delete deck", async ({ page }, testInfo) => {
   await page.getByTestId(`deck-${deckName}`).getByLabel("Deck Options").click()
 
   await page.getByRole("menuitem", { name: "Delete" }).click()
-  await page.getByRole("button", { name: "Yes" }).click()
+  await page.getByRole("button", { name: "Continue" }).click()
   await expect(page.getByTestId(`deck-${deckName}`)).not.toBeVisible()
 })
 

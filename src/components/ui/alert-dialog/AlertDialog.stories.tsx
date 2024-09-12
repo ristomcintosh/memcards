@@ -16,5 +16,6 @@ export const Default: Story = {
   args: {
     title: "Are you absolutely sure?",
     onConfirm: fn(),
+    onCancel: fn(),
   },
 }
