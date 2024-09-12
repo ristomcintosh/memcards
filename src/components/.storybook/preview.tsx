@@ -1,9 +1,9 @@
 import React from "react"
-import type { Preview, ReactRenderer } from "@storybook/react"
+import type { Preview } from "@storybook/react"
 import { withThemeByClassName } from "@storybook/addon-themes"
-import { inter } from "../src/styles/fonts"
+import { inter } from "../../styles/fonts"
 
-import "../src/styles/globals.css"
+import "../../styles/globals.css"
 
 const preview: Preview = {
   parameters: {

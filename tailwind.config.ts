@@ -52,6 +52,12 @@ const config = {
           "950": "#440b0b",
         },
       },
+      backgroundColor: {
+        surface: {
+          light: colors.zinc["50"],
+          dark: colors.zinc["700"],
+        },
+      },
       fontFamily: {
         sans: ["var(--font-inter)", "sans-serif"],
       },

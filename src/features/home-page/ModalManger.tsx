@@ -11,7 +11,7 @@ export function useModalState() {
   const closeModal = useCallback(() => setModalType(null), [])
 
   const [selectedDeck, setSelectedDeck] = useState<DeckWithCardCount | null>(
-    null
+    null,
   )
 
   const toggleModal = useCallback(
@@ -19,7 +19,7 @@ export function useModalState() {
       setSelectedDeck(deck)
       setModalType(type)
     },
-    []
+    [],
   )
 
   return { modalType, closeModal, selectedDeck, toggleModal }
