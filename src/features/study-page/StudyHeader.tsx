@@ -21,7 +21,7 @@ export const StudyHeader = ({
   deleteCard,
   editCard,
 }: StudyHeaderProps) => (
-  <header className="bg-zinc-50 dark:bg-zinc-700 shadow">
+  <header className="bg-surface-light dark:bg-surface-dark shadow">
     <div className="grid grid-cols-6 sm:grid-cols-4 items-center py-2 px-4 sm:p-4 gap-4 max-w-screen-xl mx-auto">
       <nav className="justify-self-start flex place-items-center">
         <Link href="/" aria-label="Home" className="text-inherit inline-block">

@@ -5,7 +5,7 @@ import { Logout } from "@/features/home-page/Logout"
 
 export function NavBar() {
   return (
-    <header className="dark:bg-zinc-700 bg-zinc-50 shadow">
+    <header className="dark:bg-surface-dark bg-surface-light shadow">
       <div className="flex justify-between items-center px-4 py-4 text-lg max-w-screen-xl mx-auto">
         <nav className="w-full max-w-28 sm:max-w-28">
           <Link href="/" aria-label="Home">

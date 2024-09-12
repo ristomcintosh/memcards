@@ -7,6 +7,7 @@ export const buttonVariants = cva(
       variant: {
         default:
           "bg-brand-500 text-zinc-900 hover:bg-brand-500/80 dark:bg-brand-400 dark:text-zinc-900 dark:hover:bg-brand-400/80",
+        secondary: "hover:bg-zinc-200 dark:hover:bg-zinc-800",
         destructive:
           "bg-destructive-700 text-zinc-50 dark:text-zinc-900 hover:bg-destructive-700/90 dark:bg-destructive-400 dark:hover:bg-destructive-400/80",
         destructiveSecondary:

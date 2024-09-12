@@ -47,6 +47,12 @@ type Story = StoryObj<typeof Button>
 
 export const Default: Story = {}
 
+export const Secondary: Story = {
+  args: {
+    variant: "secondary",
+  },
+}
+
 export const Outline: Story = {
   args: {
     variant: "outline",
