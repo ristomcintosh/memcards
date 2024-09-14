@@ -25,7 +25,8 @@ export const DeckList = ({ decks }: DeckListProps) => {
           >
             {deck.name}
           </Link>
-          <p id="card-count" aria-label={`card count ${deck.cardCount}`}>
+          <p>
+            <span className="sr-only">number of cards,</span>
             {deck.cardCount}
           </p>
 
