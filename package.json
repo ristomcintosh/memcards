@@ -15,7 +15,8 @@
     "prisma:seed": "prisma db seed",
     "vercel": "prisma generate && prisma migrate deploy && next build",
     "storybook": "storybook dev -p 6006 --config-dir ./src/components/.storybook",
-    "build-storybook": "storybook build"
+    "storybook:build": "storybook build --config-dir ./src/components/.storybook/",
+    "storybook:test": "test-storybook --config-dir ./src/components/.storybook/"
   },
   "prisma": {
     "seed": "node prisma/seed.js"
