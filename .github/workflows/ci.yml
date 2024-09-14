@@ -11,7 +11,7 @@ on:
       - "tsconfig.json"
       - "package.json"
       - "package-lock.json"
-      - ".github/workflows/ci.yml"
+      - ".github/workflows/**"
       - ".github/actions/**"
 
 jobs:
