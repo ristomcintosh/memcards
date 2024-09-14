@@ -14,10 +14,11 @@ import {
 import { Input } from "@/components/ui/input"
 import { CircleAlert } from "lucide-react"
 import Link from "next/link"
-import { useState } from "react"
+import { useState, useTransition } from "react"
 import { SubmitErrorHandler, useForm } from "react-hook-form"
 
 export default function LoginPage() {
+  const [isPending, startTransition] = useTransition()
   const form = useForm<LoginSchema>({
     reValidateMode: "onBlur",
     shouldFocusError: false,
@@ -30,11 +31,13 @@ export default function LoginPage() {
   const [formMessage, setFormMessage] = useState("")
 
   const handleSubmit = async (event: LoginSchema) => {
-    return login(event).then((result) => {
-      if (result?.message) {
-        setFormMessage(result?.message)
-        form.setError("password", { message: result?.message })
-      }
+    startTransition(() => {
+      login(event).then((result) => {
+        if (result?.message) {
+          setFormMessage(result?.message)
+          form.setError("password", { message: result?.message })
+        }
+      })
     })
   }
 
@@ -99,8 +102,13 @@ export default function LoginPage() {
                   </FormItem>
                 )}
               />
-              <Button className="mt-7" size="lg" type="submit">
-                {form.formState.isSubmitting ? "Logging in..." : "Log in"}
+              <Button
+                className="mt-7"
+                size="lg"
+                type="submit"
+                disabled={isPending}
+              >
+                {isPending ? "Logging in..." : "Log in"}
               </Button>
             </form>
           </Form>

@@ -14,12 +14,13 @@ import {
 import { Input } from "@/components/ui/input"
 import { CircleAlert } from "lucide-react"
 import Link from "next/link"
-import { useState } from "react"
+import { useState, useTransition } from "react"
 import { SubmitErrorHandler, useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { LogoTextIcon } from "@/components/Logo"
 
 export default function LoginPage() {
+  const [isPending, startTransition] = useTransition()
   const form = useForm<CreateUserSchema>({
     resolver: zodResolver(CreateUserSchema),
     reValidateMode: "onBlur",
@@ -34,17 +35,19 @@ export default function LoginPage() {
   const [formMessage, setFormMessage] = useState("")
 
   const handleSubmit = async (event: CreateUserSchema) => {
-    return createAccount(event).then((result) => {
-      if (result?.errors) {
-        Object.entries(result.errors).forEach(([field, errors]) => {
-          form.setError(field as keyof CreateAccountResult["errors"], {
-            type: "custom",
-            message: errors.join(" "),
+    startTransition(() => {
+      createAccount(event).then((result) => {
+        if (result?.errors) {
+          Object.entries(result.errors).forEach(([field, errors]) => {
+            form.setError(field as keyof CreateAccountResult["errors"], {
+              type: "custom",
+              message: errors.join(" "),
+            })
           })
-        })
-      }
+        }
 
-      if (result?.message) setFormMessage(result.message)
+        if (result?.message) setFormMessage(result.message)
+      })
     })
   }
 
@@ -126,8 +129,13 @@ export default function LoginPage() {
                   </FormItem>
                 )}
               />
-              <Button className="mt-7" size="lg" type="submit">
-                {form.formState.isSubmitting ? "Loading..." : "Sign up"}
+              <Button
+                className="mt-7"
+                size="lg"
+                type="submit"
+                disabled={isPending}
+              >
+                {isPending ? "Loading..." : "Sign up"}
               </Button>
             </form>
           </Form>
