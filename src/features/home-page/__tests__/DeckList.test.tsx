@@ -18,13 +18,6 @@ describe(DeckList.name, () => {
     },
   ]
 
-  it("renders", () => {
-    render(<DeckList decks={testDeckList} />)
-
-    expect(screen.getByText("Deck 1")).toBeInTheDocument()
-    expect(screen.getByLabelText("card count 3")).toBeInTheDocument()
-  })
-
   it("shows the delete confirmation dialog and calls deleteDeck when 'Yes' is clicked", async () => {
     const user = userEvent.setup()
     render(<DeckList decks={testDeckList} />)

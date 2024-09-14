@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { DarkModeToggle } from "./DarkModeToggle"
+import { ThemeToggle } from "./ThemeToggle"
 import { LogoText } from "./Logo"
 import { Logout } from "@/features/home-page/Logout"
 
@@ -13,7 +13,7 @@ export function NavBar() {
           </Link>
         </nav>
         <div className="flex items-center gap-x-2">
-          <DarkModeToggle />
+          <ThemeToggle />
           <Logout />
         </div>
       </div>
