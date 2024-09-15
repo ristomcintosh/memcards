@@ -1,9 +1,9 @@
 import Link from "next/link"
 import { ThemeToggle } from "./ThemeToggle"
-import { LogoText } from "./Logo"
-import { Logout } from "@/features/home-page/Logout"
+import { LogoText } from "../logo/LogoText"
+import { Logout } from "./Logout"
 
-export function NavBar() {
+export function AppHeader() {
   return (
     <header className="dark:bg-surface-dark bg-surface-light shadow">
       <div className="flex justify-between items-center px-4 py-4 text-lg max-w-screen-xl mx-auto">

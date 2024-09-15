@@ -1,6 +1,6 @@
 "use client"
-import { NavBar } from "@/components/NavBar"
-import { Button } from "@/components/ui"
+import { AppHeader } from "@/components/ui/app-header"
+import { Button } from "@/components/ui/button"
 import { useTransition } from "react"
 
 export default function Error({ reset }: { reset: () => void }) {
@@ -8,7 +8,7 @@ export default function Error({ reset }: { reset: () => void }) {
 
   return (
     <div className="h-full flex flex-col">
-      <NavBar />
+      <AppHeader />
       <div className="flex flex-col items-center justify-center flex-1 p-8">
         <h1 className="text-4xl mb-4 text-center">
           Oops, something went wrong 😬

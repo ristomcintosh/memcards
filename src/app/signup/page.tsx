@@ -1,7 +1,7 @@
 "use client"
 import { createAccount, CreateAccountResult } from "@/actions/auth"
 import { CreateUserSchema } from "@/actions/auth.schema"
-import { Button } from "@/components/ui"
+import { Button } from "@/components/ui/button"
 import {
   Form,
   FormControl,
@@ -17,7 +17,7 @@ import Link from "next/link"
 import { useState, useTransition } from "react"
 import { SubmitErrorHandler, useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { LogoTextIcon } from "@/components/Logo"
+import { LogoIconWithText } from "@/components/ui/logo"
 
 export default function LoginPage() {
   const [isPending, startTransition] = useTransition()
@@ -61,7 +61,7 @@ export default function LoginPage() {
   return (
     <main className="flex flex-col border-l-8 border-brand-500 dark:bg-zinc-600 sm:dark:bg-inherit border-t-8 py-4 min-h-full">
       <div className="w-32 sm:w-60 ml-8" aria-hidden="true">
-        <LogoTextIcon />
+        <LogoIconWithText />
       </div>
       <div className="flex sm:items-center justify-center flex-1">
         <div className="w-full sm:max-w-lg p-8 sm:p-14 sm:bg-zinc-50 dark:bg-zinc-600 sm:shadow-lg sm:rounded-xl">
