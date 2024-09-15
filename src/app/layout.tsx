@@ -1,8 +1,8 @@
 import { inter } from "@/styles/fonts"
 import "../styles/globals.css"
 import { Analytics } from "@vercel/analytics/react"
-import { SetThemeScript } from "@/components/SetThemeScript"
 import { Toaster } from "@/components/ui/toast/toaster"
+import { THEME_KEY } from "@/constants"
 
 export const metadata = {
   title: "Memcards",
@@ -24,4 +24,18 @@ export default function RootLayout({
       </body>
     </html>
   )
+}
+
+export function SetThemeScript() {
+  const applyThemeScript = `
+    (function () {
+      const theme = localStorage.getItem("${THEME_KEY}")
+      if (theme === "dark") {
+        document.documentElement.classList.add("dark")
+      } else {
+        document.documentElement.classList.remove("dark")
+      }
+    })()
+  `
+  return <script dangerouslySetInnerHTML={{ __html: applyThemeScript }} />
 }

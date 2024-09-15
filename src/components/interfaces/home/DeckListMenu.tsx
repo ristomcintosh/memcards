@@ -6,8 +6,8 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { VerticalDots } from "@/components/VerticalDots"
-import { Rename, Delete } from "@/components/menu-items"
+import { Rename, Delete } from "@/components/ui/menu-items"
+import { EllipsisVertical } from "lucide-react"
 
 type MenuProps = {
   handleRename: () => void
@@ -20,7 +20,7 @@ export const DeckMenu = ({ handleRename, handleDelete }: MenuProps) => (
       aria-label="Deck Options"
       className="w-8 min-w-8 min-h-8 h-8 p-1 hover:bg-zinc-300 hover:rounded-full"
     >
-      <VerticalDots />
+      <EllipsisVertical />
     </DropdownMenuTrigger>
     <DropdownMenuContent align="end">
       <DropdownMenuItem onSelect={() => handleRename()}>

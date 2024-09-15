@@ -1,8 +1,8 @@
 "use client"
 import { login } from "@/actions/auth"
 import { LoginSchema } from "@/actions/auth.schema"
-import { LogoTextIcon } from "@/components/Logo"
-import { Button } from "@/components/ui"
+import { LogoIconWithText } from "@/components/ui/logo"
+import { Button } from "@/components/ui/button"
 import {
   Form,
   FormControl,
@@ -49,7 +49,7 @@ export default function LoginPage() {
   return (
     <main className="flex flex-col border-l-8 border-brand-500 dark:bg-zinc-600 sm:dark:bg-inherit border-t-8 py-4 min-h-full">
       <div className="w-40 sm:w-60 ml-8" aria-hidden="true">
-        <LogoTextIcon />
+        <LogoIconWithText />
       </div>
       <div className="flex sm:items-center justify-center flex-1">
         <div className="w-full sm:max-w-lg p-8 sm:p-14 sm:bg-zinc-50 dark:bg-zinc-600 sm:shadow-lg sm:rounded-xl">

@@ -1,4 +1,4 @@
-import { NavBar } from "@/components/NavBar"
+import { AppHeader } from "@/components/ui/app-header"
 
 export default function Layout({
   children,
@@ -7,7 +7,7 @@ export default function Layout({
 }>) {
   return (
     <div className="flex flex-col h-full">
-      <NavBar />
+      <AppHeader />
       <main className="flex-1 px-2">{children}</main>
     </div>
   )

@@ -8,7 +8,6 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form"
-import { Plus } from "@/components/Plus"
 import { createDeck } from "@/actions/actions"
 import {
   Dialog,
@@ -17,7 +16,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog"
-import { Button } from "@/components/ui"
+import { Button } from "@/components/ui/button"
 import { useForm } from "react-hook-form"
 import { Input } from "@/components/ui/input"
 import { Deck } from "@/types"
@@ -28,6 +27,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import Link from "next/link"
+import { Plus } from "lucide-react"
 
 export const CreateNew = () => {
   const [isCreateDeckFormOpen, showCreateDeckFrom] = useState(false)
@@ -48,10 +48,10 @@ const CreateNewMenu = ({
 }) => (
   <DropdownMenu modal={false}>
     <DropdownMenuTrigger
-      className="w-12 transition-transform ease-in data-[state=open]:rotate-[225deg] text-zinc-900 rounded-full shadow-lg bg-brand-500"
+      className="w-12 h-12 transition-transform ease-in data-[state=open]:rotate-[225deg] text-zinc-900 rounded-full shadow-lg bg-brand-500"
       aria-label="Create"
     >
-      <Plus />
+      <Plus className="w-full h-full" />
     </DropdownMenuTrigger>
     <DropdownMenuContent align="end" side="top" alignOffset={10}>
       <DropdownMenuItem onSelect={handleDeckCreation}>

@@ -1,5 +1,5 @@
 import { getDecks } from "@/actions/actions"
-import { CreateFlashcardForm } from "@/features/create-flashcard/CreateFlashcardForm"
+import { CreateFlashcardForm } from "@/components/interfaces/create-flashcard/CreateFlashcardForm"
 import { Suspense } from "react"
 
 export default async function CreateFlashcard() {
