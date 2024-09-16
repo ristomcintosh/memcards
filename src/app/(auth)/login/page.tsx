@@ -1,5 +1,7 @@
 import Link from "next/link"
 import { LoginForm } from "@/components/interfaces/auth"
+import { createDemoAccount } from "@/actions/auth"
+import { GuestSignIn } from "@/components/interfaces/auth/GuestSignIn"
 
 export default function LoginPage() {
   return (
@@ -12,6 +14,7 @@ export default function LoginPage() {
         </p>
       </header>
       <LoginForm />
+      <GuestSignIn handleGuestSignIn={createDemoAccount} />
     </>
   )
 }

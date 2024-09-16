@@ -1,5 +1,7 @@
-"use client"
+import { createDemoAccount } from "@/actions/auth"
 import { SignupForm } from "@/components/interfaces/auth"
+import { GuestSignIn } from "@/components/interfaces/auth/GuestSignIn"
+
 import Link from "next/link"
 
 export default function Signup() {
@@ -13,6 +15,7 @@ export default function Signup() {
         </p>
       </header>
       <SignupForm />
+      <GuestSignIn handleGuestSignIn={createDemoAccount} />
     </>
   )
 }
