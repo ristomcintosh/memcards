@@ -1,18 +1,60 @@
-import { decks } from "@/tests/testData"
 import { StudyView } from "../StudyView"
 import { act, render, screen, within } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import { deleteFlashcard } from "@/actions/actions"
+import { DeckWithFlashcards } from "@/types"
 
 jest.mock("@/actions/actions")
 
+const deck = {
+  id: "1",
+  name: "Deck 1",
+  userId: "user-id",
+  flashcards: [
+    {
+      id: "some-id",
+      deckId: "some-id",
+      front: "What is the capital of France?",
+      back: "Paris",
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    },
+    {
+      id: "some-id-2",
+      deckId: "some-id-2",
+      front: "What is the capital of Portugal?",
+      back: "Lisbon",
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    },
+    {
+      id: "some-id-3",
+      deckId: "some-id",
+      front: "What is the capital of Germany?",
+      back: "Berlin",
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    },
+    {
+      id: "some-id-4",
+      deckId: "some-id",
+      front: "What is the capital of Italy?",
+      back: "Rome",
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    },
+  ],
+  createdAt: new Date(),
+  updatedAt: new Date(),
+} satisfies DeckWithFlashcards
+
 describe(StudyView.name, () => {
   it("renders", () => {
-    render(<StudyView deck={decks[0]} />)
+    render(<StudyView deck={deck} />)
 
     expect(screen.getByText("Deck 1")).toBeInTheDocument()
     expect(
-      screen.getByText("What is the capital of France?")
+      screen.getByText("What is the capital of France?"),
     ).toBeInTheDocument()
     expect(screen.getByRole("button", { name: "Flip" })).toBeInTheDocument()
     expect(screen.getByRole("button", { name: "Next" })).toBeInTheDocument()
@@ -21,7 +63,7 @@ describe(StudyView.name, () => {
   it("flips the card", () => {
     const frontOfCardText = "What is the capital of France?"
     const backOfCardText = "Paris"
-    render(<StudyView deck={decks[0]} />)
+    render(<StudyView deck={deck} />)
 
     expect(screen.getByText(frontOfCardText)).toBeInTheDocument()
     expect(screen.queryByText(backOfCardText)).not.toBeInTheDocument()
@@ -34,7 +76,7 @@ describe(StudyView.name, () => {
   it("shows the next card", () => {
     const firstCard = "What is the capital of France?"
     const nextCard = "What is the capital of Portugal?"
-    render(<StudyView deck={decks[0]} />)
+    render(<StudyView deck={deck} />)
 
     expect(screen.getByText(firstCard)).toBeInTheDocument()
 
@@ -45,7 +87,7 @@ describe(StudyView.name, () => {
 
   it("deletes the current card being shown and show the next card", async () => {
     const nextCard = "What is the capital of Portugal?"
-    render(<StudyView deck={decks[0]} />)
+    render(<StudyView deck={deck} />)
 
     await deleteFlashcards(1)
 
@@ -55,7 +97,7 @@ describe(StudyView.name, () => {
 
   describe("Completed deck modal", () => {
     it("shows the completed modal after viewing all cards", () => {
-      render(<StudyView deck={decks[0]} />)
+      render(<StudyView deck={deck} />)
 
       const nextButton = screen.getByRole("button", { name: "Next" })
 
@@ -79,7 +121,7 @@ describe(StudyView.name, () => {
     })
 
     it("restarts the study session", () => {
-      render(<StudyView deck={decks[0]} />)
+      render(<StudyView deck={deck} />)
 
       const nextButton = screen.getByRole("button", { name: "Next" })
 
@@ -106,17 +148,17 @@ describe(StudyView.name, () => {
       })
 
       expect(
-        screen.getByText("What is the capital of France?")
+        screen.getByText("What is the capital of France?"),
       ).toBeInTheDocument()
     })
 
     it("does not show the restart button when after deleting all cards", async () => {
-      const { rerender } = render(<StudyView deck={decks[0]} />)
+      const { rerender } = render(<StudyView deck={deck} />)
 
       await deleteFlashcards(4)
 
       const deckWithoutCards = {
-        ...decks[0],
+        ...deck,
         flashcards: [],
       }
       rerender(<StudyView deck={deckWithoutCards} />)
