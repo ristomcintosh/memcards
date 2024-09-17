@@ -1,5 +1,6 @@
-import { updateDeck } from "@/actions/actions"
-import { Deck } from "@/types"
+import { useForm } from "react-hook-form";
+import { updateDeck } from "@/actions/actions";
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogClose,
@@ -7,8 +8,7 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "@/components/ui/dialog"
-import { Button } from "@/components/ui/button"
+} from "@/components/ui/dialog";
 import {
   Form,
   FormControl,
@@ -16,17 +16,17 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form"
-import { useForm } from "react-hook-form"
-import { Input } from "@/components/ui/input"
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Deck } from "@/types";
 
 type RenameDeckFormProps = {
-  deck: Deck
-  closeForm: () => void
-}
+  deck: Deck;
+  closeForm: () => void;
+};
 
 export const RenameDeckForm = ({ deck, closeForm }: RenameDeckFormProps) => {
-  const form = useForm<Pick<Deck, "name">>()
+  const form = useForm<Pick<Deck, "name">>();
   return (
     <Dialog defaultOpen onOpenChange={() => closeForm()}>
       <DialogContent>
@@ -36,8 +36,8 @@ export const RenameDeckForm = ({ deck, closeForm }: RenameDeckFormProps) => {
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit((formData) => {
-              updateDeck(deck.id, formData.name)
-              closeForm()
+              updateDeck(deck.id, formData.name);
+              closeForm();
             })}
             className="gap-6 flex flex-col"
           >
@@ -74,5 +74,5 @@ export const RenameDeckForm = ({ deck, closeForm }: RenameDeckFormProps) => {
         </Form>
       </DialogContent>
     </Dialog>
-  )
-}
+  );
+};

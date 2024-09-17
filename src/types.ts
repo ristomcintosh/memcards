@@ -1,10 +1,11 @@
-import { Deck, Flashcard } from "@prisma/client"
-export type { Deck, Flashcard }
+import { Deck, Flashcard } from "@prisma/client";
+
+export type { Deck, Flashcard };
 
 export type DeckWithFlashcards = Deck & {
-  flashcards: Flashcard[]
-}
+  flashcards: Flashcard[];
+};
 
 export type DeckWithCardCount = Deck & {
-  cardCount: number
-}
+  cardCount: number;
+};

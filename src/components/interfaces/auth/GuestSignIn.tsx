@@ -1,20 +1,21 @@
-"use client"
-import { Button } from "@/components/ui/button"
-import { LoaderCircle } from "lucide-react"
-import { useTransition } from "react"
+"use client";
+
+import { useTransition } from "react";
+import { LoaderCircle } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 export function GuestSignIn({
   handleGuestSignIn,
 }: {
-  handleGuestSignIn: () => void
+  handleGuestSignIn: () => void;
 }) {
-  const [isPending, startTransition] = useTransition()
+  const [isPending, startTransition] = useTransition();
 
   return (
-    <div className="text-center mt-8 p-3 border-2 border-zinc-200 dark:border-zinc-500 rounded-md relative flex flex-col items-center">
-      <span className="absolute flex h-4 w-4 -top-2 -left-2">
-        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-destructive-400 dark:bg-destructive-300 opacity-75"></span>
-        <span className="relative inline-flex rounded-full h-full w-full bg-destructive-500 dark:bg-destructive-400"></span>
+    <div className="relative mt-8 flex flex-col items-center rounded-md border-2 border-zinc-200 p-3 text-center dark:border-zinc-500">
+      <span className="absolute -left-2 -top-2 flex h-4 w-4">
+        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-destructive-400 opacity-75 dark:bg-destructive-300"></span>
+        <span className="relative inline-flex h-full w-full rounded-full bg-destructive-500 dark:bg-destructive-400"></span>
       </span>
       <p>Just browsing? Continue as a guest.</p>
       <div>
@@ -26,9 +27,9 @@ export function GuestSignIn({
           Explore Without Signing In!
         </Button>
       </div>
-      <p className="text-xs mt-2">
+      <p className="mt-2 text-xs">
         Note: Guest accounts are temporary and will be deleted after 24 hours.
       </p>
     </div>
-  )
+  );
 }

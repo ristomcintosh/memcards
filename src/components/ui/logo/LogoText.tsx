@@ -1,5 +1,5 @@
-import { cn } from "@/utils/misc"
-import { SVGProps } from "react"
+import { SVGProps } from "react";
+import { cn } from "@/utils/misc";
 
 export function LogoText({ className, ...props }: SVGProps<SVGSVGElement>) {
   return (
@@ -15,5 +15,5 @@ export function LogoText({ className, ...props }: SVGProps<SVGSVGElement>) {
         className="fill-brand-500"
       />
     </svg>
-  )
+  );
 }

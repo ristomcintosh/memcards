@@ -1,9 +1,9 @@
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button";
 
 export type StudyFooterProps = {
-  flipCard: () => void
-  nextCard: () => void
-}
+  flipCard: () => void;
+  nextCard: () => void;
+};
 
 export const StudyFooter = ({ flipCard, nextCard }: StudyFooterProps) => (
   <section className="py-3 dark:bg-zinc-700 dark:border-t-zinc-400/80 bg-zinc-50 border-t">
@@ -16,4 +16,4 @@ export const StudyFooter = ({ flipCard, nextCard }: StudyFooterProps) => (
       </Button>
     </div>
   </section>
-)
+);

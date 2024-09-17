@@ -1,16 +1,15 @@
-import { Meta, StoryObj } from "@storybook/react"
-import { fn } from "@storybook/test"
-
-import { AlertDialog } from "./AlertDialog"
+import { Meta, StoryObj } from "@storybook/react";
+import { fn } from "@storybook/test";
+import { AlertDialog } from "./AlertDialog";
 
 const meta: Meta = {
   title: "AlertDialog",
   component: AlertDialog,
-}
+};
 
-export default meta
+export default meta;
 
-type Story = StoryObj<typeof AlertDialog>
+type Story = StoryObj<typeof AlertDialog>;
 
 export const Default: Story = {
   args: {
@@ -18,4 +17,4 @@ export const Default: Story = {
     onConfirm: fn(),
     onCancel: fn(),
   },
-}
+};

@@ -1,7 +1,10 @@
-"use client"
-import { login } from "@/actions/auth"
-import { LoginSchema } from "@/actions/auth.schema"
-import { Button } from "@/components/ui/button"
+"use client";
+
+import { useState, useTransition } from "react";
+import { SubmitErrorHandler, useForm } from "react-hook-form";
+import { login } from "@/actions/auth";
+import { LoginSchema } from "@/actions/auth.schema";
+import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -9,14 +12,12 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
-import { useState, useTransition } from "react"
-import { useForm, SubmitErrorHandler } from "react-hook-form"
-import { LiveMessage } from "./LiveMessage"
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { LiveMessage } from "./LiveMessage";
 
 export function LoginForm() {
-  const [isPending, startTransition] = useTransition()
+  const [isPending, startTransition] = useTransition();
 
   const form = useForm<LoginSchema>({
     reValidateMode: "onBlur",
@@ -25,25 +26,25 @@ export function LoginForm() {
       username: "",
       password: "",
     },
-  })
+  });
 
-  const [formMessage, setFormMessage] = useState<string>()
+  const [formMessage, setFormMessage] = useState<string>();
 
   const handleSubmit = async (event: LoginSchema) => {
     startTransition(() => {
       login(event).then((result) => {
         if (result?.message) {
-          setFormMessage(result?.message)
-          form.setError("password", { message: result?.message })
+          setFormMessage(result?.message);
+          form.setError("password", { message: result?.message });
         }
-      })
-    })
-  }
+      });
+    });
+  };
 
   const handleInvalid: SubmitErrorHandler<LoginSchema> = (fieldErrors) => {
-    const invalidFields = Object.keys(fieldErrors).join(", ")
-    setFormMessage(`Missing the following field(s): ${invalidFields}`)
-  }
+    const invalidFields = Object.keys(fieldErrors).join(", ");
+    setFormMessage(`Missing the following field(s): ${invalidFields}`);
+  };
 
   return (
     <section>
@@ -84,5 +85,5 @@ export function LoginForm() {
         </form>
       </Form>
     </section>
-  )
+  );
 }

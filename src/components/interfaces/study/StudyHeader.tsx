@@ -1,20 +1,20 @@
-import { LogoText } from "@/components/ui/logo"
-import { Delete, Edit } from "@/components/ui/menu-items"
-import { Button } from "@/components/ui/button"
+import Link from "next/link";
+import { ChevronLeft, PencilLine, Settings, Trash2 } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { ChevronLeft, PencilLine, Settings, Trash2 } from "lucide-react"
-import Link from "next/link"
+} from "@/components/ui/dropdown-menu";
+import { LogoText } from "@/components/ui/logo";
+import { Delete, Edit } from "@/components/ui/menu-items";
 
 export type StudyHeaderProps = {
-  progress: number
-  deleteCard: () => void
-  editCard: () => void
-}
+  progress: number;
+  deleteCard: () => void;
+  editCard: () => void;
+};
 
 export const StudyHeader = ({
   progress,
@@ -79,7 +79,7 @@ export const StudyHeader = ({
       </DropdownMenu>
     </div>
   </header>
-)
+);
 
 const ProgressBar = ({ progress }: { progress: number }) => (
   <div className="col-span-4 sm:col-span-2 justify-self-center w-full relative h-3 max-w-lg overflow-hidden bg-zinc-300 dark:bg-zinc-400 rounded-lg shadow-inner">
@@ -95,4 +95,4 @@ const ProgressBar = ({ progress }: { progress: number }) => (
       }}
     ></div>
   </div>
-)
+);

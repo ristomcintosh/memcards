@@ -1,8 +1,11 @@
-"use client"
+"use client";
 
-import { createAccount, CreateAccountResult } from "@/actions/auth"
-import { CreateUserSchema } from "@/actions/auth.schema"
-import { Button } from "@/components/ui/button"
+import { useState, useTransition } from "react";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { SubmitErrorHandler, useForm } from "react-hook-form";
+import { CreateAccountResult, createAccount } from "@/actions/auth";
+import { CreateUserSchema } from "@/actions/auth.schema";
+import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -11,15 +14,12 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useState, useTransition } from "react"
-import { SubmitErrorHandler, useForm } from "react-hook-form"
-import { LiveMessage } from "./LiveMessage"
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { LiveMessage } from "./LiveMessage";
 
 export function SignupForm() {
-  const [isPending, startTransition] = useTransition()
+  const [isPending, startTransition] = useTransition();
 
   const form = useForm<CreateUserSchema>({
     resolver: zodResolver(CreateUserSchema),
@@ -30,9 +30,9 @@ export function SignupForm() {
       username: "",
       password: "",
     },
-  })
+  });
 
-  const [formMessage, setFormMessage] = useState<string>()
+  const [formMessage, setFormMessage] = useState<string>();
 
   const handleSubmit = async (event: CreateUserSchema) => {
     startTransition(() => {
@@ -42,21 +42,21 @@ export function SignupForm() {
             form.setError(field as keyof CreateAccountResult["errors"], {
               type: "custom",
               message: errors.join(" "),
-            })
-          })
+            });
+          });
         }
 
-        if (result?.message) setFormMessage(result.message)
-      })
-    })
-  }
+        if (result?.message) setFormMessage(result.message);
+      });
+    });
+  };
 
   const handleInvalid: SubmitErrorHandler<CreateUserSchema> = (fieldErrors) => {
-    const invalidFieldsCount = Object.keys(fieldErrors).length
+    const invalidFieldsCount = Object.keys(fieldErrors).length;
     setFormMessage(
       `Failed to save because of ${invalidFieldsCount} invalid field(s).`,
-    )
-  }
+    );
+  };
   return (
     <section>
       <LiveMessage message={formMessage} />
@@ -114,5 +114,5 @@ export function SignupForm() {
         </form>
       </Form>
     </section>
-  )
+  );
 }

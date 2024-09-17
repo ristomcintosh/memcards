@@ -1,17 +1,17 @@
-import { getDeckById } from "@/actions/actions"
-import { StudyView } from "@/components/interfaces/study/StudyView"
-import { notFound } from "next/navigation"
+import { notFound } from "next/navigation";
+import { getDeckById } from "@/actions/actions";
+import { StudyView } from "@/components/interfaces/study/StudyView";
 
 export default async function Study({
   params,
 }: {
-  params: { deckId: string }
+  params: { deckId: string };
 }) {
-  const deck = await getDeckById(params.deckId)
+  const deck = await getDeckById(params.deckId);
 
   if (!deck) {
-    notFound()
+    notFound();
   }
 
-  return <StudyView deck={deck} />
+  return <StudyView deck={deck} />;
 }

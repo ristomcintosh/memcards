@@ -1,17 +1,16 @@
 /**
  * @jest-environment node
  */
+import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
+import { createUser, getUserByUsernameOrEmail } from "@/service/dbService";
+import { createAccount, login } from "../auth";
 
-import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library"
-import { createAccount, login } from "../auth"
-import { createUser, getUserByUsernameOrEmail } from "@/service/dbService"
-
-const mockedBcryptCompare = jest.fn()
-jest.mock("@/service/dbService")
+const mockedBcryptCompare = jest.fn();
+jest.mock("@/service/dbService");
 jest.mock("bcrypt", () => ({
   ...jest.requireActual("bcrypt"),
   compare: () => mockedBcryptCompare(),
-}))
+}));
 
 describe(createAccount.name, () => {
   it.each`
@@ -22,32 +21,32 @@ describe(createAccount.name, () => {
   `(
     "Validation - returns $expected when username is $username and password is $password",
     async ({ username, password, email, expected }) => {
-      const result = await createAccount({ username, password, email })
+      const result = await createAccount({ username, password, email });
 
       expect(result).toEqual(
         expect.objectContaining({
           message: expected,
-        })
-      )
-    }
-  )
+        }),
+      );
+    },
+  );
 
   it("should not save plain text password", async () => {
     await createAccount({
       email: "email",
       username: "username",
       password: "password",
-    })
+    });
 
-    expect(createUser).not.toHaveBeenCalledWith("username", "password")
-  })
+    expect(createUser).not.toHaveBeenCalledWith("username", "password");
+  });
 
   it("returns list of invalid fields", async () => {
     const result = await createAccount({
       email: "",
       username: "",
       password: "",
-    })
+    });
 
     expect(result).toEqual({
       message: "Failed to save because of 3 invalid field(s).",
@@ -60,8 +59,8 @@ describe(createAccount.name, () => {
           "Should contain at least one number.",
         ],
       },
-    })
-  })
+    });
+  });
 
   it.each(["email", "username"])(
     `returns %s already exists message`,
@@ -73,23 +72,23 @@ describe(createAccount.name, () => {
             code: "P2002",
             meta: { modelName: "User", target: [field] },
             clientVersion: "5.19.0",
-          }
-        )
-      )
+          },
+        ),
+      );
 
       const result = await createAccount({
         email: "email@gmail.com",
         username: "username",
         password: "password1",
-      })
+      });
 
       expect(result).toEqual({
         message: `User with this ${field} already exists.`,
         errors: { [field]: ["Already taken"] },
-      })
-    }
-  )
-})
+      });
+    },
+  );
+});
 
 describe(login.name, () => {
   it.each`
@@ -99,18 +98,18 @@ describe(login.name, () => {
   `(
     `Validation - returns $expected when username is $username and password is $password`,
     async ({ username, password, expected }) => {
-      const result = await login({ username, password })
+      const result = await login({ username, password });
 
       expect(result).toEqual(
         expect.objectContaining({
           message: expected,
-        })
-      )
-    }
-  )
+        }),
+      );
+    },
+  );
 
   it("returns list of invalid inputs", async () => {
-    const result = await login({ username: "", password: "" })
+    const result = await login({ username: "", password: "" });
 
     expect(result).toEqual({
       message: "Failed because of 2 invalid field(s).",
@@ -118,18 +117,18 @@ describe(login.name, () => {
         username: ["Username is required"],
         password: ["Password is required"],
       },
-    })
-  })
+    });
+  });
 
   it("returns Incorrect password or Username when user does not exist", async () => {
-    jest.mocked(getUserByUsernameOrEmail).mockResolvedValue(null)
+    jest.mocked(getUserByUsernameOrEmail).mockResolvedValue(null);
 
-    const result = await login({ username: "username", password: "password" })
+    const result = await login({ username: "username", password: "password" });
 
     expect(result).toEqual({
       message: "Incorrect password or Username",
-    })
-  })
+    });
+  });
 
   it("returns Incorrect password or Username when password is incorrect", async () => {
     jest.mocked(getUserByUsernameOrEmail).mockResolvedValue({
@@ -140,13 +139,13 @@ describe(login.name, () => {
       createdAt: new Date(),
       updatedAt: new Date(),
       hasBeenOnboarded: false,
-    })
-    mockedBcryptCompare.mockResolvedValue(false)
+    });
+    mockedBcryptCompare.mockResolvedValue(false);
 
-    const result = await login({ username: "username", password: "incorrect" })
+    const result = await login({ username: "username", password: "incorrect" });
 
     expect(result).toEqual({
       message: "Incorrect password or Username",
-    })
-  })
-})
+    });
+  });
+});

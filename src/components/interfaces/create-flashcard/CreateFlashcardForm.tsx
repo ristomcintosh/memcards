@@ -1,38 +1,40 @@
-"use client"
-import { createFlashcard } from "@/actions/actions"
-import { Button } from "@/components/ui/button"
+"use client";
+
+import { useSearchParams } from "next/navigation";
+import { useForm } from "react-hook-form";
+import { createFlashcard } from "@/actions/actions";
+import { Button } from "@/components/ui/button";
 import {
   Form,
+  FormControl,
   FormField,
   FormItem,
   FormLabel,
-  FormControl,
   FormMessage,
-} from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"
-import { useToast } from "@/components/ui/toast/use-toast"
+} from "@/components/ui/select";
+import { useToast } from "@/components/ui/toast/use-toast";
+import { Deck, Flashcard } from "@/types";
 
-import { Flashcard, Deck } from "@/types"
-import { useSearchParams } from "next/navigation"
-
-import { useForm } from "react-hook-form"
-
-type CreateFlashcardFormValues = Pick<Flashcard, "deckId" | "front" | "back">
+type CreateFlashcardFormValues = Pick<Flashcard, "deckId" | "front" | "back">;
 
 type CreateFlashcardFormProps = {
-  decks: Deck[]
-}
+  decks: Deck[];
+};
 export const CreateFlashcardForm = ({ decks }: CreateFlashcardFormProps) => {
-  const queryParam = useSearchParams()
-  const defaultDeckId = getDeckIdFromQueryParam(queryParam.get("deckId"), decks)
-  const { toast } = useToast()
+  const queryParam = useSearchParams();
+  const defaultDeckId = getDeckIdFromQueryParam(
+    queryParam.get("deckId"),
+    decks,
+  );
+  const { toast } = useToast();
 
   const form = useForm<CreateFlashcardFormValues>({
     defaultValues: {
@@ -40,15 +42,15 @@ export const CreateFlashcardForm = ({ decks }: CreateFlashcardFormProps) => {
       front: "",
       back: "",
     },
-  })
+  });
 
   const handleSubmit = form.handleSubmit(async (values) => {
-    await createFlashcard(values)
-    form.reset({ deckId: values.deckId, front: "", back: "" })
+    await createFlashcard(values);
+    form.reset({ deckId: values.deckId, front: "", back: "" });
     toast({
       title: "Flashcard created!",
-    })
-  })
+    });
+  });
 
   return (
     <Form {...form}>
@@ -111,12 +113,12 @@ export const CreateFlashcardForm = ({ decks }: CreateFlashcardFormProps) => {
         </Button>
       </form>
     </Form>
-  )
-}
+  );
+};
 
 function getDeckIdFromQueryParam(deckId: string | null, decks: Deck[]) {
   if (deckId) {
-    return decks.find((deck) => deck.id === deckId)?.id ?? ""
+    return decks.find((deck) => deck.id === deckId)?.id ?? "";
   }
-  return ""
+  return "";
 }

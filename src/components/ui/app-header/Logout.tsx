@@ -1,11 +1,12 @@
-"use client"
-import { logout } from "@/actions/auth"
-import { Button } from "@/components/ui/button"
+"use client";
+
+import { logout } from "@/actions/auth";
+import { Button } from "@/components/ui/button";
 
 export function Logout() {
   return (
     <Button size={"sm"} variant="secondary" onClick={() => logout()}>
       Logout
     </Button>
-  )
+  );
 }

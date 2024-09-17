@@ -1,15 +1,16 @@
-"use client"
-import { DeckWithCardCount } from "@/types"
-import { ModalManager, useModalState } from "./ModalManger"
-import { DeckMenu } from "./DeckListMenu"
-import Link from "next/link"
+"use client";
+
+import Link from "next/link";
+import { DeckWithCardCount } from "@/types";
+import { DeckMenu } from "./DeckListMenu";
+import { ModalManager, useModalState } from "./ModalManger";
 
 type DeckListProps = {
-  decks: DeckWithCardCount[]
-}
+  decks: DeckWithCardCount[];
+};
 
 export const DeckList = ({ decks }: DeckListProps) => {
-  const { modalType, closeModal, toggleModal, selectedDeck } = useModalState()
+  const { modalType, closeModal, toggleModal, selectedDeck } = useModalState();
 
   return (
     <>
@@ -42,5 +43,5 @@ export const DeckList = ({ decks }: DeckListProps) => {
         closeModal={closeModal}
       />
     </>
-  )
-}
+  );
+};

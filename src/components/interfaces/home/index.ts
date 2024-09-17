@@ -1,2 +1,2 @@
-export { CreateNew } from "./CreateNew"
-export { DeckList } from "./DeckList"
+export { CreateNew } from "./CreateNew";
+export { DeckList } from "./DeckList";

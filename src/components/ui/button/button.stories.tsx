@@ -1,7 +1,6 @@
-import { Meta, StoryObj } from "@storybook/react"
-
-import { Button } from "./button"
-import { Edit } from "lucide-react"
+import { Meta, StoryObj } from "@storybook/react";
+import { Edit } from "lucide-react";
+import { Button } from "./button";
 
 const meta: Meta<typeof Button> = {
   title: "Button",
@@ -40,48 +39,48 @@ const meta: Meta<typeof Button> = {
       </div>
     ),
   ],
-}
+};
 
-export default meta
-type Story = StoryObj<typeof Button>
+export default meta;
+type Story = StoryObj<typeof Button>;
 
-export const Default: Story = {}
+export const Default: Story = {};
 
 export const Secondary: Story = {
   args: {
     variant: "secondary",
   },
-}
+};
 
 export const Outline: Story = {
   args: {
     variant: "outline",
   },
-}
+};
 
 export const Destructive: Story = {
   args: {
     variant: "destructive",
   },
-}
+};
 
 export const DestructiveSecondary: Story = {
   args: {
     variant: "destructiveSecondary",
   },
-}
+};
 
 export const Ghost: Story = {
   args: {
     variant: "ghost",
   },
-}
+};
 
 export const Link: Story = {
   args: {
     variant: "link",
   },
-}
+};
 
 export const IconButton: Story = {
   args: {
@@ -89,4 +88,4 @@ export const IconButton: Story = {
     size: "icon",
     "aria-label": "Edit",
   },
-}
+};

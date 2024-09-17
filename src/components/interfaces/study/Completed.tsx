@@ -1,22 +1,22 @@
-import { Button } from "@/components/ui/button"
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
-  DialogHeader,
   DialogDescription,
   DialogFooter,
+  DialogHeader,
   DialogTitle,
-} from "@/components/ui/dialog"
-import { DeckWithFlashcards } from "@/types"
-import Link from "next/link"
+} from "@/components/ui/dialog";
+import { DeckWithFlashcards } from "@/types";
 
 type CompletedProps = {
-  restart: () => void
-  deck: DeckWithFlashcards
-}
+  restart: () => void;
+  deck: DeckWithFlashcards;
+};
 
 export const Completed = ({ restart, deck }: CompletedProps) => {
-  const isDeckEmpty = deck.flashcards.length === 0
+  const isDeckEmpty = deck.flashcards.length === 0;
   return (
     <Dialog open={true}>
       <DialogContent
@@ -44,8 +44,8 @@ export const Completed = ({ restart, deck }: CompletedProps) => {
         </DialogFooter>
       </DialogContent>
     </Dialog>
-  )
-}
+  );
+};
 
 const NoFlashcardsMessage = ({ deckId }: { deckId: string }) => {
   return (
@@ -60,5 +60,5 @@ const NoFlashcardsMessage = ({ deckId }: { deckId: string }) => {
         Add some!
       </Link>
     </DialogDescription>
-  )
-}
+  );
+};

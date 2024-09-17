@@ -1,14 +1,15 @@
-"use client"
-import { Flashcard } from "./Flashcard"
-import { StudyContainer } from "./StudyContainer"
-import { useStudy } from "./useStudy"
-import { Completed } from "./Completed"
-import { DeckWithFlashcards } from "@/types"
-import { EditFlashcardForm } from "./EditFlashcardForm"
+"use client";
+
+import { DeckWithFlashcards } from "@/types";
+import { Completed } from "./Completed";
+import { EditFlashcardForm } from "./EditFlashcardForm";
+import { Flashcard } from "./Flashcard";
+import { StudyContainer } from "./StudyContainer";
+import { useStudy } from "./useStudy";
 
 type StudyViewProps = {
-  deck: Required<DeckWithFlashcards>
-}
+  deck: Required<DeckWithFlashcards>;
+};
 
 export const StudyView = ({ deck }: StudyViewProps) => {
   const {
@@ -21,7 +22,7 @@ export const StudyView = ({ deck }: StudyViewProps) => {
     deleteCard,
     isEditing,
     editCard,
-  } = useStudy(deck)
+  } = useStudy(deck);
 
   return (
     <StudyContainer
@@ -43,5 +44,5 @@ export const StudyView = ({ deck }: StudyViewProps) => {
         <Completed restart={initialize} deck={deck} />
       )}
     </StudyContainer>
-  )
-}
+  );
+};

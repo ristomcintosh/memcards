@@ -1,6 +1,6 @@
-import { render, screen } from "@testing-library/react"
-import { Completed } from "../Completed"
-import { DeckWithFlashcards } from "@/types"
+import { render, screen } from "@testing-library/react";
+import { DeckWithFlashcards } from "@/types";
+import { Completed } from "../Completed";
 
 const deck = {
   id: "1",
@@ -18,27 +18,27 @@ const deck = {
   ],
   createdAt: new Date(),
   updatedAt: new Date(),
-} satisfies DeckWithFlashcards
+} satisfies DeckWithFlashcards;
 
 describe(Completed.name, () => {
   it("renders", () => {
-    render(<Completed restart={jest.fn()} deck={deck} />)
+    render(<Completed restart={jest.fn()} deck={deck} />);
 
-    expect(screen.getByText("Congratulations! 🎉")).toBeInTheDocument()
+    expect(screen.getByText("Congratulations! 🎉")).toBeInTheDocument();
     expect(
       screen.getByText(
         "You have successfully completed all the flashcards in this deck.",
       ),
-    ).toBeInTheDocument()
-    expect(screen.getByText("Restart")).toBeInTheDocument()
-    expect(screen.getByText("Home")).toBeInTheDocument()
-  })
+    ).toBeInTheDocument();
+    expect(screen.getByText("Restart")).toBeInTheDocument();
+    expect(screen.getByText("Home")).toBeInTheDocument();
+  });
 
   it("does not show the restart button when there are no cards left in deck", () => {
-    const deckWithNoCards = { ...deck, flashcards: [] }
-    render(<Completed restart={jest.fn()} deck={deckWithNoCards} />)
+    const deckWithNoCards = { ...deck, flashcards: [] };
+    render(<Completed restart={jest.fn()} deck={deckWithNoCards} />);
 
-    expect(screen.queryByText("Restart")).not.toBeInTheDocument()
-    expect(screen.getByText("Home")).toBeInTheDocument()
-  })
-})
+    expect(screen.queryByText("Restart")).not.toBeInTheDocument();
+    expect(screen.getByText("Home")).toBeInTheDocument();
+  });
+});

@@ -1,11 +1,12 @@
-import { updateFlashcard } from "@/actions/actions"
-import { Button } from "@/components/ui/button"
+import { SubmitHandler, useForm } from "react-hook-form";
+import { updateFlashcard } from "@/actions/actions";
+import { Button } from "@/components/ui/button";
 import {
-  DialogHeader,
   Dialog,
-  DialogTitle,
   DialogContent,
-} from "@/components/ui/dialog"
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import {
   Form,
   FormControl,
@@ -13,17 +14,16 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
-import { Flashcard } from "@/types"
-import { SubmitHandler, useForm } from "react-hook-form"
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Flashcard } from "@/types";
 
 type EditFlashcardFormProps = {
-  flashcard: Flashcard
-  editCard: (flashcard?: Pick<Flashcard, "front" | "back">) => void
-}
+  flashcard: Flashcard;
+  editCard: (flashcard?: Pick<Flashcard, "front" | "back">) => void;
+};
 
-type FlashcardFormValues = Pick<Flashcard, "front" | "back">
+type FlashcardFormValues = Pick<Flashcard, "front" | "back">;
 export const EditFlashcardForm = ({
   flashcard,
   editCard,
@@ -33,20 +33,20 @@ export const EditFlashcardForm = ({
       front: flashcard.front,
       back: flashcard.back,
     },
-  })
+  });
 
   const onSubmit: SubmitHandler<FlashcardFormValues> = (values) => {
-    editCard(values)
+    editCard(values);
     updateFlashcard({
       id: flashcard.id,
       front: values.front,
       back: values.back,
-    })
-  }
+    });
+  };
 
   const handleClose = () => {
-    editCard(flashcard)
-  }
+    editCard(flashcard);
+  };
 
   return (
     <Dialog open onOpenChange={() => handleClose()}>
@@ -91,5 +91,5 @@ export const EditFlashcardForm = ({
         </Form>
       </DialogContent>
     </Dialog>
-  )
-}
+  );
+};

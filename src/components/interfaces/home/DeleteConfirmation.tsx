@@ -1,13 +1,13 @@
-import { deleteDeck } from "@/actions/actions"
-import { Deck } from "@/types"
-import { AlertDialog } from "@/components/ui/alert-dialog"
+import { deleteDeck } from "@/actions/actions";
+import { AlertDialog } from "@/components/ui/alert-dialog";
+import { Deck } from "@/types";
 
 export const DeleteConfirmation = ({
   deck,
   handleClose,
 }: {
-  deck: Deck
-  handleClose: () => void
+  deck: Deck;
+  handleClose: () => void;
 }) => (
   <AlertDialog
     title={
@@ -22,9 +22,9 @@ export const DeleteConfirmation = ({
       </span>
     }
     onConfirm={async () => {
-      await deleteDeck(deck.id)
-      handleClose()
+      await deleteDeck(deck.id);
+      handleClose();
     }}
     onCancel={handleClose}
   />
-)
+);
