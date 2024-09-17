@@ -1,18 +1,18 @@
-"use client"
+"use client";
 
+import { EllipsisVertical } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { Rename, Delete } from "@/components/ui/menu-items"
-import { EllipsisVertical } from "lucide-react"
+} from "@/components/ui/dropdown-menu";
+import { Delete, Rename } from "@/components/ui/menu-items";
 
 type MenuProps = {
-  handleRename: () => void
-  handleDelete: () => void
-}
+  handleRename: () => void;
+  handleDelete: () => void;
+};
 
 export const DeckMenu = ({ handleRename, handleDelete }: MenuProps) => (
   <DropdownMenu modal={false}>
@@ -31,4 +31,4 @@ export const DeckMenu = ({ handleRename, handleDelete }: MenuProps) => (
       </DropdownMenuItem>
     </DropdownMenuContent>
   </DropdownMenu>
-)
+);

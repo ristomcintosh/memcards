@@ -1,13 +1,14 @@
-"use client"
-import { Flashcard as FlashcardType } from "@/types"
-import { motion, Variants } from "framer-motion"
+"use client";
 
-type CardSide = "front" | "back"
+import { Variants, motion } from "framer-motion";
+import { Flashcard as FlashcardType } from "@/types";
+
+type CardSide = "front" | "back";
 
 type FlashcardProps = {
-  cardSide: CardSide
-  flashcard: FlashcardType
-}
+  cardSide: CardSide;
+  flashcard: FlashcardType;
+};
 
 export const Flashcard = ({ cardSide, flashcard }: FlashcardProps) => {
   return (
@@ -22,16 +23,16 @@ export const Flashcard = ({ cardSide, flashcard }: FlashcardProps) => {
         text={cardSide === "front" ? flashcard.front : flashcard.back}
       />
     </motion.div>
-  )
-}
+  );
+};
 
 type FlashcardContentProps = {
-  text: string
-  cardSide: CardSide
-}
+  text: string;
+  cardSide: CardSide;
+};
 
 const FlashcardContent = ({ cardSide, text }: FlashcardContentProps) => {
-  const defaultStyles = cardSide === "back" ? { rotateY: 180 } : {}
+  const defaultStyles = cardSide === "back" ? { rotateY: 180 } : {};
   return (
     <motion.p
       style={{ ...defaultStyles }}
@@ -39,8 +40,8 @@ const FlashcardContent = ({ cardSide, text }: FlashcardContentProps) => {
     >
       {text}
     </motion.p>
-  )
-}
+  );
+};
 
 const flashcardVariants: Variants = {
   flipToFront: {
@@ -57,4 +58,4 @@ const flashcardVariants: Variants = {
       duration: 0.5,
     },
   },
-}
+};

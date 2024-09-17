@@ -1,8 +1,7 @@
-import { createDemoAccount } from "@/actions/auth"
-import { SignupForm } from "@/components/interfaces/auth"
-import { GuestSignIn } from "@/components/interfaces/auth/GuestSignIn"
-
-import Link from "next/link"
+import Link from "next/link";
+import { createDemoAccount } from "@/actions/auth";
+import { SignupForm } from "@/components/interfaces/auth";
+import { GuestSignIn } from "@/components/interfaces/auth/GuestSignIn";
 
 export default function Signup() {
   return (
@@ -17,5 +16,5 @@ export default function Signup() {
       <SignupForm />
       <GuestSignIn handleGuestSignIn={createDemoAccount} />
     </>
-  )
+  );
 }

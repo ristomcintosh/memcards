@@ -1,18 +1,18 @@
-import { inter } from "@/styles/fonts"
-import "../styles/globals.css"
-import { Analytics } from "@vercel/analytics/react"
-import { Toaster } from "@/components/ui/toast/toaster"
-import { THEME_KEY } from "@/constants"
+import { Analytics } from "@vercel/analytics/react";
+import { Toaster } from "@/components/ui/toast/toaster";
+import { THEME_KEY } from "@/constants";
+import { inter } from "@/styles/fonts";
+import "../styles/globals.css";
 
 export const metadata = {
   title: "Memcards",
   description: "A flashcard app built with Next.js and TailwindCSS",
-}
+};
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en" className={inter.variable}>
@@ -23,7 +23,7 @@ export default function RootLayout({
         <Toaster />
       </body>
     </html>
-  )
+  );
 }
 
 export function SetThemeScript() {
@@ -36,6 +36,6 @@ export function SetThemeScript() {
         document.documentElement.classList.remove("dark")
       }
     })()
-  `
-  return <script dangerouslySetInnerHTML={{ __html: applyThemeScript }} />
+  `;
+  return <script dangerouslySetInnerHTML={{ __html: applyThemeScript }} />;
 }

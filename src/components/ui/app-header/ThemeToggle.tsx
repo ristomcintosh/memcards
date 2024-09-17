@@ -1,34 +1,35 @@
-"use client"
-import { THEME_KEY } from "@/constants"
-import { MoonStar, SunMedium } from "lucide-react"
-import { useEffect, useState } from "react"
-import { Button } from "@/components/ui/button"
+"use client";
+
+import { useEffect, useState } from "react";
+import { MoonStar, SunMedium } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { THEME_KEY } from "@/constants";
 
 const handleDarkModeToggle = (
   isDarkMode: boolean,
   setDarkMode: (arg: boolean) => void,
 ) => {
-  console.log("Dark mode toggled")
+  console.log("Dark mode toggled");
   if (isDarkMode) {
-    document.documentElement.classList.remove("dark")
-    setDarkMode(false)
-    localStorage.setItem(THEME_KEY, "light")
+    document.documentElement.classList.remove("dark");
+    setDarkMode(false);
+    localStorage.setItem(THEME_KEY, "light");
   } else {
-    document.documentElement.classList.add("dark")
-    setDarkMode(true)
-    localStorage.setItem(THEME_KEY, "dark")
+    document.documentElement.classList.add("dark");
+    setDarkMode(true);
+    localStorage.setItem(THEME_KEY, "dark");
   }
-}
+};
 
 export function ThemeToggle() {
-  const [isDarkMode, setIsDarkMode] = useState<boolean>()
+  const [isDarkMode, setIsDarkMode] = useState<boolean>();
 
   useEffect(() => {
-    setIsDarkMode(localStorage.getItem(THEME_KEY) === "dark")
-  }, [])
+    setIsDarkMode(localStorage.getItem(THEME_KEY) === "dark");
+  }, []);
 
   if (isDarkMode === undefined) {
-    return null
+    return null;
   }
 
   return (
@@ -45,5 +46,5 @@ export function ThemeToggle() {
         <SunMedium className="w-6 h-6" aria-hidden />
       )}
     </Button>
-  )
+  );
 }

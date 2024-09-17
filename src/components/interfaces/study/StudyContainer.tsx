@@ -1,11 +1,11 @@
-import { PropsWithChildren } from "react"
-import { StudyHeader, StudyHeaderProps } from "./StudyHeader"
-import { StudyFooter, StudyFooterProps } from "./StudyFooter"
+import { PropsWithChildren } from "react";
+import { StudyFooter, StudyFooterProps } from "./StudyFooter";
+import { StudyHeader, StudyHeaderProps } from "./StudyHeader";
 
 type StudyContainerProps = {
-  title: string
+  title: string;
 } & StudyHeaderProps &
-  StudyFooterProps
+  StudyFooterProps;
 
 export function StudyContainer({
   title,
@@ -35,5 +35,5 @@ export function StudyContainer({
         <StudyFooter flipCard={flipCard} nextCard={nextCard} />
       </main>
     </div>
-  )
+  );
 }

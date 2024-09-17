@@ -27,5 +27,5 @@ export function LogoIconWithText() {
         className="fill-black dark:fill-brand-500"
       />
     </svg>
-  )
+  );
 }

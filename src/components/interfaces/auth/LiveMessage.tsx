@@ -1,8 +1,8 @@
-import { CircleAlert } from "lucide-react"
+import { CircleAlert } from "lucide-react";
 
 type LiveMessageProps = {
-  message?: string
-}
+  message?: string;
+};
 
 export function LiveMessage({ message }: LiveMessageProps) {
   return (
@@ -16,5 +16,5 @@ export function LiveMessage({ message }: LiveMessageProps) {
         <p>{message}</p>
       </div>
     )
-  )
+  );
 }

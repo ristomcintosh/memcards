@@ -1,4 +1,4 @@
-import { LogoIconWithText } from "@/components/ui/logo"
+import { LogoIconWithText } from "@/components/ui/logo";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -12,5 +12,5 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         </div>
       </div>
     </main>
-  )
+  );
 }

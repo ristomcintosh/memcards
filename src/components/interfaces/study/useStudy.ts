@@ -1,77 +1,77 @@
-import { deleteFlashcard } from "@/actions/actions"
-import { DeckWithFlashcards, Flashcard } from "@/types"
-import { useCallback, useReducer } from "react"
+import { useCallback, useReducer } from "react";
+import { deleteFlashcard } from "@/actions/actions";
+import { DeckWithFlashcards, Flashcard } from "@/types";
 
 type State = {
-  totalFlashcardCount: number
-  flashcards: Flashcard[]
-  flashcard: Flashcard
-  cardSide: "front" | "back"
-  isEditing: boolean
-  progress: number
-}
+  totalFlashcardCount: number;
+  flashcards: Flashcard[];
+  flashcard: Flashcard;
+  cardSide: "front" | "back";
+  isEditing: boolean;
+  progress: number;
+};
 
 type Action =
   | { type: "flipCard" }
   | { type: "nextCard" }
   | { type: "deleteCard" }
   | { type: "initialize"; payload: DeckWithFlashcards }
-  | { type: "editCard"; payload?: Partial<Flashcard> }
+  | { type: "editCard"; payload?: Partial<Flashcard> };
 
 const reducer = (state: State, action: Action): State => {
   switch (action.type) {
     case "initialize":
-      return getInitialState(action.payload.flashcards)
+      return getInitialState(action.payload.flashcards);
     case "nextCard":
     case "deleteCard":
-      return getNextFlashcardState(state)
+      return getNextFlashcardState(state);
     case "flipCard": {
       return {
         ...state,
         cardSide: state.cardSide === "front" ? "back" : "front",
-      }
+      };
     }
 
     case "editCard": {
       if (!action.payload) {
-        return { ...state, isEditing: true }
+        return { ...state, isEditing: true };
       }
 
       return {
         ...state,
         flashcard: { ...state.flashcard, ...action.payload },
         isEditing: false,
-      }
+      };
     }
   }
-}
+};
 
 // deck will already be randomised
 export const useStudy = (deck: DeckWithFlashcards) => {
   const [state, dispatch] = useReducer(
     reducer,
     deck.flashcards,
-    getInitialState
-  )
+    getInitialState,
+  );
 
-  const flipCard = useCallback(() => dispatch({ type: "flipCard" }), [])
+  const flipCard = useCallback(() => dispatch({ type: "flipCard" }), []);
 
-  const nextCard = useCallback(() => dispatch({ type: "nextCard" }), [])
+  const nextCard = useCallback(() => dispatch({ type: "nextCard" }), []);
 
   const deleteCard = useCallback(() => {
-    deleteFlashcard(state.flashcard.id)
-    dispatch({ type: "deleteCard" })
-  }, [state.flashcard?.id])
+    deleteFlashcard(state.flashcard.id);
+    dispatch({ type: "deleteCard" });
+  }, [state.flashcard?.id]);
 
   const initialize = useCallback(
     () => dispatch({ type: "initialize", payload: deck }),
-    [deck]
-  )
+    [deck],
+  );
 
   const editCard = useCallback(
     (payload?: Partial<Flashcard>) => dispatch({ type: "editCard", payload }),
-    []
-  )
+    [],
+  );
 
   return {
     ...state,
@@ -80,27 +80,27 @@ export const useStudy = (deck: DeckWithFlashcards) => {
     flipCard,
     nextCard,
     editCard,
-  }
-}
+  };
+};
 
 const takeFirstFlashcard = (
-  flashcards: Flashcard[]
+  flashcards: Flashcard[],
 ): { remainingFlashcards: Flashcard[]; flashcard: Flashcard } => {
-  const flashcard = flashcards[0]
-  const remainingFlashcards = flashcards.slice(1)
+  const flashcard = flashcards[0];
+  const remainingFlashcards = flashcards.slice(1);
   return {
     flashcard,
     remainingFlashcards,
-  }
-}
+  };
+};
 
 const getProgress = (numberOfCards: number, cardsLeft: number) =>
-  ((numberOfCards - cardsLeft) * 100) / numberOfCards
+  ((numberOfCards - cardsLeft) * 100) / numberOfCards;
 
 function getNextFlashcardState(state: State): State {
   const { flashcard, remainingFlashcards } = takeFirstFlashcard(
-    state.flashcards
-  )
+    state.flashcards,
+  );
   return {
     ...state,
     flashcard,
@@ -108,13 +108,13 @@ function getNextFlashcardState(state: State): State {
     cardSide: "front",
     progress: getProgress(
       state.totalFlashcardCount,
-      remainingFlashcards.length
+      remainingFlashcards.length,
     ),
-  }
+  };
 }
 
 function getInitialState(flashcards: Flashcard[]): State {
-  const { flashcard, remainingFlashcards } = takeFirstFlashcard(flashcards)
+  const { flashcard, remainingFlashcards } = takeFirstFlashcard(flashcards);
   return {
     flashcard,
     flashcards: remainingFlashcards,
@@ -122,5 +122,5 @@ function getInitialState(flashcards: Flashcard[]): State {
     isEditing: false,
     progress: getProgress(flashcards.length, remainingFlashcards.length),
     totalFlashcardCount: flashcards.length,
-  }
+  };
 }

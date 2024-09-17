@@ -1,10 +1,11 @@
-"use client"
-import { AppHeader } from "@/components/ui/app-header"
-import { Button } from "@/components/ui/button"
-import { useTransition } from "react"
+"use client";
+
+import { useTransition } from "react";
+import { AppHeader } from "@/components/ui/app-header";
+import { Button } from "@/components/ui/button";
 
 export default function Error({ reset }: { reset: () => void }) {
-  const [isPending, startTransition] = useTransition()
+  const [isPending, startTransition] = useTransition();
 
   return (
     <div className="h-full flex flex-col">
@@ -17,7 +18,7 @@ export default function Error({ reset }: { reset: () => void }) {
           size="lg"
           onClick={() =>
             startTransition(() => {
-              reset()
+              reset();
             })
           }
         >
@@ -26,5 +27,5 @@ export default function Error({ reset }: { reset: () => void }) {
         {isPending && <p>Loading...</p>}
       </div>
     </div>
-  )
+  );
 }

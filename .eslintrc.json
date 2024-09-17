@@ -1,5 +1,5 @@
 {
-  "extends": ["plugin:@typescript-eslint/recommended", "next/core-web-vitals"],
+  "extends": ["next/core-web-vitals", "next/typescript", "prettier"],
   "rules": {
     // Additional, per-project rules...
   }

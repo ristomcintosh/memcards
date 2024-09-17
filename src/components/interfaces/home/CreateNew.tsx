@@ -1,5 +1,24 @@
-"use client"
-import { useState } from "react"
+"use client";
+
+import Link from "next/link";
+import { useState } from "react";
+import { Plus } from "lucide-react";
+import { useForm } from "react-hook-form";
+import { createDeck } from "@/actions/actions";
+import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import {
   Form,
   FormControl,
@@ -7,30 +26,12 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form"
-import { createDeck } from "@/actions/actions"
-import {
-  Dialog,
-  DialogContent,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog"
-import { Button } from "@/components/ui/button"
-import { useForm } from "react-hook-form"
-import { Input } from "@/components/ui/input"
-import { Deck } from "@/types"
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import Link from "next/link"
-import { Plus } from "lucide-react"
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Deck } from "@/types";
 
 export const CreateNew = () => {
-  const [isCreateDeckFormOpen, showCreateDeckFrom] = useState(false)
+  const [isCreateDeckFormOpen, showCreateDeckFrom] = useState(false);
   return (
     <>
       <CreateNewMenu handleDeckCreation={() => showCreateDeckFrom(true)} />
@@ -38,13 +39,13 @@ export const CreateNew = () => {
         <CreateDeckForm handleClose={() => showCreateDeckFrom(false)} />
       )}
     </>
-  )
-}
+  );
+};
 
 const CreateNewMenu = ({
   handleDeckCreation,
 }: {
-  handleDeckCreation: () => void
+  handleDeckCreation: () => void;
 }) => (
   <DropdownMenu modal={false}>
     <DropdownMenuTrigger
@@ -67,10 +68,10 @@ const CreateNewMenu = ({
       </DropdownMenuItem>
     </DropdownMenuContent>
   </DropdownMenu>
-)
+);
 
 const CreateDeckForm = ({ handleClose }: { handleClose: () => void }) => {
-  const form = useForm<Pick<Deck, "name">>()
+  const form = useForm<Pick<Deck, "name">>();
   return (
     <Dialog defaultOpen modal onOpenChange={(open) => !open && handleClose()}>
       <DialogContent>
@@ -80,8 +81,8 @@ const CreateDeckForm = ({ handleClose }: { handleClose: () => void }) => {
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit((formData) => {
-              createDeck(formData.name)
-              handleClose()
+              createDeck(formData.name);
+              handleClose();
             })}
             className="gap-6 flex flex-col"
           >
@@ -109,5 +110,5 @@ const CreateDeckForm = ({ handleClose }: { handleClose: () => void }) => {
         </Form>
       </DialogContent>
     </Dialog>
-  )
-}
+  );
+};

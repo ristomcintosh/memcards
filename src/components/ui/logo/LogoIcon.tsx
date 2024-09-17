@@ -22,5 +22,5 @@ export function LogoIcon() {
       />
       <path d="M25 41L42.3205 70.25H7.67949L25 41Z" className="fill-white" />
     </svg>
-  )
+  );
 }

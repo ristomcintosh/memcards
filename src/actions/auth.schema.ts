@@ -1,11 +1,11 @@
-import { z } from "zod"
+import { z } from "zod";
 
 export const LoginSchema = z.object({
   username: z.string().trim().min(1, "Username is required"),
   password: z.string().trim().min(1, "Password is required"),
-})
+});
 
-export type LoginSchema = z.infer<typeof LoginSchema>
+export type LoginSchema = z.infer<typeof LoginSchema>;
 
 export const CreateUserSchema = z.object({
   username: z
@@ -21,6 +21,6 @@ export const CreateUserSchema = z.object({
     .regex(/[a-zA-Z]/, { message: "Should contain at least one letter." })
     .regex(/[0-9]/, { message: "Should contain at least one number." })
     .trim(),
-})
+});
 
-export type CreateUserSchema = z.infer<typeof CreateUserSchema>
+export type CreateUserSchema = z.infer<typeof CreateUserSchema>;

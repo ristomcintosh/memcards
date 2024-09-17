@@ -1,7 +1,7 @@
-import Link from "next/link"
-import { ThemeToggle } from "./ThemeToggle"
-import { LogoText } from "../logo/LogoText"
-import { Logout } from "./Logout"
+import Link from "next/link";
+import { LogoText } from "../logo/LogoText";
+import { Logout } from "./Logout";
+import { ThemeToggle } from "./ThemeToggle";
 
 export function AppHeader() {
   return (
@@ -18,5 +18,5 @@ export function AppHeader() {
         </div>
       </div>
     </header>
-  )
+  );
 }
