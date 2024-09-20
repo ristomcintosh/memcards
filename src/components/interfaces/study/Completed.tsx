@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button/buttonVariants";
 import {
   Dialog,
   DialogContent,
@@ -9,6 +10,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { DeckWithFlashcards } from "@/types";
+import { cn } from "@/utils/misc";
 
 type CompletedProps = {
   restart: () => void;
@@ -38,9 +40,15 @@ export const Completed = ({ restart, deck }: CompletedProps) => {
               Restart
             </Button>
           )}
-          <Button asChild variant={!isDeckEmpty ? "link" : "default"} size="lg">
-            <Link href="/">Home</Link>
-          </Button>
+          <Link
+            className={cn(
+              buttonVariants({ variant: "link", size: "lg" }),
+              "text-inherit dark:text-inherit",
+            )}
+            href="/"
+          >
+            Home
+          </Link>
         </DialogFooter>
       </DialogContent>
     </Dialog>
