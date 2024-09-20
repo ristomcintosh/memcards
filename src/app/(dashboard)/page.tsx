@@ -1,8 +1,8 @@
-import { getDecks } from "@/actions/actions";
 import { CreateNew, DeckList } from "@/components/interfaces/home/";
+import { getAllDecks } from "@/utils/getAllDecks";
 
 export default async function Home() {
-  const deckList = await getDecks();
+  const deckList = await getAllDecks();
 
   return (
     <div className="flex flex-col items-center h-full" data-testid="home-page">

@@ -2,33 +2,8 @@
 
 import { revalidatePath } from "next/cache";
 import * as DBService from "@/service/dbService";
-import { Deck, DeckWithCardCount, Flashcard } from "@/types";
+import { Deck, Flashcard } from "@/types";
 import { verifySession } from "@/utils/verifySession";
-
-export const getDecks = async (): Promise<DeckWithCardCount[]> => {
-  const session = await verifySession();
-  if (!session.isAuth) {
-    return [];
-  }
-
-  const user = await DBService.getDecks(session.userId);
-
-  if (!user) return [];
-
-  return user.decks.map((deck) => ({
-    ...deck,
-    cardCount: deck._count.flashcards,
-  }));
-};
-
-export const getDeckById = async (deckId: Deck["id"]) => {
-  const session = await verifySession();
-  if (!session.isAuth) {
-    return null;
-  }
-
-  return DBService.getDeckById(deckId, session.userId);
-};
 
 export const updateDeck = async (id: Deck["id"], deckName: string) => {
   const session = await verifySession();
