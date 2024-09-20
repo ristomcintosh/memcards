@@ -1,7 +1,6 @@
 "use client";
 
 import { useTransition } from "react";
-import { LoaderCircle } from "lucide-react";
 import { createDemoAccount } from "@/actions/auth";
 import { Button } from "@/components/ui/button";
 
@@ -20,8 +19,8 @@ export function GuestSignIn() {
           variant="link"
           onClick={() => startTransition(() => createDemoAccount())}
           disabled={isPending}
+          isLoading={isPending}
         >
-          {isPending && <LoaderCircle className="animate-spin" />}
           Explore Without Signing In!
         </Button>
       </div>
