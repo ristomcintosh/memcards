@@ -1,7 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import * as DBService from "@/service/dbService";
+import * as DBService from "@/service/database/db-service";
 import { Deck, Flashcard } from "@/types";
 import { verifySession } from "@/utils/verifySession";
 

@@ -1,6 +1,5 @@
 import Link from "next/link";
-import { LoginForm } from "@/components/interfaces/auth";
-import { GuestSignIn } from "@/components/interfaces/auth/GuestSignIn";
+import { GuestSignIn, LoginForm } from "@/components/interfaces/auth";
 
 export default function LoginPage() {
   return (

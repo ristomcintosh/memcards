@@ -6,12 +6,10 @@ import bcrypt from "bcrypt";
 import {
   copyTutorialDeckToUser,
   createUser,
-  getUserByUsernameOrEmail,
-} from "@/service/dbService";
-import { ONE_DAY, createSession, deleteSession } from "@/service/session";
+} from "@/service/database/db-service";
+import { createSession } from "@/service/session";
 import { ensureError } from "@/utils/errors";
-import { generateRandomChars, generateRandomNumber } from "@/utils/misc";
-import { CreateUserSchema, LoginSchema } from "./auth.schema";
+import { CreateUserSchema } from "./auth.schema";
 
 export type CreateAccountResult = {
   message: string;
@@ -72,71 +70,3 @@ function isUniqueConstraintError(
     error instanceof PrismaClientKnownRequestError && error.code === "P2002"
   );
 }
-
-type LoginResult = {
-  message: string;
-  formErrors?: {
-    username?: string[];
-    password?: string[];
-  };
-};
-
-export const login = async (
-  payload: LoginSchema,
-): Promise<LoginResult | undefined> => {
-  const validation = LoginSchema.safeParse(payload);
-
-  if (!validation.success) {
-    const numberOfErrors = Object.keys(
-      validation.error.formErrors.fieldErrors,
-    ).length;
-    return {
-      message: `Failed because of ${numberOfErrors} invalid field(s).`,
-      formErrors: validation.error.formErrors.fieldErrors,
-    };
-  }
-
-  const { username, password } = validation.data;
-
-  const user = await getUserByUsernameOrEmail(username);
-
-  if (!user) {
-    return { message: "Incorrect password or Username" };
-  }
-
-  const isValidPassword = await bcrypt.compare(password, user.password);
-
-  if (!isValidPassword) {
-    return { message: "Incorrect password or Username" };
-  }
-
-  await createSession(user.id);
-
-  redirect("/");
-};
-
-export const logout = async () => {
-  deleteSession();
-  redirect("/login");
-};
-
-export const createDemoAccount = async () => {
-  const unique = generateRandomNumber();
-  const username = `memcards_demo_${unique}`;
-  const email = `${username}@demo.com`;
-  const password = generateRandomChars(16);
-
-  const hashedPassword = await bcrypt.hash(password, 10);
-
-  try {
-    const user = await createUser(username, email, hashedPassword);
-    await copyTutorialDeckToUser(user.id);
-    await createSession(user.id, ONE_DAY);
-  } catch (err: unknown) {
-    const error = ensureError(err);
-    console.error(error);
-    return;
-  }
-
-  redirect("/");
-};

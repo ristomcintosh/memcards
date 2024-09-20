@@ -1,7 +1,7 @@
 import Link from "next/link";
-import { LogoText } from "../logo/LogoText";
-import { Logout } from "./Logout";
-import { ThemeToggle } from "./ThemeToggle";
+import { LogoText } from "../logo";
+import { ThemeToggle } from "../theme-toggle";
+import { LogoutButton } from "./logout-button";
 
 export function AppHeader() {
   return (
@@ -14,7 +14,7 @@ export function AppHeader() {
         </nav>
         <div className="flex items-center gap-x-2">
           <ThemeToggle />
-          <Logout />
+          <LogoutButton />
         </div>
       </div>
     </header>

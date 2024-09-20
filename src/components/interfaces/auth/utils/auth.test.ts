@@ -2,11 +2,15 @@
  * @jest-environment node
  */
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
-import { createUser, getUserByUsernameOrEmail } from "@/service/dbService";
-import { createAccount, login } from "../auth";
+import {
+  createUser,
+  getUserByUsernameOrEmail,
+} from "@/service/database/db-service";
+import { login } from "./login";
+import { createAccount } from "./signup";
 
 const mockedBcryptCompare = jest.fn();
-jest.mock("@/service/dbService");
+jest.mock("@/service/database/db-service");
 jest.mock("bcrypt", () => ({
   ...jest.requireActual("bcrypt"),
   compare: () => mockedBcryptCompare(),
