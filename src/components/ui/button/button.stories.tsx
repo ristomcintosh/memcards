@@ -89,3 +89,10 @@ export const IconButton: Story = {
     "aria-label": "Edit",
   },
 };
+
+export const Loading: Story = {
+  args: {
+    children: "Loading",
+    isLoading: true,
+  },
+};

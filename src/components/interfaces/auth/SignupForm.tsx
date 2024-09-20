@@ -108,8 +108,14 @@ export function SignupForm() {
               </FormItem>
             )}
           />
-          <Button className="mt-7" size="lg" type="submit" disabled={isPending}>
-            {isPending ? "Loading..." : "Sign up"}
+          <Button
+            className="mt-7"
+            size="lg"
+            type="submit"
+            disabled={isPending}
+            isLoading={isPending}
+          >
+            Sign up
           </Button>
         </form>
       </Form>
