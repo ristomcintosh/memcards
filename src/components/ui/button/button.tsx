@@ -32,10 +32,12 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         ref={ref}
         {...props}
       >
-        {isLoading && (
-          <LoaderCircle className="animate-spin mr-1" aria-hidden />
-        )}
-        {children}
+        <>
+          {isLoading && (
+            <LoaderCircle className="animate-spin mr-1" aria-hidden />
+          )}
+          {children}
+        </>
       </Comp>
     );
   },

@@ -54,7 +54,7 @@ export const CreateFlashcardForm = ({ decks }: CreateFlashcardFormProps) => {
 
   return (
     <Form {...form}>
-      <form onSubmit={handleSubmit}>
+      <form className="max-w-md mx-auto" onSubmit={handleSubmit}>
         <FormField
           control={form.control}
           name="deckId"
