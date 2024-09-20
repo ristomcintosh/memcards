@@ -1,4 +1,4 @@
-import { getDecks } from "@/service/dbService";
+import { getDecks } from "@/service/database/db-service";
 import { DeckWithCardCount } from "@/types";
 import { verifySession } from "./verifySession";
 

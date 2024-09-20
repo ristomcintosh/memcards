@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import { StudyView } from "@/components/interfaces/study/StudyView";
-import { getDeckById } from "@/service/dbService";
+import { getDeckById } from "@/service/database/db-service";
 import { verifySession } from "@/utils/verifySession";
 
 export default async function Study({

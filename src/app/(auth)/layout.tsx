@@ -1,5 +1,5 @@
-import { ThemeToggle } from "@/components/ui/app-header/ThemeToggle";
 import { LogoIconWithText } from "@/components/ui/logo";
+import { ThemeToggle } from "@/components/ui/theme-toggle";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (

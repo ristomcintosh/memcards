@@ -2,7 +2,7 @@
 
 import "server-only";
 import { Deck, DeckWithFlashcards } from "@/types";
-import { prisma } from "@/utils/db.server";
+import { prisma } from "./db-server";
 
 export const getDecks = async (userId: string) => {
   return await prisma.user.findUnique({

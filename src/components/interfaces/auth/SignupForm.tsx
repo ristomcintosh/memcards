@@ -3,8 +3,6 @@
 import { useState, useTransition } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitErrorHandler, useForm } from "react-hook-form";
-import { CreateAccountResult, createAccount } from "@/actions/auth";
-import { CreateUserSchema } from "@/actions/auth.schema";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -17,6 +15,8 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { LiveMessage } from "./LiveMessage";
+import { CreateUserSchema } from "./utils/auth.schema";
+import { CreateAccountResult, createAccount } from "./utils/signup";
 
 export function SignupForm() {
   const [isPending, startTransition] = useTransition();

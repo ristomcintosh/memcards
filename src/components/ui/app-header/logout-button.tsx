@@ -1,9 +1,9 @@
 "use client";
 
-import { logout } from "@/actions/auth";
 import { Button } from "@/components/ui/button";
+import { logout } from "./logout-action";
 
-export function Logout() {
+export function LogoutButton() {
   return (
     <Button size={"sm"} variant="secondary" onClick={() => logout()}>
       Logout

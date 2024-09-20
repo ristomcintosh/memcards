@@ -1,8 +1,8 @@
 "use client";
 
 import { useTransition } from "react";
-import { createDemoAccount } from "@/actions/auth";
 import { Button } from "@/components/ui/button";
+import { createDemoAccount } from "./utils/createDemoAccount";
 
 export function GuestSignIn() {
   const [isPending, startTransition] = useTransition();
