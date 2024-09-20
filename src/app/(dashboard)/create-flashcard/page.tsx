@@ -1,9 +1,9 @@
 import { Suspense } from "react";
-import { getDecks } from "@/actions/actions";
 import { CreateFlashcardForm } from "@/components/interfaces/create-flashcard/CreateFlashcardForm";
+import { getAllDecks } from "@/utils/getAllDecks";
 
 export default async function CreateFlashcard() {
-  const decks = await getDecks();
+  const decks = await getAllDecks();
   return (
     <div className="flex flex-col items-center py-4">
       <h1 className="mb-6 text-center font-semibold">Create A New Flashcard</h1>
