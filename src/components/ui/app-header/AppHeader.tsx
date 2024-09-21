@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { LogoText } from "../logo";
 import { ThemeToggle } from "../theme-toggle";
-import { LogoutButton } from "./logout-button";
+import { LogoutButton } from "./LogoutButton";
 
 export function AppHeader() {
   return (

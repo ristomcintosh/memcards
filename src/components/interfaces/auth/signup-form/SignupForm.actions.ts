@@ -9,7 +9,7 @@ import {
 } from "@/service/database/db-service";
 import { createSession } from "@/service/session";
 import { ensureError } from "@/utils/errors";
-import { CreateUserSchema } from "./auth.schema";
+import { CreateUserSchema } from "./SignupForm.utils";
 
 export type CreateAccountResult = {
   message: string;

@@ -2,7 +2,7 @@
 
 import { useTransition } from "react";
 import { Button } from "@/components/ui/button";
-import { createDemoAccount } from "./utils/createDemoAccount";
+import { createDemoAccount } from "./GuestSignIn.actions";
 
 export function GuestSignIn() {
   const [isPending, startTransition] = useTransition();

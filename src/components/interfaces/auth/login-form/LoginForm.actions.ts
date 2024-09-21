@@ -4,7 +4,7 @@ import { redirect } from "next/navigation";
 import bcrypt from "bcrypt";
 import { getUserByUsernameOrEmail } from "@/service/database/db-service";
 import { createSession } from "@/service/session";
-import { LoginSchema } from "./auth.schema";
+import { LoginSchema } from "./LoginForm.utils";
 
 export type LoginResult = {
   message: string;
