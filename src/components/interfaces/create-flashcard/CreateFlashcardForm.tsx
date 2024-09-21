@@ -28,6 +28,7 @@ type CreateFlashcardFormValues = Pick<Flashcard, "deckId" | "front" | "back">;
 type CreateFlashcardFormProps = {
   decks: Deck[];
 };
+
 export const CreateFlashcardForm = ({ decks }: CreateFlashcardFormProps) => {
   const queryParam = useSearchParams();
   const defaultDeckId = getDeckIdFromQueryParam(
