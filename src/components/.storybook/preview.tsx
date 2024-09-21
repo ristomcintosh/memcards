@@ -15,7 +15,7 @@ const preview: Preview = {
   },
   decorators: [
     (Story) => (
-      <main className={`${inter.variable} ${inter.className}`}>
+      <main className={`${inter.variable} ${inter.className} h-full`}>
         <Story />
       </main>
     ),

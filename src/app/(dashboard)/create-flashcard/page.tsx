@@ -1,5 +1,6 @@
 import { Suspense } from "react";
-import { CreateFlashcardForm } from "@/components/interfaces/create-flashcard/CreateFlashcardForm";
+import { CreateFlashcardForm } from "@/components/interfaces/create-flashcard";
+import { FormSkeleton } from "@/components/ui/form-skeleton";
 import { getAllDecks } from "@/utils/getAllDecks";
 
 export default async function CreateFlashcard() {
@@ -10,7 +11,7 @@ export default async function CreateFlashcard() {
         <h1 className="mb-6 text-center font-semibold">
           Create A New Flashcard
         </h1>
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<FormSkeleton numberOfInputs={3} />}>
           <CreateFlashcardForm decks={decks} />
         </Suspense>
       </div>

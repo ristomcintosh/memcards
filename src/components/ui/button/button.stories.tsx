@@ -34,7 +34,7 @@ const meta: Meta<typeof Button> = {
   },
   decorators: [
     (Story) => (
-      <div className="bg-zinc-50 dark:bg-zinc-700 h-svh p-10">
+      <div className="bg-surface-light dark:bg-surface-dark p-10">
         <Story />
       </div>
     ),
