@@ -6,8 +6,8 @@ import {
   createUser,
   getUserByUsernameOrEmail,
 } from "@/service/database/db-service";
-import { login } from "./login";
-import { createAccount } from "./signup";
+import { login } from "../login-form/LoginForm.actions";
+import { createAccount } from "../signup-form/SignupForm.actions";
 
 const mockedBcryptCompare = jest.fn();
 jest.mock("@/service/database/db-service");

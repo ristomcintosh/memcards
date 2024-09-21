@@ -7,26 +7,24 @@ import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { LiveMessage } from "./LiveMessage";
-import { CreateUserSchema } from "./utils/auth.schema";
-import { CreateAccountResult, createAccount } from "./utils/signup";
+import { LiveMessage } from "../LiveMessage";
+import { login } from "./LoginForm.actions";
+import { LoginSchema } from "./LoginForm.utils";
 
-export function SignupForm() {
+export function LoginForm() {
   const [isPending, startTransition] = useTransition();
 
-  const form = useForm<CreateUserSchema>({
-    resolver: zodResolver(CreateUserSchema),
+  const form = useForm<LoginSchema>({
+    resolver: zodResolver(LoginSchema),
     reValidateMode: "onBlur",
     shouldFocusError: false,
     defaultValues: {
-      email: "",
       username: "",
       password: "",
     },
@@ -34,29 +32,22 @@ export function SignupForm() {
 
   const [formMessage, setFormMessage] = useState<string>();
 
-  const handleSubmit = async (event: CreateUserSchema) => {
+  const handleSubmit = async (event: LoginSchema) => {
     startTransition(() => {
-      createAccount(event).then((result) => {
-        if (result?.errors) {
-          Object.entries(result.errors).forEach(([field, errors]) => {
-            form.setError(field as keyof CreateAccountResult["errors"], {
-              type: "custom",
-              message: errors.join(" "),
-            });
-          });
+      login(event).then((result) => {
+        if (result?.message) {
+          setFormMessage(result?.message);
+          form.setError("password", { message: result?.message });
         }
-
-        if (result?.message) setFormMessage(result.message);
       });
     });
   };
 
-  const handleInvalid: SubmitErrorHandler<CreateUserSchema> = (fieldErrors) => {
-    const invalidFieldsCount = Object.keys(fieldErrors).length;
-    setFormMessage(
-      `Failed to save because of ${invalidFieldsCount} invalid field(s).`,
-    );
+  const handleInvalid: SubmitErrorHandler<LoginSchema> = (fieldErrors) => {
+    const invalidFields = Object.keys(fieldErrors).join(", ");
+    setFormMessage(`Missing the following field(s): ${invalidFields}`);
   };
+
   return (
     <section>
       <LiveMessage message={formMessage} />
@@ -64,25 +55,11 @@ export function SignupForm() {
         <form onSubmit={form.handleSubmit(handleSubmit, handleInvalid)}>
           <FormField
             control={form.control}
-            name="email"
-            rules={{ required: "Email is required" }}
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Email</FormLabel>
-                <FormControl>
-                  <Input {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
             name="username"
             rules={{ required: "Username is required" }}
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Username</FormLabel>
+                <FormLabel>Username or email</FormLabel>
                 <FormControl>
                   <Input {...field} />
                 </FormControl>
@@ -96,11 +73,7 @@ export function SignupForm() {
             rules={{ required: "Password is required" }}
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="mb-1">Password</FormLabel>
-                <FormDescription className="mb-2" aria-hidden>
-                  Must be at least 8 characters long, contain at least one
-                  letter and one number
-                </FormDescription>
+                <FormLabel>Password</FormLabel>
                 <FormControl>
                   <Input {...field} type="password" />
                 </FormControl>
@@ -115,7 +88,7 @@ export function SignupForm() {
             disabled={isPending}
             isLoading={isPending}
           >
-            Sign up
+            Log in
           </Button>
         </form>
       </Form>
