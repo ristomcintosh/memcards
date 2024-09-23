@@ -1,9 +1,9 @@
 import { act, renderHook } from "@testing-library/react";
-import { deleteFlashcard } from "@/actions/actions";
 import { DeckWithFlashcards } from "@/types";
-import { useStudy } from "../useStudy";
+import { useStudy } from "../hooks/useStudy";
+import { deleteFlashcard } from "../hooks/useStudy.actions";
 
-jest.mock("@/actions/actions");
+jest.mock("../hooks/useStudy.actions");
 
 const testDeck: DeckWithFlashcards = {
   id: "1",

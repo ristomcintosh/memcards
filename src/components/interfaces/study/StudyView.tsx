@@ -5,7 +5,7 @@ import { Completed } from "./Completed";
 import { EditFlashcardForm } from "./EditFlashcardForm";
 import { Flashcard } from "./Flashcard";
 import { StudyContainer } from "./StudyContainer";
-import { useStudy } from "./useStudy";
+import { useStudy } from "./hooks/useStudy";
 
 type StudyViewProps = {
   deck: Required<DeckWithFlashcards>;

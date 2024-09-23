@@ -1,4 +1,4 @@
-import { CreateNew, DeckList } from "@/components/interfaces/home/";
+import { CreationMenu, DeckList } from "@/components/interfaces/home/";
 import { getAllDecks } from "@/utils/getAllDecks";
 
 export default async function Home() {
@@ -16,7 +16,7 @@ export default async function Home() {
         </div>
 
         <div className="absolute bottom-0 right-0 mb-8 mr-8">
-          <CreateNew />
+          <CreationMenu />
         </div>
       </div>
     </div>

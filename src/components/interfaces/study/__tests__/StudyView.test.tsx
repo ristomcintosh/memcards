@@ -1,10 +1,10 @@
 import { act, render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { deleteFlashcard } from "@/actions/actions";
 import { DeckWithFlashcards } from "@/types";
 import { StudyView } from "../StudyView";
+import { deleteFlashcard } from "../hooks/useStudy.actions";
 
-jest.mock("@/actions/actions");
+jest.mock("../hooks/useStudy.actions");
 
 const deck = {
   id: "1",

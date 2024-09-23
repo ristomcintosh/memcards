@@ -1,10 +1,4 @@
-"use client";
-
-import Link from "next/link";
-import { useState } from "react";
-import { Plus } from "lucide-react";
 import { useForm } from "react-hook-form";
-import { createDeck } from "@/actions/actions";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -13,12 +7,6 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import {
   Form,
   FormControl,
@@ -29,48 +17,13 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Deck } from "@/types";
+import { createDeck } from "./CreateDeckForm.actions";
 
-export const CreateNew = () => {
-  const [isCreateDeckFormOpen, showCreateDeckFrom] = useState(false);
-  return (
-    <>
-      <CreateNewMenu handleDeckCreation={() => showCreateDeckFrom(true)} />
-      {isCreateDeckFormOpen && (
-        <CreateDeckForm handleClose={() => showCreateDeckFrom(false)} />
-      )}
-    </>
-  );
-};
-
-const CreateNewMenu = ({
-  handleDeckCreation,
+export const CreateDeckForm = ({
+  handleClose,
 }: {
-  handleDeckCreation: () => void;
-}) => (
-  <DropdownMenu modal={false}>
-    <DropdownMenuTrigger
-      className="w-12 h-12 transition-transform ease-in data-[state=open]:rotate-[225deg] text-zinc-900 rounded-full shadow-lg bg-brand-500"
-      aria-label="Create"
-    >
-      <Plus className="w-full h-full" />
-    </DropdownMenuTrigger>
-    <DropdownMenuContent align="end" side="top" alignOffset={10}>
-      <DropdownMenuItem onSelect={handleDeckCreation}>
-        Create Deck
-      </DropdownMenuItem>
-      <DropdownMenuItem asChild>
-        <Link
-          className="text-inherit hover:no-underline"
-          href="/create-flashcard"
-        >
-          Create Flashcards
-        </Link>
-      </DropdownMenuItem>
-    </DropdownMenuContent>
-  </DropdownMenu>
-);
-
-const CreateDeckForm = ({ handleClose }: { handleClose: () => void }) => {
+  handleClose: () => void;
+}) => {
   const form = useForm<Pick<Deck, "name">>();
   return (
     <Dialog defaultOpen modal onOpenChange={(open) => !open && handleClose()}>

@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react";
 import { DeckWithCardCount } from "@/types";
-import { DeleteConfirmation } from "./DeleteConfirmation";
-import { RenameDeckForm } from "./RenameDeckForm";
+import { DeleteConfirmation } from "../delete-confirmation/DeleteConfirmation";
+import { RenameDeckForm } from "../rename-deck-form/RenameDeckForm";
 
 export type ModalType = "rename" | "delete" | null;
 

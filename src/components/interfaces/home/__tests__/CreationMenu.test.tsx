@@ -1,13 +1,11 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { CreateNew } from "../CreateNew";
+import { CreationMenu } from "../creation-menu/CreationMenu";
 
-jest.mock("@/actions/actions");
-
-describe(CreateNew.name, () => {
+describe(CreationMenu.name, () => {
   it("shows the create deck form ", async () => {
     const user = userEvent.setup();
-    render(<CreateNew />);
+    render(<CreationMenu />);
 
     const createButton = screen.getByLabelText("Create");
 
@@ -24,7 +22,7 @@ describe(CreateNew.name, () => {
 
   it("hides the create deck form when the cancel button is clicked", async () => {
     const user = userEvent.setup();
-    render(<CreateNew />);
+    render(<CreationMenu />);
 
     const createButton = screen.getByLabelText("Create");
 

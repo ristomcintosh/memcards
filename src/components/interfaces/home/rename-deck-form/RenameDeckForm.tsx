@@ -1,5 +1,4 @@
 import { useForm } from "react-hook-form";
-import { updateDeck } from "@/actions/actions";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -19,6 +18,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Deck } from "@/types";
+import { renameDeck } from "./RenameDeckForm.actions";
 
 type RenameDeckFormProps = {
   deck: Deck;
@@ -36,7 +36,7 @@ export const RenameDeckForm = ({ deck, closeForm }: RenameDeckFormProps) => {
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit((formData) => {
-              updateDeck(deck.id, formData.name);
+              renameDeck(deck.id, formData.name);
               closeForm();
             })}
             className="gap-6 flex flex-col"
