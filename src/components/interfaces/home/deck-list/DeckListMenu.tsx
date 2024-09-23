@@ -1,5 +1,3 @@
-"use client";
-
 import { EllipsisVertical } from "lucide-react";
 import {
   DropdownMenu,

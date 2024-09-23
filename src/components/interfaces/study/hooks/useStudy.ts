@@ -1,6 +1,6 @@
 import { useCallback, useReducer } from "react";
-import { deleteFlashcard } from "@/actions/actions";
 import { DeckWithFlashcards, Flashcard } from "@/types";
+import { deleteFlashcard } from "./useStudy.actions";
 
 type State = {
   totalFlashcardCount: number;
@@ -46,7 +46,6 @@ const reducer = (state: State, action: Action): State => {
   }
 };
 
-// deck will already be randomised
 export const useStudy = (deck: DeckWithFlashcards) => {
   const [state, dispatch] = useReducer(
     reducer,

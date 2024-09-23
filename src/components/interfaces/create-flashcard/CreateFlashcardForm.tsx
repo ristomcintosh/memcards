@@ -2,7 +2,6 @@
 
 import { useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
-import { createFlashcard } from "@/actions/actions";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -22,6 +21,7 @@ import {
 } from "@/components/ui/select";
 import { useToast } from "@/components/ui/toast/use-toast";
 import { Deck, Flashcard } from "@/types";
+import { createFlashcard } from "./CreateFlashcardForm.actions";
 
 type CreateFlashcardFormValues = Pick<Flashcard, "deckId" | "front" | "back">;
 

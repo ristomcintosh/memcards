@@ -1,9 +1,9 @@
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
-import { updateFlashcard } from "@/actions/actions";
 import { Flashcard } from "@/types";
 import { EditFlashcardForm } from "../EditFlashcardForm";
+import { updateFlashcard } from "../EditFlashcardForm.actions";
 
-jest.mock("@/actions/actions");
+jest.mock("../EditFlashcardForm.actions");
 
 describe("EditFlashcardForm", () => {
   const mockFlashcard: Flashcard = {

@@ -1,10 +1,10 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { deleteDeck } from "@/actions/actions";
 import { DeckWithCardCount } from "@/types";
-import { DeckList } from "../DeckList";
+import { DeckList } from "../deck-list/DeckList";
+import { deleteDeck } from "../delete-confirmation/DeleteConfirmation.actions";
 
-jest.mock("@/actions/actions");
+jest.mock("../delete-confirmation/DeleteConfirmation.actions");
 
 describe(DeckList.name, () => {
   const testDeckList: DeckWithCardCount[] = [
