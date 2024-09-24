@@ -1,6 +1,6 @@
 import { act, render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { DeckWithFlashcards } from "@/types";
+import type { DeckWithFlashcards } from "@/types";
 import { StudyView } from "../StudyView";
 import { deleteFlashcard } from "../hooks/useStudy.actions";
 

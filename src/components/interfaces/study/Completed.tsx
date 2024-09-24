@@ -9,7 +9,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { DeckWithFlashcards } from "@/types";
+import type { DeckWithFlashcards } from "@/types";
 import { cn } from "@/utils/misc";
 
 type CompletedProps = {

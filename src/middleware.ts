@@ -1,5 +1,6 @@
 import { cookies } from "next/headers";
-import { NextRequest, NextResponse } from "next/server";
+import type { NextRequest} from "next/server";
+import { NextResponse } from "next/server";
 import { SESSION_COOKIE, decrypt } from "@/service/session";
 
 const protectedRoutes = ["/", "/study", "/create-flashcard"];

@@ -2,7 +2,7 @@
 
 import { useState, useTransition } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { SubmitErrorHandler, useForm } from "react-hook-form";
+import { type SubmitErrorHandler, useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { LiveMessage } from "../LiveMessage";
-import { CreateAccountResult, createAccount } from "./SignupForm.actions";
+import { type CreateAccountResult, createAccount } from "./SignupForm.actions";
 import { CreateUserSchema } from "./SignupForm.utils";
 
 export function SignupForm() {

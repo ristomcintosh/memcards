@@ -1,6 +1,6 @@
 "use client";
 
-import { DeckWithFlashcards } from "@/types";
+import type { DeckWithFlashcards } from "@/types";
 import { Completed } from "./Completed";
 import { EditFlashcardForm } from "./EditFlashcardForm";
 import { Flashcard } from "./Flashcard";

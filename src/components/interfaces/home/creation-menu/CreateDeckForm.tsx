@@ -16,7 +16,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Deck } from "@/types";
+import type { Deck } from "@/types";
 import { createDeck } from "./CreateDeckForm.actions";
 
 export const CreateDeckForm = ({

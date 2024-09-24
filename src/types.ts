@@ -1,4 +1,4 @@
-import { Deck, Flashcard } from "@prisma/client";
+import type { Deck, Flashcard } from "@prisma/client";
 
 export type { Deck, Flashcard };
 

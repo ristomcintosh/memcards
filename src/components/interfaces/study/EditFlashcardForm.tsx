@@ -1,4 +1,4 @@
-import { SubmitHandler, useForm } from "react-hook-form";
+import { type SubmitHandler, useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -15,7 +15,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Flashcard } from "@/types";
+import type { Flashcard } from "@/types";
 import { updateFlashcard } from "./EditFlashcardForm.actions";
 
 type EditFlashcardFormProps = {

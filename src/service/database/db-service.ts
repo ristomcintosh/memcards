@@ -1,7 +1,7 @@
 "use server";
 
 import "server-only";
-import { Deck, DeckWithFlashcards } from "@/types";
+import type { Deck, DeckWithFlashcards } from "@/types";
 import { prisma } from "./db-server";
 
 export const getDecks = async (userId: string) => {

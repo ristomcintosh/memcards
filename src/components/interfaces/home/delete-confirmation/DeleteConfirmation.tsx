@@ -1,5 +1,5 @@
 import { AlertDialog } from "@/components/ui/alert-dialog";
-import { Deck } from "@/types";
+import type { Deck } from "@/types";
 import { deleteDeck } from "./DeleteConfirmation.actions";
 
 export const DeleteConfirmation = ({

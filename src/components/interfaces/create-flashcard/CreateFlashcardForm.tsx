@@ -20,7 +20,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useToast } from "@/components/ui/toast/use-toast";
-import { Deck, Flashcard } from "@/types";
+import type { Deck, Flashcard } from "@/types";
 import { createFlashcard } from "./CreateFlashcardForm.actions";
 
 type CreateFlashcardFormValues = Pick<Flashcard, "deckId" | "front" | "back">;

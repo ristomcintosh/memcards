@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import { DeckWithCardCount } from "@/types";
+import type { DeckWithCardCount } from "@/types";
 import { getAllDecks } from "@/utils/getAllDecks";
 import CreateFlashcard from "./page";
 

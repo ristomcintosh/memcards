@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { DeckWithCardCount } from "@/types";
+import type { DeckWithCardCount } from "@/types";
 import { DeckMenu } from "./DeckListMenu";
 import { ModalManager, useModalState } from "./ModalManger";
 

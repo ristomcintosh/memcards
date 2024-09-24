@@ -1,5 +1,5 @@
 import { getDecks } from "@/service/database/db-service";
-import { DeckWithCardCount } from "@/types";
+import type { DeckWithCardCount } from "@/types";
 import { verifySession } from "./verifySession";
 
 export const getAllDecks = async (): Promise<DeckWithCardCount[]> => {
