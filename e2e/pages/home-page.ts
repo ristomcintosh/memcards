@@ -1,4 +1,4 @@
-import { Page } from "@playwright/test"
+import type { Page } from "@playwright/test"
 
 export class HomePage {
   private deckNames = new Set<string>()
