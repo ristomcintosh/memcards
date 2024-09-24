@@ -1,8 +1,9 @@
-import {
-  expect,
+import type {
   PlaywrightWorkerArgs,
   PlaywrightWorkerOptions,
-  WorkerFixture,
+  WorkerFixture} from "@playwright/test";
+import {
+  expect
 } from "@playwright/test"
 import fs from "fs"
 import path from "path"

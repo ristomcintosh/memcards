@@ -1,5 +1,6 @@
 import { test as base } from "@playwright/test"
-import { AxeBuilder, makeAxeBuilder } from "./a11y"
+import type { AxeBuilder} from "./a11y";
+import { makeAxeBuilder } from "./a11y"
 import { handleAuth } from "./auth"
 export * from "@playwright/test"
 
