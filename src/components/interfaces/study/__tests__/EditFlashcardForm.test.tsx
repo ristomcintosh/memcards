@@ -1,5 +1,5 @@
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
-import { Flashcard } from "@/types";
+import type { Flashcard } from "@/types";
 import { EditFlashcardForm } from "../EditFlashcardForm";
 import { updateFlashcard } from "../EditFlashcardForm.actions";
 

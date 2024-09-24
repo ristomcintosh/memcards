@@ -1,5 +1,5 @@
 import { useCallback, useReducer } from "react";
-import { DeckWithFlashcards, Flashcard } from "@/types";
+import type { DeckWithFlashcards, Flashcard } from "@/types";
 import { deleteFlashcard } from "./useStudy.actions";
 
 type State = {

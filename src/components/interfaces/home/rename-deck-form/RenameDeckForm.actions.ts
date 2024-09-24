@@ -2,7 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { updateDeck } from "@/service/database/db-service";
-import { Deck } from "@/types";
+import type { Deck } from "@/types";
 import { verifySession } from "@/utils/verifySession";
 
 export const renameDeck = async (id: Deck["id"], deckName: string) => {

@@ -2,7 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { createFlashcard as createFlashcardInDb } from "@/service/database/db-service";
-import { Flashcard } from "@/types";
+import type { Flashcard } from "@/types";
 import { verifySession } from "@/utils/verifySession";
 
 export const createFlashcard = async (

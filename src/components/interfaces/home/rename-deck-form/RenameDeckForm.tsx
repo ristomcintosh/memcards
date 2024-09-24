@@ -17,7 +17,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Deck } from "@/types";
+import type { Deck } from "@/types";
 import { renameDeck } from "./RenameDeckForm.actions";
 
 type RenameDeckFormProps = {

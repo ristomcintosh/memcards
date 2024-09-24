@@ -2,7 +2,7 @@ import { cookies } from "next/headers";
 import { SignJWT, jwtVerify } from "jose";
 import "server-only";
 import { SESSION_COOKIE } from "./constants";
-import { DurationInMilliseconds, SEVEN_DAYS } from "./utils";
+import { type DurationInMilliseconds, SEVEN_DAYS } from "./utils";
 
 const secretKey = process.env.SESSION_SECRET;
 const encodedKey = new TextEncoder().encode(secretKey);

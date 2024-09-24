@@ -1,6 +1,6 @@
-import { PropsWithChildren } from "react";
-import { StudyFooter, StudyFooterProps } from "./StudyFooter";
-import { StudyHeader, StudyHeaderProps } from "./StudyHeader";
+import type { PropsWithChildren } from "react";
+import { StudyFooter, type StudyFooterProps } from "./StudyFooter";
+import { StudyHeader, type StudyHeaderProps } from "./StudyHeader";
 
 type StudyContainerProps = {
   title: string;

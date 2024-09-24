@@ -1,7 +1,8 @@
 "use client";
 
-import { Variants, motion } from "framer-motion";
-import { Flashcard as FlashcardType } from "@/types";
+import type { Variants} from "framer-motion";
+import { motion } from "framer-motion";
+import type { Flashcard as FlashcardType } from "@/types";
 
 type CardSide = "front" | "back";
 

@@ -1,5 +1,5 @@
 import { act, renderHook } from "@testing-library/react";
-import { DeckWithFlashcards } from "@/types";
+import type { DeckWithFlashcards } from "@/types";
 import { useStudy } from "../hooks/useStudy";
 import { deleteFlashcard } from "../hooks/useStudy.actions";
 

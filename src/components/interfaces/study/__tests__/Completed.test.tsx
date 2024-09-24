@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import { DeckWithFlashcards } from "@/types";
+import type { DeckWithFlashcards } from "@/types";
 import { Completed } from "../Completed";
 
 const deck = {

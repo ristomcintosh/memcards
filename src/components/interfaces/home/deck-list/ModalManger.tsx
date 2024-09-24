@@ -1,5 +1,5 @@
 import { useCallback, useState } from "react";
-import { DeckWithCardCount } from "@/types";
+import type { DeckWithCardCount } from "@/types";
 import { DeleteConfirmation } from "../delete-confirmation/DeleteConfirmation";
 import { RenameDeckForm } from "../rename-deck-form/RenameDeckForm";
 

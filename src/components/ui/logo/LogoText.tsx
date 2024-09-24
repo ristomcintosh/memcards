@@ -1,4 +1,4 @@
-import { SVGProps } from "react";
+import type { SVGProps } from "react";
 import { cn } from "@/utils/misc";
 
 export function LogoText({ className, ...props }: SVGProps<SVGSVGElement>) {
