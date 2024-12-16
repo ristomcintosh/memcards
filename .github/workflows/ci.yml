@@ -40,6 +40,8 @@ jobs:
           cache: "npm"
       - name: Download deps
         uses: bahmutov/npm-install@v1
+        with:
+          install-command: npm i --legacy-peer-deps
       - name: type check
         run: npm run type-check
 
