@@ -127,7 +127,9 @@ describe(useStudy.name, () => {
 
     rerender();
 
-    expect(deleteFlashcard).toHaveBeenCalledWith(testDeck.flashcards[0].id);
+    expect(jest.mocked(deleteFlashcard)).toHaveBeenCalledWith(
+      testDeck.flashcards[0].id,
+    );
     expect(result.current.flashcard).toEqual(testDeck.flashcards[1]);
     expect(result.current.progress).toBe(100);
   });

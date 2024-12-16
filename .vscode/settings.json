@@ -8,5 +8,6 @@
     "*.css": "tailwindcss"
   },
   "typescript.tsdk": "node_modules/typescript/lib",
-  "typescript.preferences.autoImportFileExcludePatterns": ["@radix-ui/*"]
+  "typescript.preferences.autoImportFileExcludePatterns": ["@radix-ui/*"],
+  "eslint.useFlatConfig": false
 }
