@@ -164,7 +164,7 @@ describe(StudyView.name, () => {
       rerender(<StudyView deck={deckWithoutCards} />);
 
       const completedModal = await screen.findByTestId("completed-modal");
-      expect(screen.getByText("Congratulations! 🎉")).toBeInTheDocument;
+      expect(screen.getByText("Congratulations! 🎉")).toBeInTheDocument();
       expect(screen.queryByText("Restart")).not.toBeInTheDocument();
       expect(within(completedModal).getByText("Home")).toBeInTheDocument();
     });

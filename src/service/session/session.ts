@@ -19,7 +19,7 @@ export async function decrypt(session: string | undefined = "") {
     });
     return payload;
   } catch (error) {
-    console.log("Failed to verify session");
+    console.log("Failed to verify session", error);
   }
 }
 
@@ -38,7 +38,7 @@ export async function createSession(
   const expiresAt = new Date(Date.now() + durationInMilliseconds);
   const session = await encrypt({ userId, expiresAt });
 
-  cookies().set(SESSION_COOKIE, session, {
+  (await cookies()).set(SESSION_COOKIE, session, {
     httpOnly: true,
     secure: true,
     expires: expiresAt,
@@ -47,6 +47,6 @@ export async function createSession(
   });
 }
 
-export function deleteSession() {
-  cookies().delete(SESSION_COOKIE);
+export async function deleteSession() {
+  (await cookies()).delete(SESSION_COOKIE);
 }

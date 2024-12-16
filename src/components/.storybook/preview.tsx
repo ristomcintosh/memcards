@@ -13,6 +13,7 @@ const preview: Preview = {
       },
     },
   },
+
   decorators: [
     (Story) => (
       <main className={`${inter.variable} ${inter.className} h-full`}>
@@ -27,6 +28,8 @@ const preview: Preview = {
       defaultTheme: "light",
     }),
   ],
+
+  tags: ["autodocs"]
 };
 
 export default preview;
