@@ -1,7 +1,6 @@
 {
   "extends": ["next/core-web-vitals", "next/typescript", "prettier"],
   "rules": {
-    // Additional, per-project rules...
     "@typescript-eslint/no-import-type-side-effects": "error",
     "@typescript-eslint/consistent-type-imports": "error"
   }
