@@ -32,7 +32,7 @@ export function ThemeToggle() {
 }
 
 function setThemeMode(themeMode: "light" | "dark") {
-  let isDarkModeEnabled = themeMode === "dark";
+  const isDarkModeEnabled = themeMode === "dark";
   document.documentElement.classList.toggle("dark", isDarkModeEnabled);
   localStorage.setItem(THEME_KEY, isDarkModeEnabled ? "dark" : "light");
 }

@@ -8,13 +8,17 @@
 
 ## Tech Stack
 
-Memcards is developed using a range of technologies, including:
+Memcards is developed using a wide range of technologies, including:
 
 - Next.js
 - Tailwind CSS
 - TypeScript
 - Playwright
 - Storybook
+
+## 🤔 Why Next.js?
+
+Really an app like this would be better off as a SPA, but I just wanted to try out the latest features of Next and React (like App router, Server Components, etc)
 
 ## How to run
 
