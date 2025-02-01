@@ -1,50 +1,38 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { MoonStar, SunMedium } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { THEME_KEY } from "@/constants";
 
-const handleDarkModeToggle = (
-  isDarkMode: boolean,
-  setDarkMode: (arg: boolean) => void,
-) => {
-  console.log("Dark mode toggled");
-  if (isDarkMode) {
-    document.documentElement.classList.remove("dark");
-    setDarkMode(false);
-    localStorage.setItem(THEME_KEY, "light");
-  } else {
-    document.documentElement.classList.add("dark");
-    setDarkMode(true);
-    localStorage.setItem(THEME_KEY, "dark");
-  }
-};
-
 export function ThemeToggle() {
-  const [isDarkMode, setIsDarkMode] = useState<boolean>();
-
-  useEffect(() => {
-    setIsDarkMode(localStorage.getItem(THEME_KEY) === "dark");
-  }, []);
-
-  if (isDarkMode === undefined) {
-    return null;
-  }
-
   return (
-    <Button
-      variant="ghost"
-      size="sm"
-      onClick={() => handleDarkModeToggle(isDarkMode, setIsDarkMode)}
-      title="Toggles light & dark theme"
-      aria-label={isDarkMode ? "Switch to light mode" : "Switch to dark mode"}
-    >
-      {isDarkMode ? (
-        <MoonStar className="w-6 h-6" aria-hidden />
-      ) : (
+    <>
+      <Button
+        variant="ghost"
+        size="sm"
+        onClick={() => setThemeMode("dark")}
+        title="Toggles light & dark theme"
+        className="dark:hidden"
+        aria-label={"Switch to dark mode"}
+      >
         <SunMedium className="w-6 h-6" aria-hidden />
-      )}
-    </Button>
+      </Button>
+      <Button
+        variant="ghost"
+        size="sm"
+        onClick={() => setThemeMode("light")}
+        title="Toggles light & dark theme"
+        className="hidden dark:block"
+        aria-label={"Switch to light mode"}
+      >
+        <MoonStar className="w-6 h-6" aria-hidden />
+      </Button>
+    </>
   );
+}
+
+function setThemeMode(themeMode: "light" | "dark") {
+  let isDarkModeEnabled = themeMode === "dark";
+  document.documentElement.classList.toggle("dark", isDarkModeEnabled);
+  localStorage.setItem(THEME_KEY, isDarkModeEnabled ? "dark" : "light");
 }
